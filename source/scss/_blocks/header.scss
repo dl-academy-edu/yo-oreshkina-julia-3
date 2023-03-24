@@ -1,0 +1,30 @@
+.header {
+    padding-top: 35px;
+    @media (max-width: $media-mobile-landscape) {
+        display: none;
+    }
+    &__nav {
+        display: flex;
+        justify-content: space-between;
+        border-bottom: 1px solid $color-text;
+        padding-bottom: 30px;
+    }
+    &__link--active {
+        color: $primary-text;
+        font-weight: bold;
+    }
+    &__list--log-out {
+        @include no-list;
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    &__btn {
+        @include no-btn;
+        font-family: $gilroy;
+        font-size: 18px;
+        line-height: 22px;
+        color: $color-text;
+        transition: 0.4s;
+    }
+}
