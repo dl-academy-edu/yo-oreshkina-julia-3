@@ -24,11 +24,8 @@
 @mixin dialog-box-tail {
   content: '';
   position: absolute;
-  top: 87%;
-  width: 1.5em;
-  height: 1.5em;
-  background-color: $color-section;
-  border-left: 2.5px solid $primary-text;
-  border-bottom: 2.5px solid $primary-text;
-  transform: rotate(-45deg);
+  top: 100%;
+  width: 42px;
+  height: 21px;
+  background-image: url('../img/arrow-box.svg');
 }

@@ -72,19 +72,15 @@
   &__text:nth-of-type(2n+1) {
     margin-left: -100px;
   }
-  &__text:nth-of-type(2) {
+  &__text:nth-of-type(2n) {
     margin-left: 100px;
   }
-  &__text:nth-of-type(1)::after {
+  &__text:nth-of-type(2n+1)::after {
     @include dialog-box-tail;
     right: 5%;
   }
-  &__text:nth-of-type(2)::after {
+  &__text:nth-of-type(2n)::after {
     @include dialog-box-tail;
     left: 5%;
-  }
-  &__text:nth-of-type(3)::after {
-    @include dialog-box-tail;
-    right: 5%;
   }
 }
