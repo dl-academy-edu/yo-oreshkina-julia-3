@@ -1,10 +1,11 @@
+"Use strict";
 /* task 4 - проверки на тип написаны внутри функций */
 /* task 1 */
 
-let userNumber = +prompt("Введите число", "");
+let userNumber = +prompt("Введите число");
 
 function outputNumbers (num) {
-    if (isNaN(num) || num == null) { 
+    if (isNaN(num)) {
         return "Ошибка!";
     }
 
@@ -22,11 +23,11 @@ console.log(outputNumbers(userNumber));
 /* task 2 */
 
 function factorial(num) {
-    if(!Number.isInteger(num)){
+    if(!Number.isInteger(num) || num < 0){
         return 'Ошибка!';
     }
 
-    if(num <= 1) {
+    if(num === 0 || num === 1) {
         return 1;
     }
 
@@ -44,11 +45,12 @@ function factorial(num) {
 console.log(factorial(userNumber));
 
 /* task 3 */
+
 let number = +prompt("Введите число");
 let degreeOfNumber = +prompt("Введите степень числа");
 
 function pow(x, n) {
-    if(isNaN(x) || isNaN(n)){
+    if(isNaN(x) || isNaN(n) || x === 0){
         return 'Ошибка!';
     }
 
