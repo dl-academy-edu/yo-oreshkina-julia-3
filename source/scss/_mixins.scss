@@ -35,7 +35,7 @@
 @mixin text-skills {
   font-weight: bold;
   font-size: 14px;
-  line-height: 18px;
+  line-height: 16px;
   color: $color-text;
 }
 
@@ -59,6 +59,16 @@
   font-size: 18px;
   line-height: 22px;
   text-align: center;
+}
+
+@mixin text-burger-menu {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 42px;
+  color: $color-text;
+  transition: 0.4s;
 }
 
 /* buttons and links */

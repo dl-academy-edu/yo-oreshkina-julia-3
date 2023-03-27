@@ -1,6 +1,6 @@
 .header {
     padding-top: 35px;
-    @media (max-width: $media-mobile-landscape) {
+    @media (max-width: 375px) {
         display: none;
     }
     &__nav {

@@ -1,0 +1,74 @@
+.burger-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: end;
+    row-gap: 186px;
+    animation: open-burger-menu linear 0.5s;
+    &__wrapper {
+        z-index: 10;
+        position: absolute;
+        padding-top: 50px;
+        padding-right: 20px;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 375px;
+        height: 100%;
+        background: rgba(246, 246, 246, 0.99); 
+    }
+    &__btn-open {
+        display: none;
+        @media (max-width: 375px) {
+            margin-top: 12px;
+            border: none;
+            display: block;
+            background-image: url('../img/icons/burger-menu.svg');
+            background-repeat: no-repeat;
+            width: 32px;
+            height: 20px;
+        }
+    }
+    &__btn-close {
+        @include no-btn;
+    }
+    &__btn-close__svg > rect{
+        transition: 0.4s;
+    }
+    &__btn-close__svg:hover > rect {
+        fill: $primary-text;
+    }
+    &__list {
+        @include no-list;
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 40px;
+    }
+    &__link {
+        @include text-burger-menu;
+    }
+    &__link--active {
+        @include text-burger-menu;
+        color: $primary-text;
+    }
+    &__link--active:hover, &__link--active:focus {
+        color: $color-text;
+    }
+    &__btn {
+        @include text-burger-menu;
+        @include no-btn;
+    }
+    &__link:hover, &__link:focus, &__btn:hover, &__btn:focus {
+        color: $primary-text;
+    }
+
+}
+
+@keyframes open-burger-menu {
+    0% {
+      transform: translateY(-100%);    
+    }
+  100% {
+    transform: translateY(0);    
+  }
+}

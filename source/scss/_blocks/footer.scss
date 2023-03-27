@@ -40,6 +40,9 @@
     flex-wrap: wrap;
     max-width: 330px;
     gap: 10px;
+    @media (max-width: $media-mobile-landscape) {
+      padding: 0 10px;
+    }
   }
 
   &__link {
