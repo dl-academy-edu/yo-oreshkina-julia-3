@@ -1,94 +1,94 @@
 "Use strict";
-/* task 4 - проверки на тип написаны внутри функций */
+/* task 4 - проверки на тип прописаны внутри заданий */
 /* task 1 */
 
-let userNumber = +prompt("Введите число");
+let userNumber = prompt("Введите число", "");
 
-function outputNumbers (num) {
-    if (isNaN(num)) {
-        return "Ошибка!";
-    }
-
-    for (let i = 1; i <= num; i++) {
-        if(i % 4 === 0) { 
-            continue;
-        }
-
-    console.log(i); 
-    } 
+if (isNaN(userNumber) || userNumber === null || userNumber === "") {
+    console.log("Ошибка!");
 }
 
-console.log(outputNumbers(userNumber));
+for (let i = 1; i <= Number(userNumber); i++) {
+    if(i % 4 === 0) { 
+        continue;
+    }
+
+    console.log(i); 
+}
 
 /* task 2 */
 
-function factorial(num) {
-    if(!Number.isInteger(num) || num < 0){
-        return 'Ошибка!';
-    }
+let number = prompt("Введите число", "");
 
-    if(num === 0 || num === 1) {
-        return 1;
-    }
+if (!isNaN(number) && number !== null && number !== "") {
+    let num = Number(number);
 
-    let result = num;
-    
-    while(num > 1) {
+    if(!Number.isInteger(num) || num < 0) { // невозможно вычислить факториал дробного или отрицательного числа
+        console.log("Ошибка!");
+    } else if(num === 0 || num === 1) { // 0! = 0 1! = 1
+        console.log(1);
+    } else {
+        let result = num;
+
+        while(num > 1) {
+            result = result * (num - 1);
+            num--;
+        }
         
-        result = result * (num - 1);
-        num--;
+        console.log(result);
     }
-
-    return result;
+} else {
+    console.log("Ошибка!");
 }
-
-console.log(factorial(userNumber));
 
 /* task 3 */
 
-let number = +prompt("Введите число");
-let degreeOfNumber = +prompt("Введите степень числа");
+let x = prompt("Введите число", "");
+let n = prompt("Введите степень числа", "");
 
-function pow(x, n) {
-    if(isNaN(x) || isNaN(n) || x === 0){
-        return 'Ошибка!';
-    }
 
-    let resultWithPositiveExp = x;
-    let resultWithNegativeExp = 1 / x;
+if(!isNaN(x) && !isNaN(n) && x !== null && x !== "" && n !== null && n !== "" && Number(x) !== 0) {  //  Number(x) !== 0 -  0 не принято возводить в степень
+    let base = Number(x);
+    let exponent = Number(n);
 
-    if(n === 0) {
-        return 1;
-    } else if (n > 0) {
-        for(let i = 1; i < n; i++) {
-            resultWithPositiveExp *= x;
+    if(exponent === 0) {
+        console.log(1);
+    } else if (exponent > 0) {
+        let resultWithPositiveExp = base;
+
+        for(let i = 1; i < exponent; i++) {
+            resultWithPositiveExp *= base;
         }
-        return resultWithPositiveExp;
+
+        console.log(resultWithPositiveExp);
     } else {
-        for(let i = -1; i > n; i--) {
-            resultWithNegativeExp = resultWithNegativeExp * (1 / x);
+        let resultWithNegativeExp = 1 / base;
+
+        for(let i = -1; i > exponent; i--) {
+            resultWithNegativeExp = resultWithNegativeExp * (1 / base);
         }
-        return resultWithNegativeExp;
+        console.log(resultWithNegativeExp);
     }
-
-} 
-
-console.log(pow(number, degreeOfNumber));
+} else {
+    console.log("Ошибка!");
+}
 
 /* task 5 */
 
-function guessNumber() {
-    let random = Math.floor(1 + Math.random() * 10);
-    let number = +prompt("Угадайте число");
+let random = Math.floor(1 + Math.random() * 10);
+let guess= +prompt("Угадайте число");
 
-    while (random !== number) {
-        number = +prompt("Угадайте число");
-    }
-
-    if (random === number) {
-        return `Победа! ${random} - правильный ответ!`;
+while (true) {
+    if (random === guess) {
+        console.log(`Победа! ${random} - правильный ответ!`);
+        break;
+    } else {
+        guess = +prompt("Угадайте число");
     }
 }
 
-console.log(guessNumber());
-    
+
+
+
+
+
