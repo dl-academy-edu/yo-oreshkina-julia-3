@@ -9,9 +9,17 @@
         border-bottom: 1px solid $color-text;
         padding-bottom: 30px;
     }
+    &__link {
+        font-weight: bold;
+        transition: 0.4s;
+    }
     &__link--active {
         color: $primary-text;
         font-weight: bold;
+        transition: 0.4s;
+    }
+    &__link--active:hover, &__link--active:focus {
+        color:$color-text;
     }
     &__list--log-out {
         @include no-list;
@@ -22,9 +30,13 @@
     &__btn {
         @include no-btn;
         font-family: $gilroy;
+        font-weight: bold;
         font-size: 18px;
         line-height: 22px;
         color: $color-text;
         transition: 0.4s;
+    }
+    &__btn:hover, &__btn:focus, &__link:hover, &__link:focus {
+        color: $primary-text;
     }
 }

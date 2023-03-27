@@ -2,9 +2,72 @@
   Код ниже нужно удалить, он добавлен просто для примера
 */
 .footer {
-  background-color: #151515;
-  color: #fff;
-  padding: 40px 0;
-  text-align: center;
-  height: 100px;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  &__title {
+    margin-bottom: 20px;
+  }
+  &__desc {
+    font-weight: 500;
+    max-width: 270px;
+    text-align: center;
+    margin-bottom: 30px;
+  }
+  &__btn-connect {
+    @include btn-link-black;
+  }
+  &__btn-connect:hover, &__btn-connect:focus {
+    color: $primary-text;
+    background-color: transparent;
+  }
+
+  &__btn-connect:disabled {
+    color: $color-disabled;
+    background-color: transparent;
+    border-color: $color-disabled;
+    cursor: url(../img/icons/cursor-disabled.svg) 2 2, pointer;
+  }
+
+  &__list {
+    @include no-list;
+    display: flex;
+    margin: 40px 0;
+    flex-direction: row;
+    justify-content: center;
+    align-items:center;
+    flex-wrap: wrap;
+    max-width: 330px;
+    gap: 10px;
+  }
+
+  &__link {
+    display: block;
+    @include btn-link-white;
+    height: auto;
+  }
+  &__link:hover, &__link:focus {
+    color: #FFFFFF;
+    background-color: $primary-text;
+  }
+
+  &__design-link {
+    @include text-footer;
+    margin-bottom: 5px;
+  }
+
+  &__design-link > span {
+    border-bottom: 1px dashed $color-text;
+    transition: 0.4s;
+  }
+  &__design-link > span:hover {
+    border-bottom: 1px solid $primary-text;
+    color: $primary-text;
+  }
+  &__author {
+    @include text-footer;
+  }
+
+  
 }

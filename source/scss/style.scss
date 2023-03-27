@@ -84,3 +84,104 @@
     left: 5%;
   }
 }
+
+/*    SKILLS    */
+
+.skills {
+  padding: 60px 0;
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__subtitle {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 50px;
+  }
+  &__list{
+    @include no-list;
+    max-width: 1000px;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    column-gap: 25px;
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+  }
+  &__name {
+    @include text-skills;
+  }
+  &__progress-inner {
+    display: flex;
+    flex-direction: row;
+    column-gap: 12px;
+    align-items: center;
+    margin: 4px 0;
+  }
+  &__progress-value {
+    @include text-skills;
+  }
+  &__progress {
+    position: relative;
+    width: 140px;
+    height: 9px;
+    background-color: $color-disabled;
+  }
+  &__progress::after {
+    content: "";
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: $primary-text;
+    height: 9px;
+    width: calc(var(--width, 0) * 1%);
+  }
+}
+
+/*    PORTFOLIO    */
+
+.portfolio {
+  background-color: $color-section;
+  margin: auto;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 50px;
+  &__inner {
+    position: relative;
+    max-width: 1000px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding: 31px 300px;
+    row-gap: 16px;
+    width: 100%;
+    height: 150px;
+    z-index: 2;
+    background-color: $primary-text;
+    opacity: 0.85;
+  }
+  &__info-heading {
+    @include slider-info;
+    font-size: 18px;
+    line-height: 22px;
+    max-width: max-content;
+    border-bottom: 1px dashed #FFFFFF;
+  }
+  &__info-desc {
+    @include slider-info;
+    font-size: 14px;
+    line-height: 16px;
+  }
+
+}
