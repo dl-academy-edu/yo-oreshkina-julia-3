@@ -28,15 +28,6 @@
             height: 20px;
         }
     }
-    &__btn-close {
-        @include no-btn;
-    }
-    &__btn-close__svg > rect{
-        transition: 0.4s;
-    }
-    &__btn-close__svg:hover > rect {
-        fill: $primary-text;
-    }
     &__list {
         @include no-list;
         display: flex;

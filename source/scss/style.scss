@@ -19,6 +19,9 @@
 @import "_blocks/burger-menu";
 @import "_blocks/header";
 @import "_blocks/footer";
+@import "_blocks/button-close";
+@import "_blocks/buttons";
+@import "_blocks/checkbox";
 @import "fonts";
 
 /*    SUMMARY    */
@@ -234,3 +237,70 @@
   } */
 
 }
+
+/*    SEND MESSAGE MODAL    */
+
+.modal-box {
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background-color: #F6F6F6;
+  opacity: 0.99;
+  z-index: 20;
+}
+
+.form {
+  max-width: 680px;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* height: 540px; */
+  background: #FFFFFF;
+  border: 2.5px solid #070707; 
+  &__wrapper {
+    margin: 8% auto;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    justify-content: center;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 6px;
+  }
+  &__inner--two-input {
+    width: calc(1/2*100% - (1 - 1/2)*20px);
+  }
+  &__label {
+    @include text-label;
+  }
+  &__inner > input {
+    @include input-textarea-styles;
+    height: 50px;
+  }
+  &__inner > textarea {
+    @include input-textarea-styles;
+    resize: none;
+  }
+  &__inner > input:hover, &__inner > textarea:hover {
+    border: 2.5px solid $color-text;
+    cursor: pointer;
+  }
+  &__inner > input:focus, &__inner > textarea:focus {
+    border: 2.5px solid $primary-text;
+    outline: none;
+  }
+  &__inner > input[required] + &__label:after {
+    content: "*";
+    padding-left: 5px;
+    color: $color-bad;
+  }
+  
+}
+

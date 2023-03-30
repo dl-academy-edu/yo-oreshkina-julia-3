@@ -1,11 +1,7 @@
 <div class="burger-menu__wrapper visually-hidden">
     <nav class="burger-menu">
-        <button class="burger-menu__btn-close">
-            <svg class="burger-menu__btn-close__svg" width="26" height="26" viewBox="0 0 26 26" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <rect x="3.37256" width="32" height="4" rx="2" transform="rotate(45 3.37256 0)" fill="#828282"/>
-                <rect x="0.543945" y="22.6289" width="32" height="4" rx="2" transform="rotate(-45 0.543945 22.6289)" fill="#828282"/>
-                </svg>
-        </button>
+        @@include('blocks/button-close.html', 
+        {'classJs': 'burger-menu__btn-close'})
         <ul class=" burger-menu__list burger-menu__list--log-out">
             <li class="burger-menu__item">
                 <a class="burger-menu__link--active" href="#">Home</a>

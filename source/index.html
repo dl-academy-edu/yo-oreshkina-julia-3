@@ -98,6 +98,42 @@
       </div>
     </section>
     @@include('blocks/footer.html')
+    <div class="modal-box visually-hidden">
+      <div class="form__wrapper">
+        @@include('blocks/button-close.html', 
+        {"classJs": "connect-form__btn-close"})
+        <form class="form connect-form" action="#" novalidate>
+            <div class="form__inner form__inner--two-input">
+              <input type="text" name="name" id="name" required>
+              <label class="form__label" for="name">What is your name?</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="email" name="email" id="email" required>
+              <label class="form__label" for="email">Message subject</label>
+            </div> 
+            <div class="form__inner form__inner--two-input">
+              <input type="email" name="email" id="email" required>
+              <label class="form__label" for="email">Your Email</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="tel" name="phone" id="phone" required>
+              <label class="form__label" for="phone">Your mobile phone</label>
+            </div>
+            <div class="form__inner">
+              <textarea name="message" id="message" cols="30" rows="6"></textarea>
+              <label class="form__label" for="message">What do you want to discuss with me?</label>
+            </div>
+              @@include('blocks/checkbox.html',
+              {"checkboxId": "agreement",
+              "atrCheckbox": "disabled"})
+              @@include('blocks/buttons.html',
+              {"additionalclass": "connect-form__btn",
+              "buttonType": "submit",
+              "buttonName": "Send",
+              "atr": "disabled"})
+        </form>
+      </div>
+    </div>
     <script src="js/app.js" defer></script>
   </body>
 </html>

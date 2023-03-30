@@ -5,7 +5,7 @@
 }
 
 @mixin no-btn {
-  background: transparent;
+  background-color: transparent;
   border: 0;
   box-sizing: border-box;
   margin: 0;
@@ -71,6 +71,23 @@
   transition: 0.4s;
 }
 
+@mixin text-label {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: $primary-text;
+}
+
+@mixin input-textarea-styles {
+  box-sizing: border-box;
+  border: 2.5px solid #E5E5E5;
+  padding: 14px;
+  font-size: 18px;
+  line-height: 20px;
+  color: $primary-text;
+  transition: 0.4s;
+}
+
 /* buttons and links */
 
 @mixin btn-link-black {
@@ -89,5 +106,6 @@
   border: 2.5px solid $primary-text;
   border-radius: 30px;
   color: $primary-text;
+  background-color: #FFFFFF;
   transition: 0.4s;
 }
