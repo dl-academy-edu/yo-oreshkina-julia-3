@@ -16,45 +16,291 @@
   Import all other blocks
 */
 @import "_blocks/container";
+@import "_blocks/burger-menu";
+@import "_blocks/header";
 @import "_blocks/footer";
+@import "_blocks/button-close";
+@import "_blocks/buttons";
+@import "_blocks/checkbox";
+@import "fonts";
 
-/*
-  Ниже пример подключения других блоков
+/*    SUMMARY    */
 
-  Каждый новый файл должен отвечать за конкретный блок в терминах БЭМ
-  (https://ru.bem.info/methodology/key-concepts/#%D0%B1%D0%BB%D0%BE%D0%BA)
-
-  Для именования селекторов давайте придерживаться стиля two dashes
-  (https://ru.bem.info/methodology/naming-convention/#%D1%81%D1%82%D0%B8%D0%BB%D1%8C-two-dashes)
-  block-name__element-name--modificator
-*/
-
-/*
-  Код ниже нужно удалить, он добавлен просто для примера
-  Не стал выносить в отдельный файл, но если бы блок coming-soon действительно был бы нужен,
-  то он должен был бы быть в файле _blocks/coming-soon.scss
-*/
-
-.coming-soon {
-  color: $color-text;
+.summary {
+  padding-top: 40px;
+  padding-bottom: 40px;
   display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-  text-align: center;
-  min-height: calc(100vh - 100px);
-  margin: auto;
-  padding: 0 5vw;
-
+  flex-wrap: wrap;
+  gap: 40px;
+  @media (max-width: 529px) {
+    padding-top: 30px;
+    padding-bottom: 36px;
+    row-gap: 20px;
+    @media (max-width: 375px) {
+      column-gap: 40px;
+      justify-content: space-between;
+    }
+  }
   &__title {
+    display: block;
+    margin: 0;
+    width: min-content;
+    padding-bottom: 36px;
+    @media (max-width: 509px) {
+      padding-bottom: 0;
+    }
+  }
+  &__info {
     display: flex;
-    align-items: center;
-    flex-direction: row;
-    justify-content: space-between;
-    font-size: 25vw;
-    font-weight: 400;
-    margin: 0 auto;
-    text-transform: uppercase;
+    flex-direction: column;
+    align-items: start;
+    justify-content: end;
+    padding-bottom: 44px;
+    @media (max-width: 375px) {
+      max-width: 205px;
+    }
+  }
+
+  &__slider {
     width: 100%;
   }
+
 }
+
+/*    ABOUT ME    */
+.about {
+  margin: 0 auto;
+  background-color: $color-section;
+  display: flex;
+  justify-content: center;
+  &__inner {
+    max-width: 580px;
+    padding: 60px 0 81px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 50px;
+    @media (max-width: 620px) {
+      padding: 40px 20px 61px;
+    }
+  }
+  &__title {
+    text-align: center;
+  }
+  &__text {
+    position: relative;
+    padding: 15px;
+    max-width: 475px;
+    border: 2.5px solid $primary-text;
+    @media (max-width: 620px) {
+      margin-left: 0;
+    }
+  }
+  &__text:nth-of-type(2n+1) {
+    margin-left: -100px;
+    @media (max-width: 620px) {
+      margin-left: 0;
+    }
+  }
+  &__text:nth-of-type(2n) {
+    margin-left: 100px;
+    @media (max-width: 620px) {
+      margin-left: 0;
+    }
+  }
+  &__text:nth-of-type(2n+1)::after {
+    @include dialog-box-tail;
+    right: 5%;
+  }
+  &__text:nth-of-type(2n)::after {
+    @include dialog-box-tail;
+    left: 5%;
+  }
+}
+
+/*    SKILLS    */
+
+.skills {
+  margin-top: 60px;
+  margin-bottom: 60px;
+  @media (max-width: 730px) {
+    margin-top: 40px;
+    margin-bottom: 40px;
+  }
+  
+  &__title {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  &__subtitle {
+    text-align: center;
+    font-weight: 500;
+    margin-bottom: 50px;
+  }
+  &__list{
+    @include no-list;
+    max-width: 100%;
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    grid-column-gap: 20px;
+    @media (max-width: 880px) {
+      grid-template-columns: repeat(4, 1fr);
+      grid-row-gap: 40px;
+    }
+    @media (max-width: 730px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+  }
+  &__item {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    row-gap: 20px;
+  }
+  
+  &__name {
+    @include text-skills;
+  }
+  &__progress-inner {
+    display: flex;
+    flex-direction: row;
+    column-gap: 10px;
+    align-items: center;
+    margin: 4px 0;
+  }
+  &__progress-value {
+    @include text-skills;
+  }
+  &__progress {
+    position: relative;
+    width: 140px;
+    height: 9px;
+    background-color: $color-disabled;
+    @media (max-width: 1055px) {
+      width: 108px;
+    }
+    @media (max-width: 375px) {
+      width: 90px;
+    }
+  }
+  &__progress::after {
+    content: "";
+    left: 0;
+    bottom: 0;
+    position: absolute;
+    background-color: $primary-text;
+    height: 9px;
+    width: calc(var(--width, 0) * 1%);
+  }
+}
+
+/*    PORTFOLIO    */
+
+.portfolio {
+  background-color: $color-section;
+  margin: auto;
+  padding: 60px 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  row-gap: 50px;
+  /* &__inner {
+    position: relative;
+    max-width: 1000px;
+  }
+  &__info {
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+    padding: 31px 300px;
+    row-gap: 16px;
+    width: 100%;
+    height: 150px;
+    z-index: 2;
+    background-color: $primary-text;
+    opacity: 0.85;
+  }
+  &__info-heading {
+    @include slider-info;
+    font-size: 18px;
+    line-height: 22px;
+    max-width: max-content;
+    border-bottom: 1px dashed #FFFFFF;
+  }
+  &__info-desc {
+    @include slider-info;
+    font-size: 14px;
+    line-height: 16px;
+  } */
+
+}
+
+/*    SEND MESSAGE MODAL    */
+
+.modal-box {
+  position: absolute;
+  top: 0;
+  margin: 0 auto;
+  width: 100%;
+  height: 100%;
+  background-color: #F6F6F6;
+  opacity: 0.99;
+  z-index: 20;
+}
+
+.form {
+  max-width: 680px;
+  padding: 40px;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 20px;
+  /* height: 540px; */
+  background: #FFFFFF;
+  border: 2.5px solid #070707; 
+  &__wrapper {
+    margin: 8% auto;
+    display: flex;
+    flex-direction: row-reverse;
+    gap: 10px;
+    justify-content: center;
+  }
+  &__inner {
+    display: flex;
+    flex-direction: column-reverse;
+    width: 100%;
+    gap: 6px;
+  }
+  &__inner--two-input {
+    width: calc(1/2*100% - (1 - 1/2)*20px);
+  }
+  &__label {
+    @include text-label;
+  }
+  &__inner > input {
+    @include input-textarea-styles;
+    height: 50px;
+  }
+  &__inner > textarea {
+    @include input-textarea-styles;
+    resize: none;
+  }
+  &__inner > input:hover, &__inner > textarea:hover {
+    border: 2.5px solid $color-text;
+    cursor: pointer;
+  }
+  &__inner > input:focus, &__inner > textarea:focus {
+    border: 2.5px solid $primary-text;
+    outline: none;
+  }
+  &__inner > input[required] + &__label:after {
+    content: "*";
+    padding-left: 5px;
+    color: $color-bad;
+  }
+  
+}
+

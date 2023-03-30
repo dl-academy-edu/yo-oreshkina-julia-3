@@ -1,0 +1,12 @@
+.btn-close {
+    @include no-btn;
+    transition: 0.4s;
+    background-image: url('../img/icons/close.svg');
+    background-repeat: no-repeat;
+    background-size:cover;
+    width: 26px;
+    height: 26px;
+}
+.btn-close:hover, .btn-close:focus {
+    background-image: url('../img/icons/close-focus.svg');
+}

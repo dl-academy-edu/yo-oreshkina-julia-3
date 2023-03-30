@@ -1,0 +1,14 @@
+.button {
+    @include btn-link-white;
+}
+
+.button:hover, .button:focus {
+    border: 2.5px solid $color-text;
+    color: $color-text;
+}
+
+.button:disabled {
+    border: 2.5px solid $color-disabled;
+    color: $color-disabled;
+    cursor: url(../img/icons/cursor-disabled.svg) 2 2, pointer;
+}

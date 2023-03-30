@@ -1,0 +1,28 @@
+<div class="burger-menu__wrapper visually-hidden">
+    <nav class="burger-menu">
+        @@include('blocks/button-close.html', 
+        {'classJs': 'burger-menu__btn-close'})
+        <ul class=" burger-menu__list burger-menu__list--log-out">
+            <li class="burger-menu__item">
+                <a class="burger-menu__link--active" href="#">Home</a>
+            </li>
+            <li class="burger-menu__item">
+                <a class="burger-menu__link" href="#">My blog</a>
+            </li>
+            <li class="burger-menu__item">
+                <button type="button" class="burger-menu__btn">Sigh in</button>
+            </li>
+            <li class="burger-menu__item">
+                <button type="button" class="burger-menu__btn">Register</button>
+            </li>
+        </ul>
+        <ul class="burger-menu__list--log-in visually-hidden">
+            <li class="burger-menu__item">
+                <a class="burger-menu__link" href="#">My blog</a>
+            </li>
+            <li class="burger-menu__item">
+                <a class="burger-menu__link" href="#">My profile</a>
+            </li>
+        </ul>
+    </nav>
+</div>

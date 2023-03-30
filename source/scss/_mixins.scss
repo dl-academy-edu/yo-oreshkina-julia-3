@@ -5,7 +5,7 @@
 }
 
 @mixin no-btn {
-  background: transparent;
+  background-color: transparent;
   border: 0;
   box-sizing: border-box;
   margin: 0;
@@ -19,4 +19,93 @@
     clear: both;
     display: table;
   }
+}
+
+@mixin dialog-box-tail {
+  content: '';
+  position: absolute;
+  top: 100%;
+  width: 42px;
+  height: 21px;
+  background-image: url('../img/arrow-box.svg');
+}
+
+/* text */
+
+@mixin text-skills {
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: $color-text;
+}
+
+@mixin slider-info {
+  font-weight: 500;
+  text-align: center;
+  color: #FFFFFF;
+}
+
+@mixin text-footer {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 400;
+  color: $color-text;
+}
+
+@mixin text-btn-link {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 18px;
+  line-height: 22px;
+  text-align: center;
+}
+
+@mixin text-burger-menu {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 42px;
+  color: $color-text;
+  transition: 0.4s;
+}
+
+@mixin text-label {
+  font-size: 14px;
+  line-height: 16px;
+  font-weight: 500;
+  color: $primary-text;
+}
+
+@mixin input-textarea-styles {
+  box-sizing: border-box;
+  border: 2.5px solid #E5E5E5;
+  padding: 14px;
+  font-size: 18px;
+  line-height: 20px;
+  color: $primary-text;
+  transition: 0.4s;
+}
+
+/* buttons and links */
+
+@mixin btn-link-black {
+  @include text-btn-link;
+  color: #FFFFFF;
+  background: $primary-text;
+  border: 2.5px solid $primary-text;
+  border-radius: 30px;
+  padding: 10px 29px;
+  transition: 0.4s;
+}
+
+@mixin btn-link-white {
+  @include text-btn-link;
+  padding: 10px 19px;
+  border: 2.5px solid $primary-text;
+  border-radius: 30px;
+  color: $primary-text;
+  background-color: #FFFFFF;
+  transition: 0.4s;
 }

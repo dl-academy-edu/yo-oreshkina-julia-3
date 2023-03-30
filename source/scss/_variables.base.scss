@@ -11,11 +11,13 @@ $font-mono-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "
   Themes fonts
 */
 $font-base-family: $font-serif-family;
+$gilroy: 'Gilroy', sans-serif;
 
 /*
 * Breakpoints
 */
-
+$media-mobile: 320px;
+$media-mobile-landscape: 425px;
 $media-tablet: 768px;
 $media-tablet-landscape: 1024px;
 $media-desktop: 1200px;
@@ -25,4 +27,9 @@ $media-desktop: 1200px;
 */
 
 $color-bg: #fff;
-$color-text: #151515;
+$color-section: #F6F6F6;
+$primary-text: #070707;
+$color-text: #828282;
+$color-disabled: #E5E5E5;
+$color-bad:  #EB3617;
+$color-good: #03BC3C;

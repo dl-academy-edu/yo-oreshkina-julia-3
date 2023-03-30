@@ -8,16 +8,67 @@ html {
 *::before,
 *::after {
   box-sizing: inherit;
+  margin: 0;
+  padding: 0;
 }
 
 html,
 body {
   background-color: $color-bg;
-  color: $color-text;
-  font-family: $font-base-family;
+  color: $primary-text;
+  font-family: $gilroy;
   height: 100%;
   margin: 0;
   min-height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  text-decoration: none;
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: $color-text;
+  transition: 0.4s;
+}
+
+h1 {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 48px;
+  line-height: 56px;
+}
+
+h2 {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 34px;
+  line-height: 42px;
+}
+
+p {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 18px;
+  line-height: 22px;
+  color: $primary-text;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}
+
+button {
+  cursor: pointer;
+}
+
+.visually-hidden {
+  display: none;
 }
