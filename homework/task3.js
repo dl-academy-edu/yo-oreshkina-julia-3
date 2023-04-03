@@ -5,11 +5,11 @@
 function askUserAge() {
     let age = +prompt("Сколько вам лет?", 0);
 
-    if (!isNaN(age) && age !== null && age !== "" && age >= 18) {
+    if (Number(age) && age >= 18) {
         return "отлично!"; 
-    } else {
-        return askUserAge();
-    }  
+    }
+
+    return askUserAge(); 
 }
 
 console.log(askUserAge());
