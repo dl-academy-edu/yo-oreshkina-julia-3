@@ -35,12 +35,6 @@
         border: 2px solid $color-disabled;
         cursor: url(../img/icons/cursor-disabled.svg) 2 2, pointer;
     }
-    &__input:checked + &__label::before {
-        border: 2px solid $primary-text;
-        background-image: url('../img/icons/check.svg');
-        background-repeat: no-repeat;
-        background-size:contain;
-    }
     &__label:hover {
         color: $color-text;
         cursor: pointer;
@@ -48,11 +42,18 @@
     &__input:hover + &__label::before {
         border: 2px solid $color-text;
     }
-    // TODO: разобраться с поведение чекбокса при фокусе через tub и при состоянии checked
-    /* &__input:focus + &__label::before {
+
+    &__input:checked + &__label::before {
+        border: 2px solid $primary-text;
+        background-image: url('../img/icons/check.svg');
+        background-repeat: no-repeat;
+        background-size:contain;
+    }
+    
+    &__input:focus + &__label::before {
         border: 2px solid $color-text;
     }
     &__input:focus + &__label {
         color: $color-text;
-    } */
+    }
 }
