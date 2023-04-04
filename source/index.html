@@ -99,24 +99,91 @@
     </section>
     @@include('blocks/footer.html')
     <div class="modal-box visually-hidden">
+      <div class="login-form__wrapper">
+        @@include('blocks/button-close.html', 
+        {"classJs": "login-form__btn-close"})
+        <form class="form login-form" action="#" novalidate> 
+            <div class="form__inner">
+              <input type="text" name="username" id="username" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="username">Name</label>
+            </div>
+            <div class="form__inner">
+              <input type="password" name="current-password" id="current-password" aria-label="checkbox is not selected" autocomplete="on" required>
+              <label class="form__label" for="current-password">Password</label>
+            </div>
+              @@include('blocks/buttons.html',
+              {"additionalclass": "login-form__btn",
+              "buttonType": "submit",
+              "buttonName": "Log in",
+              "btnAriaLabel": "checkbox is not selected",
+              "atr": ""})
+        </form>
+      </div>
+    </div>
+    <div class="modal-box visually-hidden">
+      <div class="form__wrapper">
+        @@include('blocks/button-close.html', 
+        {"classJs": "registration-form__btn-close"})
+        <form class="form registration-form" action="#" novalidate>
+            <div class="form__inner">
+              <input type="email" name="email" id="email" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="email">Email</label>
+            </div> 
+            <div class="form__inner form__inner--two-input">
+              <input type="text" name="new-name" id="new-name" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="new-name">Name</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="text" name="surname" id="surname" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="surname">Surname</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="password" name="new-password" id="password" aria-label="checkbox is not selected" autocomplete="on" required>
+              <label class="form__label" for="password">Password</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="password" name="repeat-password" id="repeat-password" aria-label="checkbox is not selected" autocomplete="off" required>
+              <label class="form__label" for="repeat-password">Repeat password</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="text" name="location" id="location" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="repeat-password">Location</label>
+            </div>
+            <div class="form__inner form__inner--two-input">
+              <input type="number" name="age" id="age" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="age">Age</label>
+            </div>
+              @@include('blocks/checkbox.html',
+              {"checkboxId": "agreement",
+              "atrCheckbox": "disabled"})
+              @@include('blocks/buttons.html',
+              {"additionalclass": "registration-form__btn",
+              "buttonType": "submit",
+              "buttonName": "Sign up",
+              "btnAriaLabel": "checkbox is not selected",
+              "atr": "disabled"})
+        </form>
+      </div>
+    </div>
+    <div class="modal-box visually-hidden">
       <div class="form__wrapper">
         @@include('blocks/button-close.html', 
         {"classJs": "connect-form__btn-close"})
         <form class="form connect-form" action="#" novalidate>
             <div class="form__inner form__inner--two-input">
-              <input type="text" name="name" id="name" required>
+              <input type="text" name="name" id="name" aria-label="checkbox is not selected" required>
               <label class="form__label" for="name">What is your name?</label>
             </div>
             <div class="form__inner form__inner--two-input">
-              <input type="email" name="email" id="email" required>
-              <label class="form__label" for="email">Message subject</label>
+              <input type="text" name="subject" id="subject" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="subject">Message subject</label>
             </div> 
             <div class="form__inner form__inner--two-input">
-              <input type="email" name="email" id="email" required>
-              <label class="form__label" for="email">Your Email</label>
+              <input type="email" name="current-email" id="current-email" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="current-email">Your Email</label>
             </div>
             <div class="form__inner form__inner--two-input">
-              <input type="tel" name="phone" id="phone" required>
+              <input type="tel" name="phone" id="phone" aria-label="checkbox is not selected" required>
               <label class="form__label" for="phone">Your mobile phone</label>
             </div>
             <div class="form__inner">
@@ -124,12 +191,13 @@
               <label class="form__label" for="message">What do you want to discuss with me?</label>
             </div>
               @@include('blocks/checkbox.html',
-              {"checkboxId": "agreement",
+              {"checkboxId": "connect-agreement",
               "atrCheckbox": "disabled"})
               @@include('blocks/buttons.html',
               {"additionalclass": "connect-form__btn",
               "buttonType": "submit",
               "buttonName": "Send",
+              "btnAriaLabel": "checkbox is not selected",
               "atr": "disabled"})
         </form>
       </div>

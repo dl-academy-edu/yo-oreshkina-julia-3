@@ -6,6 +6,13 @@
     background-size:cover;
     width: 26px;
     height: 26px;
+    @media (max-width: 835px) {
+        align-self: end;
+        display: flex;
+    }
+    @media (max-width: $media-mobile-landscape) {
+        transform: scale(0.8);
+    }
 }
 .btn-close:hover, .btn-close:focus {
     background-image: url('../img/icons/close-focus.svg');
