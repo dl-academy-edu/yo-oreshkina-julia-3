@@ -73,11 +73,13 @@ let dataForStories = data.map(elem => ({
 
 const writeStories = (data) => {
     data.forEach(e => {
-        console.log(`${e.name} - язык программирования, выпущенный в ${e.year} году. 
-        Автором языка стал ${e.developer.name} - ${e.developer.work}. 
-        Файлы программ, написанных на ${e.name}, могут иметь расширения ${e.filenameExtensions}.
-        ${e.name} испытал влияние ${e.influencedBy.length} языков программирования: ${e.influencedBy.join(", ")}.
-        ${e.name} повлиял на ${e.affectedBy}.`);
+        console.log(e.name + " - язык программирования, выпущенный в " +
+        e.year + "году.\nAвтopoм языка стал " + e.developer.name +
+        " - " + e.developer.work + ".\nФaйлы программ, написанных на " +
+        e.name + ", могут иметь расширения " + e.filenameExtensions +
+        ".\n" + e.name + " испытал влияние " + e.influencedBy.length +
+        " языков программирования: " + e.influencedBy.join(", ") + 
+        ".\n" + e.name + " повлиял на " + e.affectedBy + ".");
     });
 };
 
@@ -89,10 +91,9 @@ let loadingStories = setInterval(() => {
     console.log(`${counterOfTime} Ожидание...`); 
     if(counterOfTime === 0) {
         clearInterval(loadingStories);
+        writeStories(dataForStories);
     }
 }, 1000);
-
-setTimeout(writeStories, 10000, dataForStories);
 
 
 
