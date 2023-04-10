@@ -62,13 +62,8 @@
 }
 
 @mixin text-burger-menu {
-  font-family: $gilroy;
-  font-style: normal;
-  font-weight: bold;
   font-size: 34px;
   line-height: 42px;
-  color: $color-text;
-  transition: 0.4s;
 }
 
 @mixin text-label {
@@ -111,4 +106,3 @@
 }
 
 /* form */
-

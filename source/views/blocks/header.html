@@ -1,14 +1,21 @@
 <header class="header container">
     <nav class="header__nav">
-        <a class="header__link header__link--active" href="#">Home</a>
-        <ul class="header__list--log-out">
-            <li class="header__item"><a class="header__link" href="#">My blog</a></li>
-            <li class="header__item"><button class="header__btn" type="button">Sigh in</button></li>
-            <li class="header__item"><button class="header__btn" type="button">Register</button></li>
-        </ul>
-        <ul class="header__list--log-in visually-hidden">
-            <li class="header__item"><a class="header__link" href="#">My blog</a></li>
-            <li class="header__item"><a class="header__link" href="#">My profile</a></li>
+        <ul class="header__list">
+            <li><a class="header__link--active" href="#">Home</a></li>
+            <li><a class="header__link" href="./blog.html">My blog</a></li>
+            <li><button class="header__btn login-btn--open" type="button">Sign in</button></li>
+            <li><button class="header__btn registration-btn--open" type="button">Register</button></li>
         </ul>
     </nav>
+    <nav class="header__burger close">
+        @@include('blocks/button-close.html', 
+        {'addClass': 'header__burger-btn--close-js'})
+        <ul class="header__burger-list">
+            <li><a class="header__link--active header__link--text" href="#">Home</a></li>
+            <li><a class="header__link header__link--text" href="./blog.html">My blog</a></li>
+            <li><button class="header__btn header__btn--text burger-login-btn--open" type="button">Sign in</button></li>
+            <li><button class="header__btn header__btn--text burger-registration-btn--open" type="button">Register</button></li>
+        </ul>
+    </nav>
+    <button class="header__burger-btn header__burger-btn--open-js" type="button" aria-label="open burger menu"></button>
 </header>

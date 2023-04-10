@@ -1,13 +1,26 @@
 .header {
     padding-top: 35px;
     @media (max-width: 375px) {
-        display: none;
+        padding: 0;
+        margin: 0;
     }
     &__nav {
-        display: flex;
-        justify-content: space-between;
         border-bottom: 1px solid $color-text;
         padding-bottom: 30px;
+        @media (max-width: 375px) {
+            display: none;
+        }
+    }
+    &__list {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        @media (max-width: 375px) {
+            display: none;
+        }
+    }
+    &__list > li:nth-of-type(1) {
+        flex: 1 1 auto;
     }
     &__link {
         font-weight: bold;
@@ -21,12 +34,7 @@
     &__link--active:hover, &__link--active:focus {
         color:$color-text;
     }
-    &__list--log-out {
-        @include no-list;
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
-    }
+    
     &__btn {
         @include no-btn;
         font-family: $gilroy;
@@ -39,4 +47,60 @@
     &__btn:hover, &__btn:focus, &__link:hover, &__link:focus {
         color: $primary-text;
     }
+    &__burger-btn {
+        display: none;
+        @media (max-width: 375px) {
+            position: absolute;
+            top: 175px;
+            right: 20px;
+            border: none;
+            display: block;
+            background-color:#fff;
+            background-image: url('../img/icons/burger-menu.svg');
+            background-repeat: no-repeat;
+            width: 32px;
+            height: 20px;
+        }
+    }
+    
+    &__burger {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        row-gap: 186px;
+        z-index: 10;
+        position: absolute;
+        padding-top: 50px;
+        padding-right: 20px;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: 375px;
+        height: 100%;
+        background: rgba(246, 246, 246, 0.99); 
+        animation: open-burger-menu linear 0.5s;
+    }
+    &__burger.close {
+        display: none;
+    }
+    
+    &__burger-list {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 40px;
+    }
+    &__link--text, &__btn--text {
+        @include text-burger-menu;
+    }
+    
+}
+
+@keyframes open-burger-menu {
+    0% {
+      transform: translateY(-100%);    
+    }
+  100% {
+    transform: translateY(0);    
+  }
 }

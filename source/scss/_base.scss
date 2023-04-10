@@ -24,6 +24,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul, ol {
+  list-style-type: none;
+}
+
 a {
   text-decoration: none;
   font-family: $gilroy;
@@ -71,4 +75,8 @@ button {
 
 .visually-hidden {
   display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

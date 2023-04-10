@@ -26,11 +26,8 @@
     <main class="summary container">
       <h1 class="summary__title">Julia Oreshkina</h1>
       <div class="summary__info">
-        <p>Future front-end developer</p>
-        <p>30 years old, Tolyatti</p>
+        <p>Future front-end developer 30 years old, Tolyatti</p>
       </div>
-      @@include('blocks/burger-menu.html')
-      <button class="burger-menu__btn-open" type="button" aria-label="open burger menu"></button>
       <div class="summary__slider"></div>
     </main>
     <section class="about">
@@ -98,10 +95,10 @@
       </div>
     </section>
     @@include('blocks/footer.html')
-    <div class="modal-box visually-hidden">
+    <div class="login-form__modal modal-box visually-hidden">
       <div class="login-form__wrapper">
         @@include('blocks/button-close.html', 
-        {"classJs": "login-form__btn-close"})
+        {"addClass": "login-form__btn-close"})
         <form class="form login-form" action="#" novalidate> 
             <div class="form__inner">
               <input type="text" name="username" id="username" aria-label="checkbox is not selected" required>
@@ -120,10 +117,10 @@
         </form>
       </div>
     </div>
-    <div class="modal-box visually-hidden">
+    <div class="registration-form__modal modal-box visually-hidden">
       <div class="form__wrapper">
         @@include('blocks/button-close.html', 
-        {"classJs": "registration-form__btn-close"})
+        {"addClass": "registration-form__btn-close"})
         <form class="form registration-form" action="#" novalidate>
             <div class="form__inner">
               <input type="email" name="email" id="email" aria-label="checkbox is not selected" required>
@@ -165,10 +162,10 @@
         </form>
       </div>
     </div>
-    <div class="modal-box visually-hidden">
+    <div class="connect-form__modal modal-box visually-hidden">
       <div class="form__wrapper">
         @@include('blocks/button-close.html', 
-        {"classJs": "connect-form__btn-close"})
+        {"addClass": "connect-form__btn-close"})
         <form class="form connect-form" action="#" novalidate>
             <div class="form__inner form__inner--two-input">
               <input type="text" name="name" id="name" aria-label="checkbox is not selected" required>
@@ -203,5 +200,6 @@
       </div>
     </div>
     <script src="js/app.js" defer></script>
+    <script src="js/index.js" defer></script>
   </body>
 </html>

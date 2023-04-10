@@ -16,7 +16,6 @@
   Import all other blocks
 */
 @import "_blocks/container";
-@import "_blocks/burger-menu";
 @import "_blocks/header";
 @import "_blocks/footer";
 @import "_blocks/button-close";
@@ -52,10 +51,9 @@
   }
   &__info {
     display: flex;
-    flex-direction: column;
-    align-items: start;
-    justify-content: end;
+    align-items: end;
     padding-bottom: 44px;
+    max-width: 226px;
     @media (max-width: 375px) {
       max-width: 205px;
     }
@@ -238,7 +236,7 @@
 
 }
 
-/*    SEND MESSAGE MODAL    */
+/*   MODAL WINDOW   */
 
 .modal-box {
   position: absolute;
@@ -260,6 +258,7 @@
   gap: 20px;
   background: #FFFFFF;
   border: 2.5px solid #070707; 
+  z-index: 25;
   @media (max-width: $media-mobile-landscape) {
     padding: 20px;
     gap: 15px;
@@ -272,11 +271,11 @@
     justify-content: center;
     @media (max-width: 835px) {
       flex-direction: column;
-      padding: 0 45px;
+      padding: 45px;
       align-items: center;
     }
     @media (max-width: $media-mobile-landscape) {
-      padding: 0px 20px;
+      padding: 20px;
     }
   }
   &__inner {
