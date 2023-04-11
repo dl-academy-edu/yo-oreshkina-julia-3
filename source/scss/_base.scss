@@ -73,6 +73,11 @@ button {
   cursor: pointer;
 }
 
+fieldset {
+  border: none;
+  padding: 0;
+}
+
 .visually-hidden {
   display: none;
 }

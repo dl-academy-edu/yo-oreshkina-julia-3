@@ -14,13 +14,13 @@
       var docElement = document.documentElement;
       docElement.className = docElement.className.replace(/\bno-js\b/, '') + ' js';
     </script>
-
-    <!-- Favicon -->
-
-    <!-- build:css -->
     <link href="css/style.min.css" rel="stylesheet">
-    <!-- endbuild -->
   </head>
   <body>
-    <h1>BLOG</h1>
+    @@include('blocks/header.html')
+    <main class="blog container">
+      <h1 class="blog__title">My blog</h1>
+      @@include('blocks/filter.html')
+    </main>
+    @@include('blocks/footer.html')
   </body>

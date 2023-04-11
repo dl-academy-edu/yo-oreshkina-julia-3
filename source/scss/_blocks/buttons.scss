@@ -1,4 +1,5 @@
 .button {
+    width: max-content;
     @include btn-link-white;
 }
 

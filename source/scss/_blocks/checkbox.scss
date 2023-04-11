@@ -17,6 +17,7 @@
     
     &__label::before {
         content: ' ';
+        box-sizing: border-box;
         position: absolute;
         margin-left: -34px;
         width: 19px;
@@ -39,7 +40,7 @@
         color: $color-text;
         cursor: pointer;
     }
-    &__input:hover + &__label::before {
+    &__input:hover:enabled + &__label::before {
         border: 2px solid $color-text;
     }
 

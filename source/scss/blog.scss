@@ -1,0 +1,8 @@
+.blog {
+    &__title {
+        @media (max-width: $media-mobile-landscape) {
+            margin-top: 30px;
+            margin-bottom: 36px;
+        }
+    }
+}
