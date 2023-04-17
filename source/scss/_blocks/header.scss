@@ -26,12 +26,12 @@
         font-weight: bold;
         transition: 0.4s;
     }
-    &__link--active {
+    &__link_active {
         color: $primary-text;
         font-weight: bold;
         transition: 0.4s;
     }
-    &__link--active:hover, &__link--active:focus {
+    &__link_active:hover, &__link_active:focus {
         color:$color-text;
     }
     
@@ -47,7 +47,7 @@
     &__btn:hover, &__btn:focus, &__link:hover, &__link:focus {
         color: $primary-text;
     }
-    &__burger-btn {
+    &__burger-btn-open {
         display: none;
         @media (max-width: 375px) {
             position: absolute;
@@ -80,7 +80,7 @@
         background: rgba(246, 246, 246, 0.99); 
         animation: open-burger-menu linear 0.5s;
     }
-    &__burger.close {
+    &__burger.visually-hidden {
         display: none;
     }
     
@@ -90,7 +90,7 @@
         align-items: end;
         gap: 40px;
     }
-    &__link--text, &__btn--text {
+    &__burger-link, &__burger-btn {
         @include text-burger-menu;
     }
     

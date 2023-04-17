@@ -26,26 +26,29 @@
             <!-- picture -->
         </div>
         <div class="profile__data">
-            <p class="profile__item">Name: <span class="profile__value profile__name--js"></span></p>
-            <p class="profile__item">Surame: <span class="profile__value profile__surname--js"></span></p>
-            <p class="profile__item">Email: <span class="profile__value profile__email--js"></span></p>
-            <p class="profile__item">Password: <span class="profile__value profile__password--js">****************</span></p>
-            <p class="profile__item">Location: <span class="profile__value profile__location--js"></span></p>
-            <p class="profile__item">Age: <span class="profile__value profile__age--js"></span></p>
+            <p class="profile__item">Name: <span class="profile__value profile__name_js"></span></p>
+            <p class="profile__item">Surame: <span class="profile__value profile__surname_js"></span></p>
+            <p class="profile__item">Email: <span class="profile__value profile__email_js"></span></p>
+            <p class="profile__item">Password: <span class="profile__value profile__password_js">****************</span></p>
+            <p class="profile__item">Location: <span class="profile__value profile__location_js"></span></p>
+            <p class="profile__item">Age: <span class="profile__value profile__age_js"></span></p>
             @@include('blocks/buttons.html',
-            {"additionalclass": "profile__change-password-btn",
+            {"additionalClass": "profile__change-password-btn",
+            "classJs": "profile__change-password-btn_js",
             "buttonType": "button",
             "buttonName": "Change password",
             "btnAriaLabel": "open popup for change password",
             "atr": ""})
             @@include('blocks/buttons.html',
-            {"additionalclass": "profile__change-data-btn",
+            {"additionalClass": "profile__change-data-btn",
+            "classJs": "profile__change-data-btn_js",
             "buttonType": "button",
             "buttonName": "Change other data",
             "btnAriaLabel": "open popup for change data of profile",
             "atr": ""})
             @@include('blocks/buttons.html',
-            {"additionalclass": "profile__delete-btn",
+            {"additionalClass": "profile__delete-btn",
+            "classJs": "profile__delete-btn_js",
             "buttonType": "button",
             "buttonName": "Delete account",
             "btnAriaLabel": "delete account",
@@ -53,10 +56,11 @@
         </div>
     </div>
    </main>
-   <div class="password-form__modal modal-box visually-hidden">
+   <div class="password-form__popup popup visually-hidden">
     <div class="password-form__wrapper">
       @@include('blocks/button-close.html', 
-      {"addClass": "password-form__btn-close"})
+      {"addClass": "password-form__btn-close",
+      "addClassJs": "password-form__btn-close_js"})
       <form class="password-form" action="#" novalidate>
           <div class="form__inner">
             <input type="password" name="old-password" id="old-password" aria-label="checkbox is not selected" required>
@@ -71,7 +75,8 @@
             <label class="form__label" for="repeat-new-password">Repeat new password</label>
           </div>
             @@include('blocks/buttons.html',
-            {"additionalclass": "password-form__btn",
+            {"additionalClass": "password-form__btn",
+            "classJs": "password-form__btn_js",
             "buttonType": "submit",
             "buttonName": "change password",
             "btnAriaLabel": "save new password",
@@ -79,10 +84,11 @@
       </form>
     </div>
   </div>
-  <div class="form-edit-data__modal modal-box visually-hidden">
+  <div class="form-edit-data__popup popup visually-hidden">
     <div class="form-edit-data__wrapper">
       @@include('blocks/button-close.html', 
-      {"addClass": "form-edit-data__btn-close"})
+      {"addClass": "form-edit-data__btn-close",
+      "addClassJs": "form-edit-data__btn-close_js"})
       <form class="form form-edit-data" action="#" novalidate>
           <div class="form__inner">
             <input type="email" name="new-email" id="new-email">
@@ -113,7 +119,8 @@
             <label class="form__label" for="photo">Profile picture</label>
           </div>
             @@include('blocks/buttons.html',
-            {"additionalclass": "form-edit-data__btn",
+            {"additionalClass": "form-edit-data__btn",
+            "classJs": "form-edit-data__btn_js",
             "buttonType": "submit",
             "buttonName": "Submit changes",
             "btnAriaLabel": "save new data of profile",

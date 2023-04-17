@@ -91,12 +91,15 @@
     </section>
     @@include('blocks/footer.html')
     <!-- button toTop -->
-    <button class="button-to-top button-to-top--js" type="button" aria-label="scroll to top"></button>
+    <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
     <!-- popups -->
-    <div class="login-form__modal modal-box visually-hidden">
+    <div class="login-form__popup_js popup visually-hidden">
       <div class="login-form__wrapper">
         @@include('blocks/button-close.html', 
-        {"addClass": "login-form__btn-close"})
+        {"addClass": "login-form__btn-close",
+        "addClassJs": "login-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close log in form"})
         <form class="form login-form" action="#" novalidate> 
             <div class="form__inner">
               <input type="text" name="username" id="username" aria-label="checkbox is not selected" required>
@@ -107,7 +110,8 @@
               <label class="form__label" for="current-password">Password</label>
             </div>
               @@include('blocks/buttons.html',
-              {"additionalclass": "login-form__btn",
+              {"additionalClass": "login-form__btn",
+              "classJs": "login-form__btn_js",
               "buttonType": "submit",
               "buttonName": "Log in",
               "btnAriaLabel": "checkbox is not selected",
@@ -115,10 +119,13 @@
         </form>
       </div>
     </div>
-    <div class="registration-form__modal modal-box visually-hidden">
+    <div class="registration-form__popup_js popup visually-hidden">
       <div class="form__wrapper">
         @@include('blocks/button-close.html', 
-        {"addClass": "registration-form__btn-close"})
+        {"addClass": "registration-form__btn-close",
+        "addClassJs": "registration-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close registration form"})
         <form class="form registration-form" action="#" novalidate>
             <div class="form__inner">
               <input type="email" name="email" id="email" aria-label="checkbox is not selected" required>
@@ -158,7 +165,8 @@
               {"checkboxId": "agreement",
               "atrCheckbox": "disabled"})
               @@include('blocks/buttons.html',
-              {"additionalclass": "registration-form__btn",
+              {"additionalClass": "registration-form__btn",
+              "classJs": "registration-form__btn_js",
               "buttonType": "submit",
               "buttonName": "Sign up",
               "btnAriaLabel": "checkbox is not selected",
@@ -166,10 +174,13 @@
         </form>
       </div>
     </div>
-    <div class="connect-form__modal modal-box visually-hidden">
+    <div class="connect-form__popup_js popup visually-hidden">
       <div class="form__wrapper">
         @@include('blocks/button-close.html', 
-        {"addClass": "connect-form__btn-close"})
+        {"addClass": "connect-form__btn-close",
+        "addClassJs": "connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
         <form class="form connect-form" action="#" novalidate>
           <div class="form__inputs-wrap">
             <div class="form__inner">
@@ -199,7 +210,8 @@
             {"checkboxId": "connect-agreement",
             "atrCheckbox": "disabled"})
             @@include('blocks/buttons.html',
-            {"additionalclass": "connect-form__btn",
+            {"additionalClass": "connect-form__btn",
+            "classJs": "connect-form__btn_js",
             "buttonType": "submit",
             "buttonName": "Send",
             "btnAriaLabel": "checkbox is not selected",
