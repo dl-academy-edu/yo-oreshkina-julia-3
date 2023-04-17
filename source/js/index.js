@@ -1,72 +1,143 @@
+//TODO: можно ли объединить popupHandler и popupMobileHandler? и надо ли это делать?
 
-    const btnOpenedRegform = document.querySelector('.registration-btn--open');
-    const btnOpenedRegformFromMenu = document.querySelector('.burger-registration-btn--open');
-    const registrationModal = document.querySelector('.registration-form__modal');
-    const btnClosedRegform = document.querySelector('.registration-form__btn-close');
-    const btnOpenedLoginform = document.querySelector('.login-btn--open');
-    const btnOpenedLoginformFromMenu = document.querySelector('.burger-login-btn--open');
-    const loginModal = document.querySelector('.login-form__modal');
-    const btnClosedLoginform = document.querySelector('.login-form__btn-close');
-    const btnOpenedConnectForm = document.querySelector('.footer__btn-connect');
-    const connectModal = document.querySelector('.connect-form__modal');
-    const btnClosedConnectform = document.querySelector('.connect-form__btn-close');
-    
-    function openModalWindow( modalWindow, btn) {
-        btn.addEventListener('click', () => {
-            window.scrollTo(0, 0);
-            modalWindow.classList.remove('visually-hidden');
-            document.body.classList.add('no-scroll');
-        });
-    }
-    
-    function closeModalWindow(modalWindow, btn) {
-        btn.addEventListener('click', () => {
-            modalWindow.classList.add('visually-hidden');
-            document.body.classList.remove('no-scroll');
-        });
+// вызов функции открытия и закрытия формы входа
+popupHandler('login-form__popup_js', 'header__login-btn_js', 'login-form__btn-close_js');
+// вызов функции открытия и закрытия формы регистрации
+popupHandler('registration-form__popup_js', 'header__reg-btn_js', 'registration-form__btn-close_js');
+// вызов функции открытия и закрытия для отправки сообщения
+popupHandler('connect-form__popup_js', 'footer__btn-connect_js', 'connect-form__btn-close_js');
+// вызов функции открытия и закрытия форм из мобильного меню 
+popupMobileHandler('login-form__popup_js', 'header__burger-login-btn_js', 'login-form__btn-close_js');
+
+popupMobileHandler('registration-form__popup_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js');
+
+// ф-ция открытия и закрытия форм
+function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
+    const popup = document.querySelector(`.${popupClass}`);
+    const openPopupbtn = document.querySelector(`.${openPopupbtnClass}`);
+    const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
+
+    // проверка на наличие открывающей кнопки в обычном меню 
+    if(!openPopupbtn) return;
+
+    // проверка на наличие модального окна или если пользователь специально удалит класс через браузер
+    if(!popup || !popup.classList.contains('visually-hidden')) return;
+
+    openPopupbtn.addEventListener('click', openPopup);
+
+    function openPopup() {
+        window.scrollTo(0, 0);
+        popup.classList.remove('visually-hidden');
+        document.body.classList.add('no-scroll');
+        window.addEventListener('keydown', escClosePopup);
         
-        window.addEventListener('keydown', function(event) {
-            if(event.code === "Escape" && !modalWindow.classList.contains('visually-hidden')) {
-                modalWindow.classList.add('visually-hidden');
-                document.body.classList.remove('no-scroll');
-            }
-        });
+        if(closePopupbtn) { // проверка на наличие закрывающей кнопки
+        closePopupbtn.addEventListener('click', closePopup);
+        }
     }
 
-    openModalWindow(registrationModal, btnOpenedRegform);
-    openModalWindow(loginModal, btnOpenedLoginform);
-    openModalWindow(connectModal, btnOpenedConnectForm);
-    openModalWindow(connectModal, btnOpenedRegformFromMenu);
-    openModalWindow(connectModal, btnOpenedLoginformFromMenu);
+    function closePopup() {
+        popup.classList.add('visually-hidden');
+        document.body.classList.remove('no-scroll');
+        window.removeEventListener('keydown', escClosePopup);
+        if(closePopupbtn) { 
+            closePopupbtn.removeEventListener('click', closePopup);
+        }
+    } 
 
-    closeModalWindow(registrationModal, btnClosedRegform);
-    closeModalWindow(loginModal, btnClosedLoginform);
-    closeModalWindow(connectModal, btnClosedConnectform);
+    function escClosePopup(e) {
+        if(e.code === "Escape" && !popup.classList.contains('visually-hidden')) {
+            closePopup();
+        }
+    }
+}
+// ф-ция открытия и закрытия форм из бургер-меню
+function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopupbtnClass) {
+    const menu = document.querySelector('.header__burger');
+    const mobilePopup = document.querySelector(`.${mobilePopupClass}`);
+    const openPopupBurgerbtn = document.querySelector(`.${openPopupBurgerbtnClass}`);
+    const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
 
+    if(!menu && !openPopupBurgerbtn) return;
+    if(!mobilePopup && !closePopupbtn) return;
+   
+    openPopupBurgerbtn.addEventListener('click', openMobilePopup);
+   
+    function openMobilePopup() {
+        if(!menu.classList.contains('visually-hidden')) {
+            menu.classList.add('visually-hidden');
+        }
+        window.scrollTo(0, 0);
+        mobilePopup.classList.remove('visually-hidden');
+        document.body.classList.add('no-scroll');
+
+        closePopupbtn.addEventListener('click', closeMobilePopup);
+    }
+
+    function closeMobilePopup() {
+        mobilePopup.classList.add('visually-hidden');
+        document.body.classList.remove('no-scroll');
+        closePopupbtn.removeEventListener('click', closeMobilePopup); 
+    }      
+}
+
+//------------------------------   Бургер меню  -------------------------------
 
 (function() {
-    const btnOpenedMenu = document.querySelector('.header__burger-btn--open-js');
+    const openMenuBtn = document.querySelector('.header__burger-btn-open_js');
     const menu = document.querySelector('.header__burger');
-    const btnClosedMenu = document.querySelector('.header__burger-btn--close-js');
+    const closeMenuBtn = document.querySelector('.header__burger-btn-close_js');
 
-    
-    btnOpenedMenu.addEventListener('click', () => {
-        menu.classList.remove('close');
+    if(!openMenuBtn) return;
+    if(!menu && !closeMenuBtn) return;
+
+    openMenuBtn.addEventListener('click', openMenu);
+
+    function openMenu() {
+        menu.classList.remove('visually-hidden');
         document.body.classList.add('no-scroll');
-        btnClosedMenu.focus();
-    });
-   
-    btnClosedMenu.addEventListener('click', () => {
-        menu.classList.add('close');
-        document.body.classList.remove('no-scroll');
-    });
+        closeMenuBtn.focus();
 
-    window.addEventListener('keydown', function(e) {
-        if(e.code === "Escape" && !menu.classList.contains('close')) {
-            menu.classList.add('close');
-            document.body.classList.remove('no-scroll');
+        closeMenuBtn.addEventListener('click', closeMenu);
+        window.addEventListener('keydown', escHandler);
+    }
+
+    function closeMenu() {
+        menu.classList.add('visually-hidden');
+        document.body.classList.remove('no-scroll'); 
+        closeMenuBtn.removeEventListener('click', closeMenu);
+        window.removeEventListener('keydown', escHandler);
+    }
+
+    function escHandler(e) {
+        if(e.code === "Escape" && !menu.classList.contains('visually-hidden')) {
+            closeMenu();
         }
-    });   
-
+    }
 })();
 
+
+
+/* -------------------- Функция прокрутки страницы вверх------------------ */
+
+(function() {
+    const btnToTop = document.querySelector('.button-to-top_js');
+
+    if(!btnToTop) return;
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY >= 1500) {
+            btnToTop.classList.remove('visually-hidden');
+        } else {
+            btnToTop.classList.add('visually-hidden');
+        }
+        btnToTop.addEventListener('click', scrollToTop, {once: true});
+    });
+
+    function scrollToTop() {
+        window.scrollTo({
+            top: 0,
+            behavior: 'smooth',
+        });
+    }
+})();
