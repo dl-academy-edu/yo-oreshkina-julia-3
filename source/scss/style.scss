@@ -304,6 +304,13 @@
     @include input-textarea-styles;
     height: 50px;
   }
+  
+  &__inner > input.invalid {
+    border: 2.5px solid $color-bad;
+  }
+  &__inner > input.valid {
+    border: 2.5px solid $color-good;
+  }
   &__inner > textarea {
     @include input-textarea-styles;
     width: 100%;
@@ -351,6 +358,7 @@
  }
 }
 
+
 /* BUTTON TO TOP */
 .button-to-top {
   position: fixed;
@@ -360,4 +368,21 @@
   background-image: url('../img/icons/btn-to-top.svg');
   width: 62px;
   height: 62px;
+}
+
+/* DINAMIC ELEMENTS */
+
+// class of error div
+.invalid-message {
+  padding-top: 10px;
+  color: $color-bad;
+  font-size: 14px;
+  line-height: 16px;
+}
+
+.valid-message {
+  padding-top: 10px;
+  color: $color-good;
+  font-size: 14px;
+  line-height: 16px;
 }

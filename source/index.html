@@ -100,14 +100,14 @@
         "addClassJs": "login-form__btn-close_js",
         "btnTab": "0",
         "btnLabel": "close log in form"})
-        <form class="form login-form" action="#" novalidate> 
+        <form class="form login-form" action="#" name="loginForm" novalidate> 
+          <div class="form__inner">
+            <input class="form__input_js" type="email" name="email" id="newEmail" required>
+            <label class="form__label" for="newEmail">Email</label>
+          </div>
             <div class="form__inner">
-              <input type="text" name="username" id="username" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="username">Name</label>
-            </div>
-            <div class="form__inner">
-              <input type="password" name="current-password" id="current-password" aria-label="checkbox is not selected" autocomplete="on" required>
-              <label class="form__label" for="current-password">Password</label>
+              <input class="form__input_js" type="password" name="password" id="currentPassword" autocomplete="on" required>
+              <label class="form__label" for="currentPassword">Password</label>
             </div>
               @@include('blocks/buttons.html',
               {"additionalClass": "login-form__btn",
@@ -126,44 +126,46 @@
         "addClassJs": "registration-form__btn-close_js",
         "btnTab": "0",
         "btnLabel": "close registration form"})
-        <form class="form registration-form" action="#" novalidate>
+        <form class="form registration-form" action="#" name="regForm" novalidate>
             <div class="form__inner">
-              <input type="email" name="email" id="email" aria-label="checkbox is not selected" required>
+              <input class="form__input_js" type="email" name="email" id="email" aria-label="checkbox is not selected" required>
               <label class="form__label" for="email">Email</label>
             </div>
             <div class="form__inputs-wrap">
               <div class="form__inner">
-                <input type="text" name="new-name" id="new-name" aria-label="checkbox is not selected" required>
-                <label class="form__label" for="new-name">Name</label>
+                <input class="form__input_js" type="text" name="name" id="userName" aria-label="checkbox is not selected" required>
+                <label class="form__label" for="userName">Name</label>
               </div>
               <div class="form__inner">
-                <input type="text" name="surname" id="surname" aria-label="checkbox is not selected" required>
+                <input class="form__input_js" type="text" name="surname" id="surname" aria-label="checkbox is not selected" required>
                 <label class="form__label" for="surname">Surname</label>
               </div>
             </div> 
             <div class="form__inputs-wrap">
               <div class="form__inner">
-                <input type="password" name="new-password" id="password" aria-label="checkbox is not selected" autocomplete="on" required>
+                <input class="form__input_js" type="password" name="password" id="password" aria-label="checkbox is not selected" autocomplete="on" required>
                 <label class="form__label" for="password">Password</label>
               </div>
               <div class="form__inner">
-                <input type="password" name="repeat-password" id="repeat-password" aria-label="checkbox is not selected" autocomplete="off" required>
-                <label class="form__label" for="repeat-password">Repeat password</label>
+                <input class="form__input_js" type="password" name="repeatPassword" id="repeatPassword" aria-label="checkbox is not selected" autocomplete="off" required>
+                <label class="form__label" for="repeatPassword">Repeat password</label>
               </div>
             </div>
             <div class="form__inputs-wrap">
               <div class="form__inner">
-                <input type="text" name="location" id="location" aria-label="checkbox is not selected" required>
+                <input class="form__input_js" type="text" name="location" id="location" aria-label="checkbox is not selected" required>
                 <label class="form__label" for="location">Location</label>
               </div>
               <div class="form__inner">
-                <input type="number" name="age" id="age" aria-label="checkbox is not selected" required>
+                <input class="form__input_js" type="number" name="age" id="age" aria-label="checkbox is not selected" required>
                 <label class="form__label" for="age">Age</label>
               </div>
             </div>
               @@include('blocks/checkbox.html',
-              {"checkboxId": "agreement",
-              "atrCheckbox": "disabled"})
+              {"addClassInput": "checkbox__input_js",
+              "checkboxName": "agreement",
+              "checkboxId": "agreement",
+              "atrCheckbox": ""})
               @@include('blocks/buttons.html',
               {"additionalClass": "registration-form__btn",
               "classJs": "registration-form__btn_js",
@@ -181,24 +183,24 @@
         "addClassJs": "connect-form__btn-close_js",
         "btnTab": "0",
         "btnLabel": "close form of send message"})
-        <form class="form connect-form" action="#" novalidate>
+        <form class="form connect-form" action="#" name="connectForm" novalidate>
           <div class="form__inputs-wrap">
             <div class="form__inner">
-              <input type="text" name="name" id="name" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="name">What is your name?</label>
+              <input class="form__input_js" type="text" name="fullName" id="fullName" aria-label="checkbox is not selected" required>
+              <label class="form__label" for="fullName">What is your name?</label>
             </div>
             <div class="form__inner">
-              <input type="text" name="subject" id="subject" aria-label="checkbox is not selected" required>
+              <input class="form__input_js" type="text" name="subject" id="subject" aria-label="checkbox is not selected" required>
               <label class="form__label" for="subject">Message subject</label>
             </div> 
           </div>
           <div class="form__inputs-wrap">
             <div class="form__inner">
-              <input type="email" name="current-email" id="current-email" aria-label="checkbox is not selected" required>
+              <input class="form__input_js" type="email" name="email" id="current-email" aria-label="checkbox is not selected" required>
               <label class="form__label" for="current-email">Your Email</label>
             </div>
             <div class="form__inner">
-              <input type="tel" name="phone" id="phone" aria-label="checkbox is not selected" required>
+              <input class="form__input_js" type="tel" name="phone" id="phone" aria-label="checkbox is not selected" required>
               <label class="form__label" for="phone">Your mobile phone</label>
             </div>
           </div>  
@@ -207,8 +209,10 @@
             <label class="form__label" for="message">What do you want to discuss with me?</label>
           </div>
             @@include('blocks/checkbox.html',
-            {"checkboxId": "connect-agreement",
-            "atrCheckbox": "disabled"})
+            {"addClassInput": "checkbox__input_js",
+            "checkboxName": "connectAgreement",
+            "checkboxId": "connectAgreement",
+            "atrCheckbox": ""})
             @@include('blocks/buttons.html',
             {"additionalClass": "connect-form__btn",
             "classJs": "connect-form__btn_js",
