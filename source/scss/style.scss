@@ -293,6 +293,7 @@
   &__inner {
     display: flex;
     flex-direction: column-reverse;
+    justify-content: flex-end;
     width: 100%;
     gap: 6px;
   }
@@ -374,14 +375,12 @@
 
 // class of error div
 .invalid-message {
-  padding-top: 10px;
   color: $color-bad;
   font-size: 14px;
   line-height: 16px;
 }
 
 .valid-message {
-  padding-top: 10px;
   color: $color-good;
   font-size: 14px;
   line-height: 16px;

@@ -227,30 +227,33 @@ function agreementCheckedHandler(checkbox, inputs, btn) {
 // появление-удаление ошибки для некорректно заполненного поля
 
 function setErrorText(input, messageError) { 
-    const error = errorCreator(messageError); // Получаем готовый div с ошибкой.
-    input.classList.add('invalid'); // Вешаем класс ошибки. 
-    input.insertAdjacentElement('beforeBegin', error); // Добавляем элемент в вёрстку.
-    input.addEventListener('input', () => { // Вешаем слушатель инпут, который отработает тогда, когда пользователь начнет что-то снова вводить.
+    const error = errorCreator(messageError);
+    input.classList.add('invalid');
+    input.insertAdjacentElement('beforeBegin', error);
+    input.addEventListener('input', () => {
         error.remove(); // Удаляем ошибку.
-        input.classList.remove('invalid'); // Удаляем класс ошибки.
-    }, {once: true}); // В качестве объекта параметров делаем выполнение этого события одноразовым.
+        input.classList.remove('invalid');
+    }, {once: true});
 }
 
 // создание элемента ошибки
 function errorCreator(message) {
     let messageError = document.createElement('div'); 
     messageError.classList.add('invalid-message'); 
-    messageError.innerText = message; // Кладём в него текст нашей ошибки.
-    return messageError; // Возвращаем подготовленный div как результат выполнения нашей функции.
-    // На момент завершения этой функции div не находится в вёрстке для того, чтобы он там появился мы его потом добавляем в него при помощи insertAdjacentElement.
+    messageError.innerText = message; 
+    return messageError;
 }
 
-//  вставка cooбщения для корректно заполненного поля
+//  вставка cooбщения о корректно заполненном поле
 
 function setValidityMessage(input) { 
     const message = validityMessageCreator(); 
     input.classList.add('valid'); 
     input.insertAdjacentElement('beforeBegin', message);
+    input.addEventListener('input', () => {
+        message.remove(); 
+        input.classList.remove('valid'); 
+    }, {once: true}); 
 }
 
 // создание елемента c cообщением о правильности заполнения формы
@@ -275,7 +278,10 @@ function validityMessageCreator() {
         e.preventDefault();
 
         const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
-        for (let error of errorsOldMessages) error.remove(); 
+        for (let error of errorsOldMessages) error.remove();
+
+        const validityOldMessages =  document.querySelectorAll('.valid-message');
+        for (let validityMessage of validityOldMessages) validityMessage.remove();
       
         const userData = getAllFormData(loginForm);
         console.log(userData);
@@ -288,12 +294,16 @@ function validityMessageCreator() {
                     case 'email': {
                         if(!isEmailCorrect(elem.value)) {
                             errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     default: {
                         if(elem.value.length <= 0) {
                             errors[elem.name] = 'This field is required';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
@@ -317,9 +327,6 @@ function validityMessageCreator() {
             password: userData.password,  
         };
 
-        // где-то здесь возможно появится функция setValidityMessage(input)
-        // TODO: К чему привязать эту функцию setValidityMessage(input)?????
-
         //типа отправили данные на сервер
         console.log(data);
     });
@@ -335,14 +342,18 @@ function validityMessageCreator() {
 
     if(!regForm) return;
 
-    // разбокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
+    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
     userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, inputs, regFormBtn));
 
     regForm.addEventListener('submit', (e) => {
         e.preventDefault();
+        // Если есть ошибки стираем их для предотвращения эффекта накопления ошибок.
+        const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
+        for (let error of errorsOldMessages) error.remove();
 
-        const errorsOldMessages = document.querySelectorAll('.invalid-message'); // Смотрим есть ли у нас элементы ошибок
-        for (let error of errorsOldMessages) error.remove(); // Если они есть стираем их для предотвращения эффекта накопления ошибок.
+        // Если есть уведомления, что поле верно заполнено, стираем их для предотвращения эффекта накопления.
+        const validityOldMessages =  document.querySelectorAll('.valid-message');
+        for (let validityMessage of validityOldMessages) validityMessage.remove();
 
         const userData = getAllFormData(regForm); // кладем данные формы во временный объект
         console.log(userData);
@@ -355,18 +366,24 @@ function validityMessageCreator() {
                     case 'email': {
                         if(!isEmailCorrect(elem.value)) {
                             errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     case 'repeatPassword': {
-                        if(elem.value !== userData.password) {
+                        if(elem.value !== userData.password || elem.value.length <= 0) {
                             errors.repeatPassword = 'Please re-enter password (your entry does not match the password you entered)';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     default: {
                         if(elem.value.length <= 0) {
                             errors[elem.name] = 'This field is required';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
@@ -393,9 +410,6 @@ function validityMessageCreator() {
             age: userData.age,
         };
 
-        // где-то здесь возможно появится функция setValidityMessage(input)
-        // TODO: К чему привязать эту функцию setValidityMessage(input)?????
-
         //типа отправили данные на сервер
         console.log(data);
     });
@@ -411,14 +425,17 @@ function validityMessageCreator() {
 
     if(!connectForm) return;
 
-    // разбокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
+    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
     userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, inputs, connectFormBtn));
 
     connectForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const errorsOldMessages = document.querySelectorAll('.invalid-message'); // Смотрим есть ли у нас элементы ошибок
-        for (let error of errorsOldMessages) error.remove(); // Если они есть стираем их для предотвращения эффекта накопления ошибок.
+        const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
+        for (let error of errorsOldMessages) error.remove();
+
+        const validityOldMessages =  document.querySelectorAll('.valid-message');
+        for (let validityMessage of validityOldMessages) validityMessage.remove();
 
         const userData = getAllFormData(connectForm); // кладем данные формы во временный объект
         console.log(userData);
@@ -431,24 +448,32 @@ function validityMessageCreator() {
                     case 'fullName': {
                         if(!isConnectNameCorrect(elem.value)) {
                             errors.fullName = 'Please enter a valid full name (your entry is not in the format "Name Surname")';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     case 'email': {
                         if(!isEmailCorrect(elem.value)) {
                             errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     case 'phone': {
                         if(!isPhoneCorrect(elem.value)) {
                             errors.phone = 'Please enter a valid phone';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
                     default: {
                         if(elem.value.length <= 0) {
                             errors[elem.name] = 'This field is required';
+                        } else {
+                            setValidityMessage(elem);
                         }
                         break;
                     }
