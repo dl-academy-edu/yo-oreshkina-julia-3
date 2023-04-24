@@ -499,10 +499,105 @@ function validityMessageCreator() {
             messageText: userData.message,
         };
 
-        // где-то здесь возможно появится функция setValidityMessage(input)
-        // TODO: К чему привязать эту функцию setValidityMessage(input)?????
-
         //типа отправили данные на сервер
         console.log(data);
     });
+})();
+
+/* __________________________________SLIDER________________________________ */
+
+(function() {
+    const slider = document.querySelector('.summary__slider_js');
+    const wrapper = slider.querySelector('.summary__slider-wrapper_js');
+    const innerWrapper = wrapper.querySelector('.summary__slider-inner_js');
+    const btnBack = slider.querySelector('.summary__slider-btn-back_js');
+    const btnNext = slider.querySelector('.summary__slider-btn-next_js');
+    const pagination = slider.querySelector('.summary__slider-pagination_js');
+    const slides = [...innerWrapper.querySelectorAll('.summary__slide_js')];
+    const slidesCount = slides.length;
+    const paginationDots = [];
+    const animationDuration = 500; // время задержки анимации
+
+    let timer = null;
+    let slideWidth = wrapper.offsetWidth; // ширина wrapper
+    let activeSlideIndex = 0;
+
+    initWidth();
+    createDots();
+    setActiveSlide(0);
+
+    window.addEventListener('resize', () => {
+        initWidth();
+        setActiveSlide(activeSlideIndex);
+    });
+
+    btnBack.addEventListener('click', () => {
+        setActiveSlide(activeSlideIndex - 1);
+    });
+    btnNext.addEventListener('click', () => {
+        setActiveSlide(activeSlideIndex + 1);
+    });
+
+    function setActiveSlide(index, withAnimation = true) {
+        if(index < 0 || index >= slidesCount) return; // проверяем не было ли переключения без кнопки
+        innerWrapper.style.transform = `translateX(${index * slideWidth * (-1)}px)`;
+
+        if(withAnimation) {
+            clearTimeout(timer);
+            innerWrapper.style.transition = `transform ${animationDuration}ms`;
+            timer = setTimeout(() => {
+                innerWrapper.style.transition = ''; // снимаем анимацию на время задержки
+            }, animationDuration);
+        }
+
+        if(index === 0) {
+            btnBack.setAttribute('disabled', 'disabled');
+        } else {
+            btnBack.removeAttribute('disabled');
+        }
+
+        if(index === slidesCount - 1) {
+            btnNext.setAttribute('disabled', 'disabled');
+        } else {
+            btnNext.removeAttribute('disabled');
+        }
+
+        paginationDots[activeSlideIndex].classList.remove('summary__slider-dot_active');
+        paginationDots[index].classList.add('summary__slider-dot_active');
+
+
+        activeSlideIndex = index; //обновляем значение для дальнейшего пролистывания
+    }
+
+    function initWidth() {
+        slideWidth = wrapper.offsetWidth;
+
+        slides.forEach(slide => {
+            slide.style.width = `${slideWidth}px`; 
+        });
+    }
+    function createDots() {
+        for (let i = 0; i < slidesCount; i++) {
+            const dot = createDot(i);
+            paginationDots.push(dot);
+            pagination.insertAdjacentElement('beforeEnd', dot);
+        }
+    }
+
+    function createDot(index) {
+        const dot = document.createElement('button');
+        dot.classList.add('summary__slider-dot');
+
+        if(index === activeSlideIndex) {
+            dot.classList.add('summary__slider-dot_active'); // !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+        }
+
+        dot.addEventListener('click', () => {
+            setActiveSlide(index);
+        });
+
+        return dot;
+    }
+
+
 })();
