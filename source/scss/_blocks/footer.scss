@@ -68,6 +68,7 @@
   &__author {
     @include text-footer;
   }
-
-  
+}
+.footer_onBlog{
+  background-color: $color-section;
 }
