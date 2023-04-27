@@ -1,7 +1,7 @@
 <form class="filter" action="#">
-    <fieldset class="filter__tags">
-      <legend class="filter__subtitle">Tags</legend>  
-      <!-- динамически -->
+    <fieldset class="filter__fieldset filter__tags">
+      <legend class="filter__subtitle">Tags</legend>
+      <div class="filter__tags-inner"><!-- динамически --></div>
     </fieldset>
     <fieldset class="filter__fieldset filter__views">
       <legend class="filter__subtitle">Views</legend>
@@ -44,17 +44,22 @@
       <input type="radio" name="sorts" id="sort-views" value="views">
       <label class="filter__radio-label" for="sort-views">views</label> 
     </fieldset>
-    @@include('blocks/buttons.html',
-        {"additionalclass": "filter__reset-btn",
-        "buttonType": "reset",
-        "buttonName": "Reset",
-        "btnAriaLabel": "search post",
-        "atr": ""})
+    <div class="filter__reset">
+      <p class="filter__reset-subtitle">reset form</p>
+      @@include('blocks/buttons.html',
+          {"additionalClass": "filter__reset-btn",
+          "classJs": "filter__reset-btn_js",
+          "buttonType": "reset",
+          "buttonName": "Reset",
+          "btnAriaLabel": "search post",
+          "atr": ""})
+    </div>
     <div class="filter__search">
       <input type="text" name="name" class="filter__search-input" id="text-search">
       <label class="filter__search-label" for="text-search"></label>
       @@include('blocks/buttons.html',
-        {"additionalclass": "filter__search-btn",
+        {"additionalClass": "filter__search-btn",
+        "classJs": "filter__search-btn_js",
         "buttonType": "submit",
         "buttonName": "Search",
         "btnAriaLabel": "search posts",

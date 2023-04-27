@@ -1,8 +1,13 @@
 .blog {
     &__title {
+        margin-top: 40px;
+        margin-bottom: 40px;
         @media (max-width: $media-mobile-landscape) {
             margin-top: 30px;
             margin-bottom: 36px;
+        }
+        @media (max-width: $media-mobile) {
+            width: 205px;
         }
     }
 }

@@ -5,6 +5,9 @@
             margin-top: 30px;
             margin-bottom: 36px
         }
+        @media (max-width: $media-mobile) {
+            width: 205px;
+        }
     }
     &__inner {
         display: flex;
@@ -39,7 +42,6 @@
         @media (max-width: 375px) {
             width: 280px;
         }  
-
     }
     &__data {
         display: flex;
@@ -105,11 +107,54 @@
             padding: 20px;
           }
     }
+    &__inner {
+        position: relative;
+    }
     &__input-file {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+    }
+    &__label-file {
+        margin-bottom: 56px;
+    }
+    &__label-file::before {
+        content: '';
+        box-sizing: border-box;
+        position: absolute;
+        top: 22px;
+        left: 0;
+
+        height: 50px;
         width: calc(1/2*100% - (1 - 1/2)*20px);
+
+        background: url('../img/icons/file-upload.svg') no-repeat 14px / 18px;
+        border: 2px solid $color-disabled;
+        transition: 0.4s;
         @media (max-width: 665px) {
             width: 100%;
         }
+    }
+    &__label-file::after {
+        content: 'Choose a file...'; // динамически при загрузке сюда вставляется другой текст
+        box-sizing: border-box;
+        position: absolute;
+        top: 50%;
+        left: 45px;
+
+        font-size: 18px;
+        line-height: 20px;
+        color: $primary-text;
+    }
+    &__input-file:hover + &__label-file::before{
+        border: 2.5px solid $color-text;
+        cursor: pointer;
+    }
+    &__input-file:focus + &__label-file::before {
+        border: 2.5px solid $primary-text;
+        outline: none;
     }
     &__btn {
         margin-top: 10px;
