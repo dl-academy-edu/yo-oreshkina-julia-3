@@ -1,15 +1,3 @@
-//TODO: можно ли объединить popupHandler и popupMobileHandler? и надо ли это делать?
-
-// вызов функции открытия и закрытия формы входа
-popupHandler('login-form__popup_js', 'header__login-btn_js', 'login-form__btn-close_js');
-// вызов функции открытия и закрытия формы регистрации
-popupHandler('registration-form__popup_js', 'header__reg-btn_js', 'registration-form__btn-close_js');
-// вызов функции открытия и закрытия для отправки сообщения
-popupHandler('connect-form__popup_js', 'footer__btn-connect_js', 'connect-form__btn-close_js');
-// вызов функции открытия и закрытия форм из мобильного меню 
-popupMobileHandler('login-form__popup_js', 'header__burger-login-btn_js', 'login-form__btn-close_js');
-popupMobileHandler('registration-form__popup_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js');
-
 // ф-ция открытия и закрытия форм
 function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
     const popup = document.querySelector(`.${popupClass}`);

@@ -19,7 +19,8 @@
     <link href="css/style.min.css" rel="stylesheet">
   </head>
   <body>
-    @@include('blocks/header.html')
+    @@include('blocks/header.html',
+    {"posOnPage": "header__burger-btn-open_home-page"})
     <main class="summary container">
       <h1 class="summary__title">Julia Oreshkina</h1>
       <div class="summary__info">
@@ -137,143 +138,17 @@
         </div>
       </div>
     </section>
-    @@include('blocks/footer.html')
+    @@include('blocks/footer.html',
+    {"blogStyle": ""})
     <!-- button toTop -->
     <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
     <!-- popups -->
-    <div class="login-form__popup_js popup visually-hidden">
-      <div class="login-form__wrapper">
-        @@include('blocks/button-close.html', 
-        {"addClass": "login-form__btn-close",
-        "addClassJs": "login-form__btn-close_js",
-        "btnTab": "0",
-        "btnLabel": "close log in form"})
-        <form class="form login-form" action="#" name="loginForm" novalidate> 
-          <div class="form__inner">
-            <input class="form__input_js" type="email" name="email" id="newEmail" required>
-            <label class="form__label" for="newEmail">Email</label>
-          </div>
-            <div class="form__inner">
-              <input class="form__input_js" type="password" name="password" id="currentPassword" autocomplete="on" required>
-              <label class="form__label" for="currentPassword">Password</label>
-            </div>
-              @@include('blocks/buttons.html',
-              {"additionalClass": "login-form__btn",
-              "classJs": "login-form__btn_js",
-              "buttonType": "submit",
-              "buttonName": "Log in",
-              "btnAriaLabel": "checkbox is not selected",
-              "atr": ""})
-        </form>
-      </div>
-    </div>
-    <div class="registration-form__popup_js popup visually-hidden">
-      <div class="form__wrapper">
-        @@include('blocks/button-close.html', 
-        {"addClass": "registration-form__btn-close",
-        "addClassJs": "registration-form__btn-close_js",
-        "btnTab": "0",
-        "btnLabel": "close registration form"})
-        <form class="form registration-form" action="#" name="regForm" novalidate>
-            <div class="form__inner">
-              <input class="form__input_js" type="email" name="email" id="email" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="email">Email</label>
-            </div>
-            <div class="form__inputs-wrap">
-              <div class="form__inner">
-                <input class="form__input_js" type="text" name="name" id="userName" aria-label="checkbox is not selected" required>
-                <label class="form__label" for="userName">Name</label>
-              </div>
-              <div class="form__inner">
-                <input class="form__input_js" type="text" name="surname" id="surname" aria-label="checkbox is not selected" required>
-                <label class="form__label" for="surname">Surname</label>
-              </div>
-            </div> 
-            <div class="form__inputs-wrap">
-              <div class="form__inner">
-                <input class="form__input_js" type="password" name="password" id="password" aria-label="checkbox is not selected" autocomplete="on" required>
-                <label class="form__label" for="password">Password</label>
-              </div>
-              <div class="form__inner">
-                <input class="form__input_js" type="password" name="repeatPassword" id="repeatPassword" aria-label="checkbox is not selected" autocomplete="off" required>
-                <label class="form__label" for="repeatPassword">Repeat password</label>
-              </div>
-            </div>
-            <div class="form__inputs-wrap">
-              <div class="form__inner">
-                <input class="form__input_js" type="text" name="location" id="location" aria-label="checkbox is not selected" required>
-                <label class="form__label" for="location">Location</label>
-              </div>
-              <div class="form__inner">
-                <input class="form__input_js" type="number" name="age" id="age" aria-label="checkbox is not selected" required>
-                <label class="form__label" for="age">Age</label>
-              </div>
-            </div>
-              @@include('blocks/checkbox.html',
-              {"addClassInput": "checkbox__input_js",
-              "checkboxName": "agreement",
-              "checkboxId": "agreement",
-              "atrCheckbox": ""})
-              @@include('blocks/buttons.html',
-              {"additionalClass": "registration-form__btn",
-              "classJs": "registration-form__btn_js",
-              "buttonType": "submit",
-              "buttonName": "Sign up",
-              "btnAriaLabel": "checkbox is not selected",
-              "atr": "disabled"})
-        </form>
-      </div>
-    </div>
-    <div class="connect-form__popup_js popup visually-hidden">
-      <div class="form__wrapper">
-        @@include('blocks/button-close.html', 
-        {"addClass": "connect-form__btn-close",
-        "addClassJs": "connect-form__btn-close_js",
-        "btnTab": "0",
-        "btnLabel": "close form of send message"})
-        <form class="form connect-form" action="#" name="connectForm" novalidate>
-          <div class="form__inputs-wrap">
-            <div class="form__inner">
-              <input class="form__input_js" type="text" name="fullName" id="fullName" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="fullName">What is your name?</label>
-            </div>
-            <div class="form__inner">
-              <input class="form__input_js" type="text" name="subject" id="subject" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="subject">Message subject</label>
-            </div> 
-          </div>
-          <div class="form__inputs-wrap">
-            <div class="form__inner">
-              <input class="form__input_js" type="email" name="email" id="current-email" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="current-email">Your Email</label>
-            </div>
-            <div class="form__inner">
-              <input class="form__input_js" type="tel" name="phone" id="phone" aria-label="checkbox is not selected" required>
-              <label class="form__label" for="phone">Your mobile phone</label>
-            </div>
-          </div>  
-          <div class="form__inner">
-            <textarea name="message" id="message" cols="30" rows="6"></textarea>
-            <label class="form__label" for="message">What do you want to discuss with me?</label>
-          </div>
-            @@include('blocks/checkbox.html',
-            {"addClassInput": "checkbox__input_js",
-            "checkboxName": "connectAgreement",
-            "checkboxId": "connectAgreement",
-            "atrCheckbox": ""})
-            @@include('blocks/buttons.html',
-            {"additionalClass": "connect-form__btn",
-            "classJs": "connect-form__btn_js",
-            "buttonType": "submit",
-            "buttonName": "Send",
-            "btnAriaLabel": "checkbox is not selected",
-            "atr": "disabled"})
-        </form>
-      </div>
-    </div>
+    @@include('blocks/popup__login-form.html')
+    @@include('blocks/popup__registration-form.html')
+    @@include('blocks/popup__connect-form.html')
     <script src="js/app.js" defer></script>
-    <script src="js/common.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="js/common.js"></script>
     <script src="js/script.js"></script>
   </body>
 </html>

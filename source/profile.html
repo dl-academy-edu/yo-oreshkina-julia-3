@@ -18,7 +18,8 @@
     <link href="css/style.min.css" rel="stylesheet">
   </head>
   <body>
-    @@include('blocks/header.html')
+    @@include('blocks/header.html',
+    {"posOnPage": "header__burger-btn-open_pages"})
    <main class="profile container">
     <h1 class="profile__title">My profile</h1>
     <div class="profile__inner">
@@ -56,7 +57,7 @@
         </div>
     </div>
    </main>
-   <div class="password-form__popup popup visually-hidden">
+   <div class="password-form__popup_js popup visually-hidden">
     <div class="password-form__wrapper">
       @@include('blocks/button-close.html', 
       {"addClass": "password-form__btn-close",
@@ -84,7 +85,7 @@
       </form>
     </div>
   </div>
-  <div class="form-edit-data__popup popup visually-hidden">
+  <div class="form-edit-data__popup_js popup visually-hidden">
     <div class="form-edit-data__wrapper">
       @@include('blocks/button-close.html', 
       {"addClass": "form-edit-data__btn-close",
@@ -116,7 +117,7 @@
           </div>
           <div class="form__inner form-edit-data__inner">
             <input class="form-edit-data__input-file" type="file" name="photo" id="photo">
-            <label class="form__label" for="photo">Profile picture</label>
+            <label class="form__label form-edit-data__label-file" for="photo">Profile picture</label>
           </div>
             @@include('blocks/buttons.html',
             {"additionalClass": "form-edit-data__btn",
@@ -129,5 +130,7 @@
     </div>
   </div>
     <script src="js/app.js" defer></script>
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
   </body>
 </html>
