@@ -48,21 +48,27 @@
         color: $primary-text;
     }
     &__burger-btn-open {
-        display: none;
+        display: none; 
+        background-color:#fff;
+        background-image: url('../img/icons/burger-menu.svg');
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 20px;
+        border: none; 
         @media (max-width: 375px) {
+            display: block;
+        }
+        &_home-page {
             position: absolute;
             top: 175px;  // если страница профиля, то top: 50px;
             right: 20px;
-            border: none;
-            display: block;
-            background-color:#fff;
-            background-image: url('../img/icons/burger-menu.svg');
-            background-repeat: no-repeat;
-            width: 32px;
-            height: 20px;
+        }
+        &_pages {
+            position: absolute;
+            top: 50px; 
+            right: 20px;
         }
     }
-    
     &__burger {
         display: flex;
         flex-direction: column;
