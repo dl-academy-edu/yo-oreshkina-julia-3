@@ -263,15 +263,22 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
     let timer = null;
     let slideWidth = wrapper.offsetWidth; // ширина wrapper
-    let activeSlideIndex = 0;
+    let activeSlideIndex;
+
+    const updateSlideIndex = () => {
+        +localStorage.getItem('activeSlideIndex')
+            ? (activeSlideIndex = +localStorage.getItem('activeSlideIndex'))
+            : (activeSlideIndex = 0);
+    }
+    updateSlideIndex();
 
     initWidth();
     createDots();
-    setActiveSlide(0);
+    setActiveSlide(activeSlideIndex, withAnimation = false);
 
     window.addEventListener('resize', () => {
         initWidth();
-        setActiveSlide(activeSlideIndex);
+        setActiveSlide(activeSlideIndex, withAnimation = false);
     });
 
     btnBack.addEventListener('click', () => {
@@ -310,6 +317,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
 
         activeSlideIndex = index; //обновляем значение для дальнейшего пролистывания
+        localStorage.setItem('activeSlideIndex', activeSlideIndex);
     }
 
     function initWidth() {
