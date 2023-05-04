@@ -1,3 +1,6 @@
+// базовый путь до сервера
+const BASE_SERVER_PATH = 'https://academy.directlinedev.com';
+
 // ф-ция открытия и закрытия форм
 function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
     const popup = document.querySelector(`.${popupClass}`);
@@ -249,4 +252,37 @@ function validityMessageCreator() {
     validityMessage.classList.add('valid-message'); 
     validityMessage.innerText = 'All right'; 
     return validityMessage;
+}
+
+//ф-ция для переключения модальных окон
+
+function interactionModal(modal) {
+    modal.classList.toggle('visually-hidden');
+}
+
+// функция создания элемента
+function createElement(elem, className) {
+    let element = document.createElement(elem);
+    element.classList.add(className);
+    return element;
+}
+
+// функция отрисовки лоадера
+function createPreloader() {
+   let preloader = createElement('div', 'loader');
+   let spinner = createElement('div', 'spinner-border');
+   preloaderDiv.insertAdjacentElement('afterBegin', spinner);
+   return preloader;
+}
+
+// показать лоадер
+function showLoader() {
+    let loader = createPreloader();
+    document.body.insertAdjacentElement('afterBegin', loader);
+}
+
+// убрать лоадер
+function removeLoader() {
+    const loader = document.querySelector('.loader');
+    if (loader) loader.remove(); 
 }
