@@ -1,14 +1,14 @@
-<form class="filter" action="#">
+<form class="filter" name="filterForm">
     <fieldset class="filter__fieldset filter__tags">
       <legend class="filter__subtitle">Tags</legend>
-      <div class="filter__tags-inner"><!-- динамически --></div>
+      <div class="filter__tags-inner filter__tags-inner_js"></div>
     </fieldset>
     <fieldset class="filter__fieldset filter__views">
       <legend class="filter__subtitle">Views</legend>
       <input type="radio" id="views-0" name="views" value="100-500">
       <label class="filter__radio-label" for="views-0">100-500</label>
 
-      <input type="radio" id="views-1" name="views" value="500-1000" checked>
+      <input type="radio" id="views-1" name="views" value="500-1000">
       <label class="filter__radio-label" for="views-1">500-1000</label>
 
       <input type="radio" id="views-2" name="views" value="1000-2000">
@@ -16,7 +16,7 @@
     </fieldset>
     <fieldset class="filter__fieldset filter__comments">
       <legend class="filter__subtitle">Comments</legend>
-      <input type="checkbox" id="comments-0" name="comments" value="0-0" checked>
+      <input type="checkbox" id="comments-0" name="comments" value="0-0">
       <label class="filter__checkbox-label" for="comments-0">0</label>
 
       <input type="checkbox" id="comments-1" name="comments" value="0-1">
@@ -30,12 +30,12 @@
       <input type="radio" id="show-0" name="count-show" value="100-500">
       <label class="filter__radio-label" for="show-0">show 5</label>
 
-      <input type="radio" id="show-1" name="count-show" value="500-1000" checked>
+      <input type="radio" id="show-1" name="count-show" value="500-1000">
       <label class="filter__radio-label" for="show-1">show 10</label>
     </fieldset>
     <fieldset class="filter__fieldset filter__sorts">
       <legend class="filter__subtitle">Sort by</legend> 
-      <input type="radio" name="sorts" id="sort-date" value="date" checked>
+      <input type="radio" name="sorts" id="sort-date" value="date">
       <label class="filter__radio-label" for="sort-date">date</label>
 
       <input type="radio" name="sorts" id="sort-title" value="title">

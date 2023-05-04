@@ -1,4 +1,3 @@
-// TODO: Как работает фильтр? Возможно использовать filter display: grid;
 .filter {
     display:flex;
     flex-direction: row;
@@ -114,9 +113,12 @@
         }
     }
     &__tags-inner {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        gap: 5px;
         width: 115px;
         height: 55px;
-        background-color:aqua;
     }
     &__views {
         margin-left: 29px;
@@ -214,4 +216,54 @@
     }
 }
 
+.tag-wrapper {
+    width: 25px;
+    height: 25px;
+}
 
+.tag-input {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0 0 0 0); 
+}
+
+.tag-wrapper > label {
+    position: absolute;
+    width: 25px;
+    height: 25px;
+    border-radius: 5px;
+    border-width: 2.5px;
+    border-style: solid;
+    border-color: #070707;
+}
+
+.tag-wrapper > input:checked + .tag-label {
+    background-repeat: no-repeat;
+    background-position: 50%;
+}
+.tag-wrapper > input[id = tags-1]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-1.svg');
+}
+.tag-wrapper > input[id = tags-2]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-2.svg');
+}
+.tag-wrapper > input[id = tags-3]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-3.svg');
+}
+.tag-wrapper > input[id = tags-4]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-4.svg');
+}
+.tag-wrapper > input[id = tags-5]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-5.svg');
+}
+.tag-wrapper > input[id = tags-6]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-6.svg');
+}
+.tag-wrapper > input[id = tags-7]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-7.svg');
+}
+.tag-wrapper > input[id = tags-8]:checked + .tag-label {
+    background-image: url('../img/icons/vector-checked-8.svg');
+}
