@@ -10,8 +10,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
 /* _______________________________ FILTER __________________________________ */
 // получение  и отрисовка тегов  и постов
-
-// TODO: дописать очистку  с помощью RESET
 (function() {
     const filter = document.forms.filterForm;
     const resetBtn = filter.querySelector('.filter__reset-btn_js');
@@ -77,6 +75,14 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     if(btnNext) {
         btnNext.addEventListener('click', () => {
             setActivePostsPage(getParamsFromLocation().page + 1);
+        });
+    }
+
+    if(resetBtn) {
+        resetBtn.addEventListener('click', () => {
+            if(location.search.length && localStorage.getItem('searchParams')) {
+                history.replaceState(null, null, window.location.pathname);
+            };
         });
     }
 
