@@ -23,6 +23,11 @@
       <h1 class="blog__title">My blog</h1>
       @@include('blocks/filter.html')
       <div class="posts posts_js"></div>
+      <div class="blog__control-panel">
+        <button type="button" class="blog__btn blog__btn-back_js" aria-label="switch to the previous blog page"></button>
+        <div class="blog__pagination blog__pagination_js"></div>
+        <button type="button" class="blog__btn blog__btn-next_js" aria-label="switch to the blog page"></button>
+      </div>
     </main>
     @@include('blocks/footer.html',
     {"blogStyle": "footer_onBlog"})

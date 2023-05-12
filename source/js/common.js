@@ -271,7 +271,7 @@ function createElement(elem, className) {
 function createPreloader() {
    let preloader = createElement('div', 'loader');
    let spinner = createElement('div', 'spinner-border');
-   preloaderDiv.insertAdjacentElement('afterBegin', spinner);
+   preloader.insertAdjacentElement('afterBegin', spinner);
    return preloader;
 }
 
