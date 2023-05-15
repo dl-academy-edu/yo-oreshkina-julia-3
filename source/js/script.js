@@ -9,23 +9,39 @@ popupHandler('popup__connect-form_js', 'footer__btn-connect_js', 'connect-form__
 popupMobileHandler('popup__login-form_js', 'header__burger-login-btn_js', 'login-form__btn-close_js');
 popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js');
 
+// функция выделение текущей страницы как активной
+(function() {
+    const currentPage = document.querySelector('.header__home-link_js');
+    const currentBurgerPage = document.querySelector('.header__burger-home-link_js');
+    currentPage.classList.add('header__link_active');
+    currentBurgerPage.classList.add('header__link_active');
+
+})();
+// Инициализация ссылок в меню при аутентификации
+(function setMenuLinks() {
+    rerenderLinks();
+    rerenderBurgerLinks();
+})();
+
 // РАБОТА С ФОРМОЙ АВТОРИЗАЦИИ
 
 (function() {
+    const loginPopup = document.querySelector('.popup__login-form_js');
     const loginForm = document.forms.loginForm;
-    const loginFormBtn = loginForm.querySelector('.login-form__btn_js');
     const inputs = loginForm.querySelectorAll('.form__input_js');
+    const serverMessagePopup = document.querySelector('.server-message_js');
+    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
+
+    rerenderLinks();
+    rerenderBurgerLinks();
 
     if(!loginForm) return;
 
     loginForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
-        for (let error of errorsOldMessages) error.remove();
-
-        const validityOldMessages =  document.querySelectorAll('.valid-message');
-        for (let validityMessage of validityOldMessages) validityMessage.remove();
+        clearErrors(loginForm);
+        clearValidityMessage(loginForm);
       
         const userData = getAllFormData(loginForm);
         console.log(userData);
@@ -54,36 +70,74 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                 }    
             }
         });
-
         console.log(errors);
         
-        if(Object.keys(errors).length) {
-            Object.keys(errors).forEach((key) => {
-                // 1-ый аргумент наш инпут, 2-ой текст ошибки
-                setErrorText(loginForm.elements[key], errors[key]); 
-            });
-            return; 
-        }
-
+        showLoader(); // включаем лоадер
         // конечный объект, который будет отправляться на сервер
         const data = {
             email: userData.email,
             password: userData.password,  
         };
-
-        //типа отправили данные на сервер
         console.log(data);
+        sendRequest({
+            url: '/api/users/login',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then((response) => {
+            return response.json();
+        })
+        .then((response) => {
+            if(response.success) {
+                console.log("Вы успешно вошли");
+                setSuccessServerMessage(serverMessagePopup);
+                localStorage.setItem('token', response.data.token);
+                localStorage.setItem('userId', response.data.userId);
+                rerenderLinks();
+                rerenderBurgerLinks();
+                setTimeout(() => {
+                    location.pathname = '/';
+                    interactionModal(loginPopup);
+                    interactionModal(serverMessagePopup);
+                }, 2000);
+            } else {
+                throw response;
+            }  
+        })
+        .catch(err => {
+            errorFormHandler(errors, loginForm);
+            if(err._message) {
+                setErrorServerMessage(serverMessagePopup, err._message);
+                setTimeout(() => { 
+                    interactionModal(loginPopup);
+                    loginForm.reset();
+                    clearErrors(loginForm);
+                    clearValidityMessage(loginForm);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+            }
+        })
+        .finally(() => {
+            removeLoader();
+        })
+        
     });
 })();
 
 // РАБОТА С ФОРМОЙ РЕГИСТРАЦИИ
 
 (function() {
+    const RegPopup = document.querySelector('.popup__registration-form_js');
     const regForm = document.forms.regForm;
     const inputs = regForm.querySelectorAll('.form__input_js');
     const regFormBtn = regForm.querySelector('.registration-form__btn_js');
     const userAgreement = regForm.elements.agreement;
-
+    const serverMessagePopup = document.querySelector('.server-message_js');
+    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
+               
     if(!regForm) return;
 
     // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
@@ -91,13 +145,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
     regForm.addEventListener('submit', (e) => {
         e.preventDefault();
-        // Если есть ошибки стираем их для предотвращения эффекта накопления ошибок.
-        const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
-        for (let error of errorsOldMessages) error.remove();
 
-        // Если есть уведомления, что поле верно заполнено, стираем их для предотвращения эффекта накопления.
-        const validityOldMessages =  document.querySelectorAll('.valid-message');
-        for (let validityMessage of validityOldMessages) validityMessage.remove();
+        // Если есть ошибки или сообщения об успехе стираем их для предотвращения эффекта накопления.
+        clearErrors(regForm);
+        clearValidityMessage(regForm);
 
         const userData = getAllFormData(regForm); // кладем данные формы во временный объект
         console.log(userData);
@@ -110,6 +161,14 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                     case 'email': {
                         if(!isEmailCorrect(elem.value)) {
                             errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                        } else {
+                            setValidityMessage(elem);
+                        }
+                        break;
+                    }
+                    case 'age': {
+                        if(!isAgeCorrect(elem.value)) {
+                            errors.age = 'The minimum age is 18 years!';
                         } else {
                             setValidityMessage(elem);
                         }
@@ -136,13 +195,8 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         });
 
         console.log(errors);
-        
-        if(Object.keys(errors).length) {
-            Object.keys(errors).forEach((key) => {
-                setErrorText(regForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
-            });
-            return; 
-        }
+        errorFormHandler(errors, regForm);
+        showLoader(); // включаем лоадер
 
         // конечный объект, который будет отправляться на сервер
         const data = {
@@ -151,11 +205,69 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             surname: userData.surname,
             password: userData.password,
             location: userData.location,
-            age: userData.age,
+            age: +userData.age,
         };
 
-        //типа отправили данные на сервер
         console.log(data);
+
+        sendRequest({
+            url: '/api/users',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(response => {
+            if(response.success) {
+                setSuccessServerMessage(serverMessagePopup);
+                setTimeout(() => { 
+                    interactionModal(RegPopup);
+                    regForm.reset();
+                    clearValidityMessage(RegPopup);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+                console.log(`Пользователь с id ${response.data.id} & email ${response.data.email} зарегистрирован!`);
+                
+            } else {
+                throw response;  
+            }
+        })
+        .catch(err => {
+            if(err._message) {
+                setErrorServerMessage(serverMessagePopup, err._message);
+                setTimeout(() => { 
+                    interactionModal(RegPopup);
+                    regForm.reset();
+                    clearErrors(RegPopup);
+                    clearValidityMessage(RegPopup);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+            }
+            if(err.errors.email === 'Данный email уже занят!') {
+                setErrorServerMessage(serverMessagePopup, err.errors.email);
+                setTimeout(() => { 
+                    interactionModal(RegPopup);
+                    regForm.reset();
+                    clearErrors(RegPopup);
+                    clearValidityMessage(RegPopup);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+            }
+        })
+        .finally(() => {
+            removeLoader();
+        })
+    });
+
+    closeServerMessagePopup.addEventListener('click', () => {
+        if(!serverMessagePopup.classList.contains('visually-hidden')) {
+            serverMessagePopup.classList.add('visually-hidden');
+            document.body.classList.remove('no-scroll');
+        }
     });
 })();
 

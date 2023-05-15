@@ -182,6 +182,12 @@ function isEmailCorrect(email) {
     return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
+// проверка на возраст пользователя
+
+function isAgeCorrect(age) {
+    return (!isNaN(age) && age !== null && age >= 18);
+}
+
 // проверка на корректное заполнение номера телефона
 
 function isPhoneCorrect(phone) {
@@ -258,6 +264,7 @@ function validityMessageCreator() {
 
 function interactionModal(modal) {
     modal.classList.toggle('visually-hidden');
+    document.body.classList.remove('no-scroll');
 }
 
 // функция создания элемента
@@ -286,3 +293,109 @@ function removeLoader() {
     const loader = document.querySelector('.loader');
     if (loader) loader.remove(); 
 }
+
+// функция переключения страниц после авторизации
+
+function rerenderLinks() {
+    
+    const loginBtn = document.querySelector('.header__login-btn_js');
+    const registerBtn = document.querySelector('.header__reg-btn_js');
+    const toProfileLink = document.querySelector('.header__profile-link_js');
+   // localStorage.removeItem('token'); // убрать, когда будет написана функция удаления акаунта
+    const isLogin = localStorage.getItem('token');
+    if(isLogin) {
+        // токен присутсвует
+        loginBtn.classList.add('visually-hidden');
+        registerBtn.classList.add('visually-hidden');
+        toProfileLink.classList.remove('visually-hidden');
+    } else {
+        // токен отсутствует
+        loginBtn.classList.remove('visually-hidden');
+        registerBtn.classList.remove('visually-hidden');
+        toProfileLink.classList.add('visually-hidden');
+    }
+}
+
+function rerenderBurgerLinks() {
+    const loginBurgerBtn = document.querySelector('.header__burger-login-btn_js');
+    const registerBurgerBtn = document.querySelector('.header__burger-reg-btn_js');
+    const toProfileBurgerLink = document.querySelector('.header__burger-profile-link_js');
+
+    const isLogin = localStorage.getItem('token');
+    if(isLogin) {
+        // токен присутсвует
+        loginBurgerBtn.classList.add('visually-hidden');
+        registerBurgerBtn.classList.add('visually-hidden');
+        toProfileBurgerLink.classList.remove('visually-hidden');
+    } else {
+        // токен отсутствует
+        loginBurgerBtn.classList.remove('visually-hidden');
+        registerBurgerBtn.classList.remove('visually-hidden');
+        toProfileBurgerLink.classList.add('visually-hidden');
+    }
+}   
+
+// функция заготовки для создания запроса
+
+function sendRequest({url, method = 'GET', headers, body = null}) {
+    return fetch(BASE_SERVER_PATH + url, {
+        method,
+        headers,
+        body,
+    })
+}
+
+// функция установки ошибок на полях форм
+function errorFormHandler(errors, form) {
+    if(!errors) return;
+    if(Object.keys(errors).length) {
+      Object.keys(errors).forEach(key => {
+        const messageError = errors[key];
+        const input = form.elements[key];
+        setErrorText(input, messageError);
+      })
+      return;
+    }
+  }
+
+  // функция удаления ошибок на полях форм
+  function clearErrors(element) {
+    const messages = element.querySelectorAll('.invalid-message');
+    const invalids = element.querySelectorAll('.invalid');
+    messages.forEach(message => message.remove());
+    invalids.forEach(invalid => invalid.classList.remove('invalid'));
+  }
+
+  // функция удаления сообщений All right! на полях форм
+  function clearValidityMessage(element) {
+    const messages = element.querySelectorAll('.valid-message');
+    const valids = element.querySelectorAll('.valid');
+    messages.forEach(message => message.remove());
+    valids.forEach(invalid => invalid.classList.remove('valid'));
+  }
+
+  // функция оповещения ошибки сервера
+  function setErrorServerMessage(element, error) {
+    const serverMessage = createElement('div', 'server-message__text-error');
+    serverMessage.innerText = `The form was sent but the server transmits an error: “${error}”`;
+    element.insertAdjacentElement('afterBegin', serverMessage);
+    if (element.classList.contains('visually-hidden'))
+    interactionModal(element);
+    setTimeout(() => { 
+        serverMessage.remove();
+     }, 3000)
+  }
+
+  // функция оповещения об успешном запросе
+  function setSuccessServerMessage(element) {
+    const serverMessage = createElement('div', 'server-message__text-success');
+    serverMessage.innerText = 'Form has been sent successfully';
+    element.insertAdjacentElement('afterBegin', serverMessage);
+    if (element.classList.contains('visually-hidden'))
+    interactionModal(element);
+    setTimeout(() => { 
+        serverMessage.remove();
+     }, 3000)
+  }
+
+  
