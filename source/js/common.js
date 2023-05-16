@@ -133,6 +133,19 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
 
 
 /* -------------------------------- ФОРМЫ ---------------------------------- */
+// функция закрытия сообщений с сервера
+(function closeServerMessage() {
+    const serverMessagePopup = document.querySelector('.server-message_js');
+    const closeServerMessagePopupBtn = document.querySelector('.server-message__btn-close_js');
+    if(!serverMessagePopup && !closeServerMessagePopupBtn) return;
+
+    closeServerMessagePopupBtn.addEventListener('click', () => {
+        if(!serverMessagePopup.classList.contains('visually-hidden')) {
+            serverMessagePopup.classList.add('visually-hidden');
+            document.body.classList.remove('no-scroll');
+        }
+    });
+})();
 
 // функция получения данных из формы
 function getAllFormData(form) {

@@ -1,3 +1,4 @@
+// TODO пересмотреть закрытие сообщений с сервера
 
 // вызов функции открытия и закрытия формы входа
 popupHandler('popup__login-form_js', 'header__login-btn_js', 'login-form__btn-close_js');
@@ -30,7 +31,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     const loginForm = document.forms.loginForm;
     const inputs = loginForm.querySelectorAll('.form__input_js');
     const serverMessagePopup = document.querySelector('.server-message_js');
-    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
 
     rerenderLinks();
     rerenderBurgerLinks();
@@ -136,7 +136,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     const regFormBtn = regForm.querySelector('.registration-form__btn_js');
     const userAgreement = regForm.elements.agreement;
     const serverMessagePopup = document.querySelector('.server-message_js');
-    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
                
     if(!regForm) return;
 
@@ -262,22 +261,17 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             removeLoader();
         })
     });
-
-    closeServerMessagePopup.addEventListener('click', () => {
-        if(!serverMessagePopup.classList.contains('visually-hidden')) {
-            serverMessagePopup.classList.add('visually-hidden');
-            document.body.classList.remove('no-scroll');
-        }
-    });
 })();
 
 //  РАБОТА С ФОРМОЙ ОТПРАВКИ СООБЩЕНИЯ
 
 (function() {
+    const connectFormPopup = document.querySelector('.popup__connect-form_js');
     const connectForm = document.forms.connectForm;
     const inputs = connectForm.querySelectorAll('.form__input_js');
     const connectFormBtn = connectForm.querySelector('.connect-form__btn_js');
     const userAgreement = connectForm.elements.connectAgreement;
+    const serverMessagePopup = document.querySelector('.server-message_js');
 
     if(!connectForm) return;
 
@@ -287,13 +281,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     connectForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        const errorsOldMessages = document.querySelectorAll('.invalid-message'); 
-        for (let error of errorsOldMessages) error.remove();
-
-        const validityOldMessages =  document.querySelectorAll('.valid-message');
-        for (let validityMessage of validityOldMessages) validityMessage.remove();
-
-        const userData = getAllFormData(connectForm); // кладем данные формы во временный объект
+        const userData = getAllFormData(connectForm); 
         console.log(userData);
         
         let errors = {};
@@ -337,6 +325,18 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             }
         });
 
+
+        console.log(errors);
+        
+        if(Object.keys(errors).length) {
+            Object.keys(errors).forEach((key) => {
+                setErrorText(connectForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
+            });
+            return; 
+        }
+
+        // конечный объект, который будет отправляться на сервер
+        
         console.log(errors);
         
         if(Object.keys(errors).length) {
@@ -348,15 +348,57 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
         // конечный объект, который будет отправляться на сервер
         const data = {
-            fullName: userData.fullName,
-            massageSubject: userData.subject,
-            email: userData.email,
-            phone: userData.phone,
-            messageText: userData.message,
+            to: userData.email,
+            body: JSON.stringify({
+                name: userData.fullName,
+                subject: userData.subject,
+                phone: userData.phone,
+                message: userData.message,
+            })
         };
 
-        //типа отправили данные на сервер
         console.log(data);
+        showLoader();
+        sendRequest({
+            url: '/api/emails',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(response => {
+            if(response.success) {
+                setSuccessServerMessage(serverMessagePopup);
+                setTimeout(() => { 
+                    interactionModal(connectFormPopup);
+                    connectForm.reset();
+                    clearValidityMessage(connectForm);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+            } else {
+                throw response;  
+            }
+        })
+        .catch(err => {
+            errorFormHandler(errors, connectForm);
+            if(err._message) {
+                setErrorServerMessage(serverMessagePopup, err._message);
+                setTimeout(() => { 
+                    interactionModal(connectFormPopup);
+                    connectForm.reset();
+                    clearErrors(connectForm);
+                    clearValidityMessage(connectForm);
+                    interactionModal(serverMessagePopup);
+                }, 2000)
+            }
+        })
+        .finally(() => {
+            removeLoader();
+        }); 
     });
 })();
 
