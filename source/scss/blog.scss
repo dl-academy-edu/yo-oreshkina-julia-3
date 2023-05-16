@@ -116,27 +116,19 @@
         text-decoration: underline dashed $primary-text;;
         text-underline-offset: 5px;
     }
-    &__photo-wrapper {
-        width: 320px;
-        height: 236px;
-        @media (max-width: $media-tablet) {
-            width: 314px;
-            height: 299px;
-        }
-        @media (max-width: 375px) {
-            width: 280px;
-            height: 280px;
-        }
-    }
     &__photo {
         display: flex;
         width: 320px;
         height: auto;
+        background-color: $color-section;
+        @media (max-width: 600px) {
+          align-self: center;
+        }
         @media (max-width: $media-tablet) {
-            width: 314px;
+          width: 314px;
         }
         @media (max-width: 375px) {
-            width: 280px;
+          width: 280px;
         }
     }
 }

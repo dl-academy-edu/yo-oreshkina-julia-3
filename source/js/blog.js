@@ -295,7 +295,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     function createCard({title, text, comments, date, views, photo, tags}) {
         return `
             <div class="card">
-            <picture class="card__photo-wrapper">
+            <picture class="card__photo">
                 <source class="card__photo" srcset="${BASE_SERVER_PATH}${photo.desktopPhotoUrl}, ${BASE_SERVER_PATH}${photo.desktop2xPhotoUrl} 2x" media="(min-width: 769px)">
                 <source class="card__photo" srcset="${BASE_SERVER_PATH}${photo.tabletPhotoUrl}, ${BASE_SERVER_PATH}${photo.tablet2xPhotoUrl} 2x" media="(min-width: 376px) and (max-width: 768px)">
                 <source class="card__photo" srcset="${BASE_SERVER_PATH}${photo.mobilePhotoUrl}, ${BASE_SERVER_PATH}${photo.mobile2xPhotoUrl} 2x" media="(max-width: 375px)">
@@ -350,7 +350,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     const loginForm = document.forms.loginForm;
     const inputs = loginForm.querySelectorAll('.form__input_js');
     const serverMessagePopup = document.querySelector('.server-message_js');
-    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
 
     rerenderLinks();
     rerenderBurgerLinks();
@@ -588,5 +587,144 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             serverMessagePopup.classList.add('visually-hidden');
             document.body.classList.remove('no-scroll');
         }
+    });
+})();
+
+//  РАБОТА С ФОРМОЙ ОТПРАВКИ СООБЩЕНИЯ
+
+(function() {
+    const connectFormPopup = document.querySelector('.popup__connect-form_js');
+    const connectForm = document.forms.connectForm;
+    const inputs = connectForm.querySelectorAll('.form__input_js');
+    const connectFormBtn = connectForm.querySelector('.connect-form__btn_js');
+    const userAgreement = connectForm.elements.connectAgreement;
+    const serverMessagePopup = document.querySelector('.server-message_js');
+
+    if(!connectForm) return;
+
+    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
+    userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, inputs, connectFormBtn));
+
+    connectForm.addEventListener('submit', (e) => {
+        e.preventDefault();
+
+        const userData = getAllFormData(connectForm); 
+        console.log(userData);
+        
+        let errors = {};
+
+        inputs.forEach(elem => {
+            if(elem.hasAttribute('required')){
+                switch (elem.name) {
+                    case 'fullName': {
+                        if(!isConnectNameCorrect(elem.value)) {
+                            errors.fullName = 'Please enter a valid full name (your entry is not in the format "Name Surname")';
+                        } else {
+                            setValidityMessage(elem);
+                        }
+                        break;
+                    }
+                    case 'email': {
+                        if(!isEmailCorrect(elem.value)) {
+                            errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                        } else {
+                            setValidityMessage(elem);
+                        }
+                        break;
+                    }
+                    case 'phone': {
+                        if(!isPhoneCorrect(elem.value)) {
+                            errors.phone = 'Please enter a valid phone';
+                        } else {
+                            setValidityMessage(elem);
+                        }
+                        break;
+                    }
+                    default: {
+                        if(elem.value.length <= 0) {
+                            errors[elem.name] = 'This field is required';
+                        } else {
+                            setValidityMessage(elem);
+                        }
+                        break;
+                    }
+                }    
+            }
+        });
+
+
+        console.log(errors);
+        
+        if(Object.keys(errors).length) {
+            Object.keys(errors).forEach((key) => {
+                setErrorText(connectForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
+            });
+            return; 
+        }
+
+        // конечный объект, который будет отправляться на сервер
+        
+        console.log(errors);
+        
+        if(Object.keys(errors).length) {
+            Object.keys(errors).forEach((key) => {
+                setErrorText(connectForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
+            });
+            return; 
+        }
+
+        // конечный объект, который будет отправляться на сервер
+        const data = {
+            to: userData.email,
+            body: JSON.stringify({
+                name: userData.fullName,
+                subject: userData.subject,
+                phone: userData.phone,
+                message: userData.message,
+            })
+        };
+
+        console.log(data);
+        showLoader();
+        sendRequest({
+            url: '/api/emails',
+            method: 'POST',
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify(data),
+        })
+        .then(response => {
+            return response.json();
+        })
+        .then(response => {
+            if(response.success) {
+                setSuccessServerMessage(serverMessagePopup);
+                setTimeout(() => { 
+                    interactionModal(connectFormPopup);
+                    connectForm.reset();
+                    clearValidityMessage(connectForm);
+                    interactionModal(serverMessagePopup);
+                 }, 2000)
+            } else {
+                throw response;  
+            }
+        })
+        .catch(err => {
+            errorFormHandler(errors, connectForm);
+            if(err._message) {
+                setErrorServerMessage(serverMessagePopup, err._message);
+                setTimeout(() => { 
+                    interactionModal(connectFormPopup);
+                    connectForm.reset();
+                    clearErrors(connectForm);
+                    clearValidityMessage(connectForm);
+                    interactionModal(serverMessagePopup);
+                }, 2000)
+            }
+        })
+        .finally(() => {
+            removeLoader();
+        }); 
     });
 })();
