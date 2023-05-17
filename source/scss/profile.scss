@@ -67,7 +67,7 @@
     @media (max-width: $media-mobile-landscape) {
         min-width: 320px;
     }
-    @media (max-width: $media-mobile) {
+    @media (max-width: 375px) {
         border: none;
         padding: 10px 20px;
     }
@@ -76,7 +76,7 @@
         @include form-wrapper;
         @media (max-width: $media-mobile-landscape) {
             padding-top: 75px;
-            flex-direction: column;
+            flex-direction: column-reverse;
             align-items: center;
             padding-left: 20px;
             padding-right: 20px;
@@ -95,7 +95,7 @@
         padding-top: 132px;
         @include form-wrapper;
         @media (max-width: $media-tablet) {
-            flex-direction: column;
+            flex-direction: column-reverse;
             padding-left: 44px;
             padding-right: 44px;
             align-items: center;
@@ -168,45 +168,6 @@
         border: 2.5px solid $primary-text;
         outline: none;
     }
-    /* &__label-file {
-        margin-bottom: 56px;
-    }
-    &__label-file::before {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-        top: 22px;
-        left: 0;
-
-        height: 50px;
-        width: calc(1/2*100% - (1 - 1/2)*20px);
-
-        background: url('../img/icons/file-upload.svg') no-repeat 14px / 18px;
-        border: 2px solid $color-disabled;
-        transition: 0.4s;
-        @media (max-width: 665px) {
-            width: 100%;
-        }
-    }
-    &__label-file::after {
-        content: 'Choose a file...'; // динамически при загрузке сюда вставляется другой текст
-        box-sizing: border-box;
-        position: absolute;
-        top: 50%;
-        left: 45px;
-
-        font-size: 18px;
-        line-height: 20px;
-        color: $primary-text;
-    }
-    &__input-file:hover + &__label-file::before{
-        border: 2.5px solid $color-text;
-        cursor: pointer;
-    }
-    &__input-file:focus + &__label-file::before {
-        border: 2.5px solid $primary-text;
-        outline: none;
-    } */
     &__btn {
         margin-top: 10px;
     }
@@ -215,7 +176,7 @@
         @media (max-width: $media-tablet) {
             align-self: end;
         }
-        @media (max-width: $media-mobile) {
+        @media (max-width: 375px) {
             align-self: start;
         }
     }

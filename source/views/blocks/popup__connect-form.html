@@ -1,14 +1,9 @@
 <div class="popup__connect-form_js popup visually-hidden">
       <div class="form__wrapper">
-        @@include('blocks/button-close.html', 
-        {"addClass": "connect-form__btn-close",
-        "addClassJs": "connect-form__btn-close_js",
-        "btnTab": "0",
-        "btnLabel": "close form of send message"})
         <form class="form connect-form" action="#" name="connectForm" novalidate>
           <div class="form__inputs-wrap">
             <div class="form__inner">
-              <input class="form__input_js" type="text" name="fullName" id="fullName" aria-label="checkbox is not selected" required>
+              <input class="form__input_js form__input-focus_js" type="text" name="fullName" id="fullName" aria-label="checkbox is not selected" required>
               <label class="form__label" for="fullName">What is your name?</label>
             </div>
             <div class="form__inner">
@@ -40,8 +35,14 @@
             "classJs": "connect-form__btn_js",
             "buttonType": "submit",
             "buttonName": "Send",
-            "btnAriaLabel": "checkbox is not selected",
+            "btnAriaLabel": "Send message",
+            "buttonTab": "0",
             "atr": "disabled"})
         </form>
+        @@include('blocks/button-close.html', 
+        {"addClass": "connect-form__btn-close",
+        "addClassJs": "connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
       </div>
     </div>

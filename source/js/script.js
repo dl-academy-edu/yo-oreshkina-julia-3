@@ -1,12 +1,12 @@
 // вызов функции открытия и закрытия формы входа
-popupHandler('popup__login-form_js', 'header__login-btn_js', 'login-form__btn-close_js');
+popupHandler('popup__login-form_js', 'header__login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
 // вызов функции открытия и закрытия формы регистрации
-popupHandler('popup__registration-form_js', 'header__reg-btn_js', 'registration-form__btn-close_js');
+popupHandler('popup__registration-form_js', 'header__reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
 // вызов функции открытия и закрытия для отправки сообщения
-popupHandler('popup__connect-form_js', 'footer__btn-connect_js', 'connect-form__btn-close_js');
+popupHandler('popup__connect-form_js', 'footer__btn-connect_js', 'connect-form__btn-close_js', 'form__input-focus_js');
 // вызов функции открытия и закрытия форм из мобильного меню 
-popupMobileHandler('popup__login-form_js', 'header__burger-login-btn_js', 'login-form__btn-close_js');
-popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js');
+popupMobileHandler('popup__login-form_js', 'header__burger-login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
+popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
 
 // функция выделение текущей страницы как активной
 (function() {
@@ -366,6 +366,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     function createDot(index) {
         const dot = document.createElement('button');
         dot.classList.add('summary__slider-dot');
+        dot.setAttribute('aria-label', 'switch slide');
 
         if(index === activeSlideIndex) {
             dot.classList.add('summary__slider-dot_active');

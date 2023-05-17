@@ -1,13 +1,8 @@
 <div class="popup__registration-form_js popup visually-hidden">
   <div class="form__wrapper">
-    @@include('blocks/button-close.html', 
-    {"addClass": "registration-form__btn-close",
-    "addClassJs": "registration-form__btn-close_js",
-    "btnTab": "0",
-    "btnLabel": "close registration form"})
     <form class="form registration-form" action="#" name="regForm" novalidate>
         <div class="form__inner">
-          <input class="form__input_js" type="email" name="email" id="email" aria-label="checkbox is not selected" required>
+          <input class="form__input_js form__input-focus_js" type="email" name="email" id="email" aria-label="checkbox is not selected" required>
           <label class="form__label" for="email">Email</label>
         </div>
         <div class="form__inputs-wrap">
@@ -50,8 +45,14 @@
           "classJs": "registration-form__btn_js",
           "buttonType": "submit",
           "buttonName": "Sign up",
-          "btnAriaLabel": "checkbox is not selected",
+          "btnAriaLabel": "Sign up",
+          "buttonTab": "0",
           "atr": "disabled"})
     </form>
+    @@include('blocks/button-close.html', 
+    {"addClass": "registration-form__btn-close",
+    "addClassJs": "registration-form__btn-close_js",
+    "btnTab": "0",
+    "btnLabel": "close registration form"})
   </div>
 </div>

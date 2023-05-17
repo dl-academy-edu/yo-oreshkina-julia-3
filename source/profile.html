@@ -6,9 +6,8 @@
     <meta name="google" content="notranslate">
     <meta name="format-detection" content="telephone=no">
 
-    <title>DL Academy</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
+    <title>Summary | profile</title>
+    <meta name="description" content="The final project of the course `Junior Front End Developer` by Julia Oreshkina, student DL Academy">
 
     <script>
       var docElement = document.documentElement;
@@ -37,6 +36,7 @@
             "buttonType": "button",
             "buttonName": "Change password",
             "btnAriaLabel": "open popup for change password",
+            "buttonTab": "0",
             "atr": ""})
             @@include('blocks/buttons.html',
             {"additionalClass": "profile__change-data-btn",
@@ -44,6 +44,7 @@
             "buttonType": "button",
             "buttonName": "Change other data",
             "btnAriaLabel": "open popup for change data of profile",
+            "buttonTab": "0",
             "atr": ""})
             @@include('blocks/buttons.html',
             {"additionalClass": "profile__delete-btn",
@@ -51,18 +52,16 @@
             "buttonType": "button",
             "buttonName": "Delete account",
             "btnAriaLabel": "delete account",
+            "buttonTab": "0",
             "atr": ""})
         </div>
     </div>
    </main>
    <div class="password-form__popup_js popup visually-hidden">
     <div class="password-form__wrapper">
-      @@include('blocks/button-close.html', 
-      {"addClass": "password-form__btn-close",
-      "addClassJs": "password-form__btn-close_js"})
       <form class="password-form" name="editPasswordForm" novalidate>
           <div class="form__inner">
-            <input class="form__input_js" type="password" name="oldPassword" id="old-password" aria-label="enter the current password" required>
+            <input class="form__input_js form__input-focus_js" type="password" name="oldPassword" id="old-password" aria-label="enter the current password" required>
             <label class="form__label" for="old-password">Old password</label>
           </div>
           <div class="form__inner">
@@ -79,18 +78,21 @@
             "buttonType": "submit",
             "buttonName": "change password",
             "btnAriaLabel": "save new password",
+            "buttonTab": "0",
             "atr": ""})
       </form>
+      @@include('blocks/button-close.html', 
+      {"addClass": "password-form__btn-close",
+      "addClassJs": "password-form__btn-close_js",
+      "btnTab": "0",
+      "btnLabel": "close editing password form"})
     </div>
   </div>
   <div class="form-edit-data__popup_js popup visually-hidden">
     <div class="form-edit-data__wrapper">
-      @@include('blocks/button-close.html', 
-      {"addClass": "form-edit-data__btn-close",
-      "addClassJs": "form-edit-data__btn-close_js"})
       <form class="form form-edit-data" name="editDataForm" novalidate>
           <div class="form__inner">
-            <input class="form__input_js" type="email" name="email" id="new-email">
+            <input class="form__input_js form__input-focus_js" type="email" name="email" id="new-email">
             <label class="form__label" for="new-email">Email</label>
           </div>
           <div class="form__inputs-wrap">
@@ -126,8 +128,14 @@
             "buttonType": "submit",
             "buttonName": "Submit changes",
             "btnAriaLabel": "save new data of profile",
+            "buttonTab": "0",
             "atr": ""})
       </form>
+      @@include('blocks/button-close.html', 
+      {"addClass": "form-edit-data__btn-close",
+      "addClassJs": "form-edit-data__btn-close_js",
+      "btnTab": "0",
+      "btnLabel": "close editing profile data form"})
     </div>
   </div>
   @@include('blocks/server-message.html')

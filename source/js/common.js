@@ -2,10 +2,12 @@
 const BASE_SERVER_PATH = 'https://academy.directlinedev.com';
 
 // ф-ция открытия и закрытия форм
-function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
+function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass, inputFocusClass) {
     const popup = document.querySelector(`.${popupClass}`);
     const openPopupbtn = document.querySelector(`.${openPopupbtnClass}`);
     const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
+    const inputFocus = popup.querySelector(`.${inputFocusClass}`);
+    console.log(inputFocus);
 
     // проверка на наличие открывающей кнопки в обычном меню 
     if(!openPopupbtn) return;
@@ -19,6 +21,7 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
         window.scrollTo(0, 0);
         popup.classList.remove('visually-hidden');
         document.body.classList.add('no-scroll');
+        inputFocus.focus();
         window.addEventListener('keydown', escClosePopup);
         
         if(closePopupbtn) { // проверка на наличие закрывающей кнопки
@@ -29,6 +32,7 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
     function closePopup() {
         popup.classList.add('visually-hidden');
         document.body.classList.remove('no-scroll');
+        openPopupbtn.focus();
         window.removeEventListener('keydown', escClosePopup);
         if(closePopupbtn) { 
             closePopupbtn.removeEventListener('click', closePopup);
@@ -42,12 +46,14 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass) {
     }
 }
 // ф-ция открытия и закрытия форм из бургер-меню
-function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopupbtnClass) {
+function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopupbtnClass, inputFocusClass) {
     const menu = document.querySelector('.header__burger');
+    const openMenuBtn = document.querySelector('.header__burger-btn-open_js');
     const mobilePopup = document.querySelector(`.${mobilePopupClass}`);
     const openPopupBurgerbtn = document.querySelector(`.${openPopupBurgerbtnClass}`);
     const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
-
+    const inputFocus = mobilePopup.querySelector(`.${inputFocusClass}`);
+    
     if(!menu && !openPopupBurgerbtn) return;
     if(!mobilePopup && !closePopupbtn) return;
    
@@ -60,12 +66,14 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
         window.scrollTo(0, 0);
         mobilePopup.classList.remove('visually-hidden');
         document.body.classList.add('no-scroll');
+        inputFocus.focus();
 
         closePopupbtn.addEventListener('click', closeMobilePopup);
     }
 
     function closeMobilePopup() {
         mobilePopup.classList.add('visually-hidden');
+        openMenuBtn.focus();
         document.body.classList.remove('no-scroll');
         closePopupbtn.removeEventListener('click', closeMobilePopup); 
     }      

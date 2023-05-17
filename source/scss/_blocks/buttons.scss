@@ -1,6 +1,7 @@
 .button {
     width: max-content;
     @include btn-link-white;
+    outline: none;
 }
 
 .button:hover, .button:focus:not(:disabled) {

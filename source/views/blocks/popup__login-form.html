@@ -1,13 +1,8 @@
 <div class="popup popup__login-form_js visually-hidden">
     <div class="login-form__wrapper">
-      @@include('blocks/button-close.html', 
-      {"addClass": "login-form__btn-close",
-      "addClassJs": "login-form__btn-close_js",
-      "btnTab": "0",
-      "btnLabel": "close log in form"})
       <form class="form login-form" action="#" name="loginForm" novalidate> 
         <div class="form__inner">
-          <input class="form__input_js" type="email" name="email" id="newEmail" required>
+          <input class="form__input_js form__input-focus_js" type="email" name="email" id="newEmail" required>
           <label class="form__label" for="newEmail">Email</label>
         </div>
           <div class="form__inner">
@@ -19,8 +14,14 @@
             "classJs": "login-form__btn_js",
             "buttonType": "submit",
             "buttonName": "Log in",
-            "btnAriaLabel": "checkbox is not selected",
+            "btnAriaLabel": "sign in",
+            "buttonTab": "0",
             "atr": ""})
       </form>
+      @@include('blocks/button-close.html', 
+      {"addClass": "login-form__btn-close",
+      "addClassJs": "login-form__btn-close_js",
+      "btnTab": "0",
+      "btnLabel": "close log in form"})
     </div>
   </div>

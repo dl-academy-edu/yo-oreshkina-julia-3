@@ -139,13 +139,14 @@
     border: none; 
     width: 10px;
     height: 10px;
+    outline: none;
     background-color: $color-disabled;
     transition: 0.5s;
   }
   &__slider-dot_active {
     background-color: $primary-text;
   }
-  &__slider-dot:hover {
+  &__slider-dot:hover, &__slider-dot:focus {
     background-color: $color-text;
   }
 }
@@ -375,7 +376,7 @@
   opacity: 0.99;
   z-index: 20;
   overflow-y: auto;
-  @media (max-width: $media-mobile) {
+  @media (max-width: 375px) {
     background-color: #FFFFFF;
     opacity: 1;
   }
@@ -389,7 +390,7 @@
   @media (max-width: 560px) {
     padding: 20px;
   }
-  @media (max-width: $media-mobile) {
+  @media (max-width: 375px) {
     border: none;
     padding: 10px 0;
   }
@@ -397,7 +398,7 @@
     padding-top: 118px;
     @include form-wrapper;
     @media (max-width: 835px) {
-      flex-direction: column;
+      flex-direction: column-reverse;
       padding: 45px;
       align-items: center;
     }
@@ -428,6 +429,7 @@
   &__inner > input {
     @include input-textarea-styles;
     height: 50px;
+    outline: none;
   }
   
   &__inner > input.invalid {
@@ -447,7 +449,6 @@
   }
   &__inner > input:focus, &__inner > textarea:focus {
     border: 2.5px solid $primary-text;
-    outline: none;
   }
   &__inner > input[required] + &__label:after {
     content: "*";
@@ -463,12 +464,12 @@
   padding-top: 225px;
   @include form-wrapper;
   @media (max-width: 500px) {
-    flex-direction: column;
+    flex-direction: column-reverse;
     align-items: center;
     padding-left: 20px;
     padding-right: 20px;
   }
-  @media (max-width: 500px) {
+  @media (max-width: 375px) {
     padding-top: 75px;
   }
  }
@@ -488,7 +489,7 @@
   position: fixed;
   bottom: 5%;
   right: 5%;
-  z-index: 5;
+  z-index: 5; 
   @include no-btn;
   background-image: url('../img/icons/btn-to-top.svg');
   width: 62px;
