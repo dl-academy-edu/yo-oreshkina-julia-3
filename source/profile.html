@@ -23,9 +23,7 @@
    <main class="profile container">
     <h1 class="profile__title">My profile</h1>
     <div class="profile__inner">
-        <div class="profile__avatar-wrapper">
-            <!-- picture -->
-        </div>
+        <div class="profile__avatar-wrapper profile__avatar-wrapper_js"></div>
         <div class="profile__data">
             <p class="profile__item">Name: <span class="profile__value profile__name_js"></span></p>
             <p class="profile__item">Surame: <span class="profile__value profile__surname_js"></span></p>
@@ -62,18 +60,18 @@
       @@include('blocks/button-close.html', 
       {"addClass": "password-form__btn-close",
       "addClassJs": "password-form__btn-close_js"})
-      <form class="password-form" action="#" novalidate>
+      <form class="password-form" name="editPasswordForm" novalidate>
           <div class="form__inner">
-            <input type="password" name="old-password" id="old-password" aria-label="checkbox is not selected" required>
+            <input class="form__input_js" type="password" name="oldPassword" id="old-password" aria-label="enter the current password" required>
             <label class="form__label" for="old-password">Old password</label>
           </div>
           <div class="form__inner">
-            <input type="password" name="new-password" id="new-password" aria-label="checkbox is not selected" autocomplete="on" required>
+            <input class="form__input_js" type="password" name="newPassword" id="new-password" aria-label="enter the new password" autocomplete="on" required>
               <label class="form__label" for="new-password">New password</label>
           </div>
           <div class="form__inner">
-            <input type="password" name="repeat-password" id="repeat-new-password" aria-label="checkbox is not selected" required>
-            <label class="form__label" for="repeat-new-password">Repeat new password</label>
+            <input class="form__input_js" type="password" name="repeatPassword" id="confirm-password" aria-label="confirm the new password" required>
+            <label class="form__label" for="confirm-password">Repeat new password</label>
           </div>
             @@include('blocks/buttons.html',
             {"additionalClass": "password-form__btn",
@@ -90,34 +88,37 @@
       @@include('blocks/button-close.html', 
       {"addClass": "form-edit-data__btn-close",
       "addClassJs": "form-edit-data__btn-close_js"})
-      <form class="form form-edit-data" action="#" novalidate>
+      <form class="form form-edit-data" name="editDataForm" novalidate>
           <div class="form__inner">
-            <input type="email" name="new-email" id="new-email">
+            <input class="form__input_js" type="email" name="email" id="new-email">
             <label class="form__label" for="new-email">Email</label>
           </div>
           <div class="form__inputs-wrap">
             <div class="form__inner">
-                <input type="text" name="new-name" id="new-name">
+                <input class="form__input_js" type="text" name="name" id="new-name">
                 <label class="form__label" for="new-name">Name</label>
               </div>
               <div class="form__inner">
-                <input type="text" name="new-surname" id="new-surname">
+                <input class="form__input_js" type="text" name="surname" id="new-surname">
                 <label class="form__label" for="new-surname">Surname</label>
               </div>
           </div>
           <div class="form__inputs-wrap">
             <div class="form__inner">
-                <input type="text" name="new-location" id="new-location">
+                <input class="form__input_js" type="text" name="location" id="new-location">
                 <label class="form__label" for="new-location">Location</label>
               </div>
               <div class="form__inner">
-                <input type="number" name="new-age" id="new-age">
+                <input class="form__input_js" type="number" name="age" id="new-age">
                 <label class="form__label" for="new-age">Age</label>
               </div>
           </div>
           <div class="form__inner form-edit-data__inner">
-            <input class="form-edit-data__input-file" type="file" name="photo" id="photo">
-            <label class="form__label form-edit-data__label-file" for="photo">Profile picture</label>
+            <input class="form-edit-data__input-file form-edit-data__input-file_js" type="file" name="avatar" id="photo">
+            <label class="form__label form-edit-data__label-file" for="photo">Profile picture
+              <span class="form-edit-data__file-icon"></span>
+              <span class="form-edit-data__file-text form-edit-data__file-text_js">Choose a file...</span>
+            </label>
           </div>
             @@include('blocks/buttons.html',
             {"additionalClass": "form-edit-data__btn",

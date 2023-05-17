@@ -314,7 +314,7 @@ function rerenderLinks() {
     const loginBtn = document.querySelector('.header__login-btn_js');
     const registerBtn = document.querySelector('.header__reg-btn_js');
     const toProfileLink = document.querySelector('.header__profile-link_js');
-   // localStorage.removeItem('token'); // убрать, когда будет написана функция удаления акаунта
+  //localStorage.removeItem('token'); // убрать, когда будет написана функция удаления акаунта
     const isLogin = localStorage.getItem('token');
     if(isLogin) {
         // токен присутсвует
