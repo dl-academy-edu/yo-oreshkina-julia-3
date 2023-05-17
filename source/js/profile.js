@@ -81,7 +81,6 @@ popupHandler('form-edit-data__popup_js', 'profile__change-data-btn_js', 'form-ed
                 }
             }    
         });
-        console.log(errors);
 
         if(Object.keys(errors).length) {
             errorFormHandler(errors, editDataForm);
@@ -183,7 +182,6 @@ popupHandler('form-edit-data__popup_js', 'profile__change-data-btn_js', 'form-ed
                 }
             }    
         });
-        console.log(errors);
         
         if(Object.keys(errors).length) {
             errorFormHandler(errors, editPasswordForm);

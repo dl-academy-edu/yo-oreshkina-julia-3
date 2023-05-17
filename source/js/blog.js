@@ -164,13 +164,11 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
         if(params.comments.length) {
             let selectedCommentsCount = [params.comments[0].split('-')[0], params.comments[params.comments.length-1].split('-')[1]];
-            //console.log(selectedCommentsCount);
             filter.commentsCount = {"$between": selectedCommentsCount};
         }
 
         if (params.views) {
             let selectedViews = (params.views).split('-');
-            //console.log(selectedViews);
             filter.views = {"$between": selectedViews};
         };
 
@@ -348,7 +346,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 (function() {
     const loginPopup = document.querySelector('.popup__login-form_js');
     const loginForm = document.forms.loginForm;
-    const inputs = loginForm.querySelectorAll('.form__input_js');
+    const loginFormInputs = [...loginForm.querySelectorAll('.form__input_js')];
     const serverMessagePopup = document.querySelector('.server-message_js');
 
     rerenderLinks();
@@ -363,41 +361,18 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         clearValidityMessage(loginForm);
       
         const userData = getAllFormData(loginForm);
-        console.log(userData);
+        let errors = getValidationFeildsResult(loginFormInputs);
 
-        let errors = {};
-
-        inputs.forEach(elem => {
-            if(elem.hasAttribute('required')){
-                switch (elem.name) {
-                    case 'email': {
-                        if(!isEmailCorrect(elem.value)) {
-                            errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    default: {
-                        if(elem.value.length <= 0) {
-                            errors[elem.name] = 'This field is required';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                }    
-            }
-        });
-        console.log(errors);
+        if(Object.keys(errors).length) {
+            errorFormHandler(errors, loginForm);
+            return;
+        }
         
-        showLoader(); // включаем лоадер
-        // конечный объект, который будет отправляться на сервер
+        showLoader(); 
         const data = {
             email: userData.email,
             password: userData.password,  
         };
-        console.log(data);
         sendRequest({
             url: '/api/users/login',
             method: 'POST',
@@ -418,23 +393,22 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                 rerenderLinks();
                 rerenderBurgerLinks();
                 setTimeout(() => {
-                    location.pathname = '/';
                     interactionModal(loginPopup);
                     interactionModal(serverMessagePopup);
+                    location.pathname = '/';
                 }, 2000);
             } else {
                 throw response;
             }  
         })
         .catch(err => {
-            errorFormHandler(errors, loginForm);
             if(err._message) {
                 setErrorServerMessage(serverMessagePopup, err._message);
+                loginForm.reset();
+                clearErrors(loginForm);
+                clearValidityMessage(loginForm);
                 setTimeout(() => { 
                     interactionModal(loginPopup);
-                    loginForm.reset();
-                    clearErrors(loginForm);
-                    clearValidityMessage(loginForm);
                     interactionModal(serverMessagePopup);
                  }, 2000)
             }
@@ -451,73 +425,32 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 (function() {
     const RegPopup = document.querySelector('.popup__registration-form_js');
     const regForm = document.forms.regForm;
-    const inputs = regForm.querySelectorAll('.form__input_js');
+    const regFormInputs = regForm.querySelectorAll('.form__input_js');
     const regFormBtn = regForm.querySelector('.registration-form__btn_js');
     const userAgreement = regForm.elements.agreement;
     const serverMessagePopup = document.querySelector('.server-message_js');
-    const closeServerMessagePopup = document.querySelector('.server-message__btn-close_js');
                
     if(!regForm) return;
 
     // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
-    userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, inputs, regFormBtn));
+    userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, regFormInputs, regFormBtn));
 
     regForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
-        // Если есть ошибки или сообщения об успехе стираем их для предотвращения эффекта накопления.
         clearErrors(regForm);
         clearValidityMessage(regForm);
 
         const userData = getAllFormData(regForm); // кладем данные формы во временный объект
-        console.log(userData);
+        let errors = getValidationFeildsResult(regFormInputs, userData);
 
-        let errors = {};
+        if(Object.keys(errors).length) {
+            errorFormHandler(errors, regForm);
+            return;
+        }
 
-        inputs.forEach(elem => {
-            if(elem.hasAttribute('required')){
-                switch (elem.name) {
-                    case 'email': {
-                        if(!isEmailCorrect(elem.value)) {
-                            errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    case 'age': {
-                        if(!isAgeCorrect(elem.value)) {
-                            errors.age = 'The minimum age is 18 years!';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    case 'repeatPassword': {
-                        if(elem.value !== userData.password || elem.value.length <= 0) {
-                            errors.repeatPassword = 'Please re-enter password (your entry does not match the password you entered)';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    default: {
-                        if(elem.value.length <= 0) {
-                            errors[elem.name] = 'This field is required';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                }    
-            }
-        });
+        showLoader(); 
 
-        console.log(errors);
-        errorFormHandler(errors, regForm);
-        showLoader(); // включаем лоадер
-
-        // конечный объект, который будет отправляться на сервер
         const data = {
             email: userData.email,
             name: userData.name,
@@ -526,8 +459,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             location: userData.location,
             age: +userData.age,
         };
-
-        console.log(data);
 
         sendRequest({
             url: '/api/users',
@@ -543,14 +474,13 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         .then(response => {
             if(response.success) {
                 setSuccessServerMessage(serverMessagePopup);
+                clearValidityMessage(RegPopup);
+                regForm.reset();
                 setTimeout(() => { 
                     interactionModal(RegPopup);
-                    regForm.reset();
-                    clearValidityMessage(RegPopup);
                     interactionModal(serverMessagePopup);
                  }, 2000)
-                console.log(`Пользователь с id ${response.data.id} & email ${response.data.email} зарегистрирован!`);
-                
+                console.log(`Пользователь с id ${response.data.id} & email ${response.data.email} зарегистрирован!`);   
             } else {
                 throw response;  
             }
@@ -566,13 +496,13 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                     interactionModal(serverMessagePopup);
                  }, 2000)
             }
-            if(err.errors.email === 'Данный email уже занят!') {
+            if(err.errors) {
                 setErrorServerMessage(serverMessagePopup, err.errors.email);
+                regForm.reset();
+                clearErrors(RegPopup);
+                clearValidityMessage(RegPopup);
                 setTimeout(() => { 
                     interactionModal(RegPopup);
-                    regForm.reset();
-                    clearErrors(RegPopup);
-                    clearValidityMessage(RegPopup);
                     interactionModal(serverMessagePopup);
                  }, 2000)
             }
@@ -581,13 +511,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             removeLoader();
         })
     });
-
-    closeServerMessagePopup.addEventListener('click', () => {
-        if(!serverMessagePopup.classList.contains('visually-hidden')) {
-            serverMessagePopup.classList.add('visually-hidden');
-            document.body.classList.remove('no-scroll');
-        }
-    });
 })();
 
 //  РАБОТА С ФОРМОЙ ОТПРАВКИ СООБЩЕНИЯ
@@ -595,85 +518,29 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 (function() {
     const connectFormPopup = document.querySelector('.popup__connect-form_js');
     const connectForm = document.forms.connectForm;
-    const inputs = connectForm.querySelectorAll('.form__input_js');
+    const connectFormInputs = connectForm.querySelectorAll('.form__input_js');
     const connectFormBtn = connectForm.querySelector('.connect-form__btn_js');
     const userAgreement = connectForm.elements.connectAgreement;
     const serverMessagePopup = document.querySelector('.server-message_js');
 
     if(!connectForm) return;
 
-    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
-    userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, inputs, connectFormBtn));
+    userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, connectFormInputs, connectFormBtn));
 
     connectForm.addEventListener('submit', (e) => {
         e.preventDefault();
 
+        clearErrors(connectForm);
+        clearValidityMessage(connectForm);
+
         const userData = getAllFormData(connectForm); 
-        console.log(userData);
-        
-        let errors = {};
+        let errors = getValidationFeildsResult(connectFormInputs, userData);
 
-        inputs.forEach(elem => {
-            if(elem.hasAttribute('required')){
-                switch (elem.name) {
-                    case 'fullName': {
-                        if(!isConnectNameCorrect(elem.value)) {
-                            errors.fullName = 'Please enter a valid full name (your entry is not in the format "Name Surname")';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    case 'email': {
-                        if(!isEmailCorrect(elem.value)) {
-                            errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    case 'phone': {
-                        if(!isPhoneCorrect(elem.value)) {
-                            errors.phone = 'Please enter a valid phone';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                    default: {
-                        if(elem.value.length <= 0) {
-                            errors[elem.name] = 'This field is required';
-                        } else {
-                            setValidityMessage(elem);
-                        }
-                        break;
-                    }
-                }    
-            }
-        });
-
-
-        console.log(errors);
-        
         if(Object.keys(errors).length) {
-            Object.keys(errors).forEach((key) => {
-                setErrorText(connectForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
-            });
-            return; 
+            errorFormHandler(errors, connectForm);
+            return;
         }
-
-        // конечный объект, который будет отправляться на сервер
         
-        console.log(errors);
-        
-        if(Object.keys(errors).length) {
-            Object.keys(errors).forEach((key) => {
-                setErrorText(connectForm.elements[key], errors[key]); // Вызываем функцию, устанавливающую ошибку.
-            });
-            return; 
-        }
-
-        // конечный объект, который будет отправляться на сервер
         const data = {
             to: userData.email,
             body: JSON.stringify({
@@ -684,7 +551,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             })
         };
 
-        console.log(data);
         showLoader();
         sendRequest({
             url: '/api/emails',
@@ -700,10 +566,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         .then(response => {
             if(response.success) {
                 setSuccessServerMessage(serverMessagePopup);
+                connectForm.reset();
+                clearValidityMessage(connectForm);
                 setTimeout(() => { 
                     interactionModal(connectFormPopup);
-                    connectForm.reset();
-                    clearValidityMessage(connectForm);
                     interactionModal(serverMessagePopup);
                  }, 2000)
             } else {
@@ -711,14 +577,13 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             }
         })
         .catch(err => {
-            errorFormHandler(errors, connectForm);
             if(err._message) {
                 setErrorServerMessage(serverMessagePopup, err._message);
+                connectForm.reset();
+                clearErrors(connectForm);
+                clearValidityMessage(connectForm);
                 setTimeout(() => { 
                     interactionModal(connectFormPopup);
-                    connectForm.reset();
-                    clearErrors(connectForm);
-                    clearValidityMessage(connectForm);
                     interactionModal(serverMessagePopup);
                 }, 2000)
             }

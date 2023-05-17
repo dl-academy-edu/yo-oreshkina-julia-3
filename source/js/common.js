@@ -190,25 +190,21 @@ function getAllFormData(form) {
 }
 
 // проверка на корректное заполнение почты 
-
 function isEmailCorrect(email) {
     return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
 // проверка на возраст пользователя
-
 function isAgeCorrect(age) {
     return (!isNaN(age) && age !== null && age >= 18);
 }
 
 // проверка на корректное заполнение номера телефона
-
 function isPhoneCorrect(phone) {
     return phone.match(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/);
 }
 
 // проверка на корректное заполнение поля What is your name?
-
 function isConnectNameCorrect(fullName) {
     return fullName.match(/^[a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?$/);
 }
@@ -253,7 +249,6 @@ function errorCreator(message) {
 }
 
 //  вставка cooбщения о корректно заполненном поле
-
 function setValidityMessage(input) { 
     const message = validityMessageCreator(); 
     input.classList.add('valid'); 
@@ -265,7 +260,6 @@ function setValidityMessage(input) {
 }
 
 // создание елемента c cообщением о правильности заполнения формы
-
 function validityMessageCreator() {
     let validityMessage = document.createElement('div'); 
     validityMessage.classList.add('valid-message'); 
@@ -274,7 +268,6 @@ function validityMessageCreator() {
 }
 
 //ф-ция для переключения модальных окон
-
 function interactionModal(modal) {
     modal.classList.toggle('visually-hidden');
     document.body.classList.remove('no-scroll');
@@ -310,12 +303,12 @@ function removeLoader() {
 // функция переключения страниц после авторизации
 
 function rerenderLinks() {
-    
     const loginBtn = document.querySelector('.header__login-btn_js');
     const registerBtn = document.querySelector('.header__reg-btn_js');
     const toProfileLink = document.querySelector('.header__profile-link_js');
-  //localStorage.removeItem('token'); // убрать, когда будет написана функция удаления акаунта
+  
     const isLogin = localStorage.getItem('token');
+
     if(isLogin) {
         // токен присутсвует
         loginBtn.classList.add('visually-hidden');
@@ -349,7 +342,6 @@ function rerenderBurgerLinks() {
 }   
 
 // функция заготовки для создания запроса
-
 function sendRequest({url, method = 'GET', headers, body = null}) {
     return fetch(BASE_SERVER_PATH + url, {
         method,
@@ -410,5 +402,68 @@ function errorFormHandler(errors, form) {
         serverMessage.remove();
      }, 3000)
   }
+
+  // функция валидации обязательных полей форм
+  function getValidationFeildsResult (inputs, data = null) {
+    let errors = {};
+    inputs.forEach(elem => {
+        if(elem.hasAttribute('required')){
+            switch (elem.name) {
+                case 'email': {
+                    if(!isEmailCorrect(elem.value)) {
+                        errors.email = 'Please enter a valid email address (your entry is not in the format "somebody@example.com")';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+                case 'fullName': {
+                    if(!isConnectNameCorrect(elem.value)) {
+                        errors.fullName = 'Please enter a valid full name (your entry is not in the format "Name Surname")';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+                case 'phone': {
+                    if(!isPhoneCorrect(elem.value)) {
+                        errors.phone = 'Please enter a valid phone';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+                case 'age': {
+                    if(!isAgeCorrect(elem.value)) {
+                        errors.age = 'The minimum age is 18 years!';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+                case 'repeatPassword': {
+                    if(elem.value !== data.password) {
+                        errors.repeatPassword = 'Please re-enter password (your entry does not match the password you entered)';
+                    } else if(elem.value.length <= 0) {
+                        errors.repeatPassword = 'This field is required';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+                default: {
+                    if(elem.value.length <= 0) {
+                        errors[elem.name] = 'This field is required';
+                    } else {
+                        setValidityMessage(elem);
+                    }
+                    break;
+                }
+            }    
+        }
+    });
+    return errors;
+  }
+
 
   
