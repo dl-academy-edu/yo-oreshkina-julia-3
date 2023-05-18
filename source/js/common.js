@@ -7,7 +7,6 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass, inputF
     const openPopupbtn = document.querySelector(`.${openPopupbtnClass}`);
     const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
     const inputFocus = popup.querySelector(`.${inputFocusClass}`);
-    console.log(inputFocus);
 
     // проверка на наличие открывающей кнопки в обычном меню 
     if(!openPopupbtn) return;
@@ -110,6 +109,30 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
     function escHandler(e) {
         if(e.code === "Escape" && !menu.classList.contains('visually-hidden')) {
             closeMenu();
+        }
+    }
+})();
+
+/* -------------------- Функция выхода из аккаунта------------------ */
+(function() {
+    const signOutBtn = document.querySelector('.header__sign-out-btn_js');
+    const signOutBurgerBtn = document.querySelector('.header__burger-sign-out-btn_js');
+    const isLogin = localStorage.getItem('token');
+
+    if(signOutBtn) {
+        signOutBtn.addEventListener('click', signOutHandler, {once: true});
+    }
+
+    if(signOutBurgerBtn) {
+        signOutBurgerBtn.addEventListener('click', signOutHandler, {once: true});
+    }
+    
+    function signOutHandler() {
+        if(isLogin) {
+            localStorage.removeItem('token');
+            location.pathname = '/';
+            rerenderLinks();
+            rerenderBurgerLinks();
         }
     }
 })();
@@ -319,41 +342,79 @@ function removeLoader() {
 // функция переключения страниц после авторизации
 
 function rerenderLinks() {
-    const loginBtn = document.querySelector('.header__login-btn_js');
-    const registerBtn = document.querySelector('.header__reg-btn_js');
-    const toProfileLink = document.querySelector('.header__profile-link_js');
+    const loginBtn = document.querySelector('.header__item-login_js');
+    const registerBtn = document.querySelector('.header__item-reg_js');
+    const toProfileLink = document.querySelector('.header__item-profile_js');
+    const signOutBtn = document.querySelector('.header__item-sign-out_js');
   
     const isLogin = localStorage.getItem('token');
 
     if(isLogin) {
         // токен присутсвует
-        loginBtn.classList.add('visually-hidden');
-        registerBtn.classList.add('visually-hidden');
-        toProfileLink.classList.remove('visually-hidden');
+        if(!loginBtn.classList.contains('visually-hidden')) {
+            loginBtn.classList.add('visually-hidden');
+        }
+        if(!registerBtn.classList.contains('visually-hidden')) {
+            registerBtn.classList.add('visually-hidden');
+        }
+        if(toProfileLink.classList.contains('visually-hidden')){
+            toProfileLink.classList.remove('visually-hidden');
+        }
+        if(signOutBtn.classList.contains('visually-hidden')){
+            signOutBtn.classList.remove('visually-hidden');
+        }
     } else {
         // токен отсутствует
-        loginBtn.classList.remove('visually-hidden');
-        registerBtn.classList.remove('visually-hidden');
-        toProfileLink.classList.add('visually-hidden');
+        if(loginBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(registerBtn.classList.contains('visually-hidden')) {
+            registerBtn.classList.remove('visually-hidden');
+        }
+        if(!toProfileLink.classList.contains('visually-hidden')){
+            toProfileLink.classList.add('visually-hidden');
+        }
+        if(!signOutBtn.classList.contains('visually-hidden')){
+            signOutBtn.classList.add('visually-hidden');
+        }
     }
 }
 
 function rerenderBurgerLinks() {
-    const loginBurgerBtn = document.querySelector('.header__burger-login-btn_js');
-    const registerBurgerBtn = document.querySelector('.header__burger-reg-btn_js');
-    const toProfileBurgerLink = document.querySelector('.header__burger-profile-link_js');
-
+    const loginBurgerBtn = document.querySelector('.header__burger-login_js');
+    const registerBurgerBtn = document.querySelector('.header__burger-reg_js');
+    const toProfileBurgerLink = document.querySelector('.header__burger-profile_js');
+    const signOutBurgerBtn = document.querySelector('.header__burger-sign-out_js');
     const isLogin = localStorage.getItem('token');
+    
     if(isLogin) {
         // токен присутсвует
-        loginBurgerBtn.classList.add('visually-hidden');
-        registerBurgerBtn.classList.add('visually-hidden');
-        toProfileBurgerLink.classList.remove('visually-hidden');
+        if(!loginBurgerBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.add('visually-hidden');
+        }
+        if(!registerBurgerBtn.classList.contains('visually-hidden')) {
+            registerBurgerBtn.classList.add('visually-hidden');
+        }
+        if(toProfileBurgerLink.classList.contains('visually-hidden')) {
+            toProfileBurgerLink.classList.remove('visually-hidden');
+        }
+        if(signOutBurgerBtn.classList.contains('visually-hidden')) {
+            signOutBurgerBtn.classList.remove('visually-hidden');
+        }
     } else {
         // токен отсутствует
-        loginBurgerBtn.classList.remove('visually-hidden');
-        registerBurgerBtn.classList.remove('visually-hidden');
-        toProfileBurgerLink.classList.add('visually-hidden');
+        if(loginBurgerBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(registerBurgerBtn.classList.contains('visually-hidden')) {
+            registerBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(!toProfileBurgerLink.classList.contains('visually-hidden')) {
+            toProfileBurgerLink.classList.add('visually-hidden');
+        }
+        if(!signOutBurgerBtn.classList.contains('visually-hidden')) {
+            signOutBurgerBtn.classList.add('visually-hidden');
+        }   
     }
 }   
 

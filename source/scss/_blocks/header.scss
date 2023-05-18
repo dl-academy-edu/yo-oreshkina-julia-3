@@ -34,7 +34,6 @@
     &__link_active:hover, &__link_active:focus {
         color:$color-text;
     }
-    
     &__btn {
         @include no-btn;
         font-family: $gilroy;
