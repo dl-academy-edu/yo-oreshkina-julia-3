@@ -27,6 +27,7 @@
         }
     }
     &__avatar-wrapper {
+        display: flex;
         width: 320px;
         height: 450px;
         left: 220px;
@@ -38,6 +39,7 @@
         }
         @media (max-width: 375px) {
             width: 280px;
+            align-self: center;
         }  
     }
     &__avatar {
