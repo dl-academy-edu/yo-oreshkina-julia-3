@@ -1,0 +1,18 @@
+<form class="form login-form" action="#" name="loginForm" novalidate> 
+  <div class="form__inner">
+    <input class="form__input_js form__input-focus_js" type="email" name="email" id="newEmail" required>
+    <label class="form__label" for="newEmail">Email</label>
+  </div>
+    <div class="form__inner">
+      <input class="form__input_js" type="password" name="password" id="currentPassword" autocomplete="on" required>
+      <label class="form__label" for="currentPassword">Password</label>
+    </div>
+      @@include('blocks/buttons.html',
+      {"additionalClass": "login-form__btn",
+      "classJs": "login-form__btn_js",
+      "buttonType": "submit",
+      "buttonName": "Log in",
+      "btnAriaLabel": "sign in",
+      "buttonTab": "0",
+      "atr": ""})
+</form>

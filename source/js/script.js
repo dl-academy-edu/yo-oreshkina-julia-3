@@ -1,31 +1,30 @@
-// вызов функции открытия и закрытия формы входа
-popupHandler('popup__login-form_js', 'header__login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия формы регистрации
-popupHandler('popup__registration-form_js', 'header__reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия для отправки сообщения
-popupHandler('popup__connect-form_js', 'footer__btn-connect_js', 'connect-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия форм из мобильного меню 
-popupMobileHandler('popup__login-form_js', 'header__burger-login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
-popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the login form
+popupHandler('popup-login-form_js', 'header__login-btn_js', 'popup-login-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the registration form
+popupHandler('popup-registration-form_js', 'header__reg-btn_js', 'popup-registration-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the send message form
+popupHandler('popup-connect-form_js', 'footer__btn-connect_js', 'popup-connect-form__btn-close_js', 'form__input-focus_js');
+// opening and closing forms from the mobile menu 
+popupMobileHandler('popup-login-form_js', 'header__burger-login-btn_js', 'popup-login-form__btn-close_js', 'form__input-focus_js');
+popupMobileHandler('popup-registration-form_js', 'header__burger-reg-btn_js', 'popup-registration-form__btn-close_js', 'form__input-focus_js');
 
-// функция выделение текущей страницы как активной
+// set the current page as active
 (function() {
     const currentPage = document.querySelector('.header__home-link_js');
     const currentBurgerPage = document.querySelector('.header__burger-home-link_js');
     currentPage.classList.add('header__link_active');
     currentBurgerPage.classList.add('header__link_active');
-
 })();
-// Инициализация ссылок в меню при аутентификации
+
 (function setMenuLinks() {
     rerenderLinks();
     rerenderBurgerLinks();
 })();
 
-// РАБОТА С ФОРМОЙ АВТОРИЗАЦИИ
+// working with the authorization form
 
 (function() {
-    const loginPopup = document.querySelector('.popup__login-form_js');
+    const loginPopup = document.querySelector('.popup-login-form_js');
     const loginForm = document.forms.loginForm;
     const loginFormInputs = [...loginForm.querySelectorAll('.form__input_js')];
     const serverMessagePopup = document.querySelector('.server-message_js');
@@ -101,10 +100,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     });
 })();
 
-// РАБОТА С ФОРМОЙ РЕГИСТРАЦИИ
+// working with the registration form
 
 (function() {
-    const RegPopup = document.querySelector('.popup__registration-form_js');
+    const RegPopup = document.querySelector('.popup-registration-form_js');
     const regForm = document.forms.regForm;
     const regFormInputs = regForm.querySelectorAll('.form__input_js');
     const regFormBtn = regForm.querySelector('.registration-form__btn_js');
@@ -113,7 +112,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                
     if(!regForm) return;
 
-    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
     userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, regFormInputs, regFormBtn));
 
     regForm.addEventListener('submit', (e) => {
@@ -122,7 +120,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         clearErrors(regForm);
         clearValidityMessage(regForm);
 
-        const userData = getAllFormData(regForm); // кладем данные формы во временный объект
+        const userData = getAllFormData(regForm);
         let errors = getValidationFeildsResult(regFormInputs, userData);
 
         if(Object.keys(errors).length) {
@@ -194,10 +192,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     });
 })();
 
-//  РАБОТА С ФОРМОЙ ОТПРАВКИ СООБЩЕНИЯ
+//  working with the send message form
 
 (function() {
-    const connectFormPopup = document.querySelector('.popup__connect-form_js');
+    const connectFormPopup = document.querySelector('.popup-connect-form_js');
     const connectForm = document.forms.connectForm;
     const connectFormInputs = connectForm.querySelectorAll('.form__input_js');
     const connectFormBtn = connectForm.querySelector('.connect-form__btn_js');
@@ -206,7 +204,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
     if(!connectForm) return;
 
-    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
     userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, connectFormInputs, connectFormBtn));
 
     connectForm.addEventListener('submit', (e) => {
@@ -287,10 +284,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     const slides = [...innerWrapper.querySelectorAll('.summary__slide_js')];
     const slidesCount = slides.length;
     const paginationDots = [];
-    const animationDuration = 500; // время задержки анимации
+    const animationDuration = 500;
 
     let timer = null;
-    let slideWidth = wrapper.offsetWidth; // ширина wrapper
+    let slideWidth = wrapper.offsetWidth;
     let activeSlideIndex;
 
     const updateSlideIndex = () => {
@@ -317,14 +314,14 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     });
 
     function setActiveSlide(index, withAnimation = true) {
-        if(index < 0 || index >= slidesCount) return; // проверяем не было ли переключения без кнопки
+        if(index < 0 || index >= slidesCount) return; 
         innerWrapper.style.transform = `translateX(${index * slideWidth * (-1)}px)`;
 
         if(withAnimation) {
             clearTimeout(timer);
             innerWrapper.style.transition = `transform ${animationDuration}ms`;
             timer = setTimeout(() => {
-                innerWrapper.style.transition = ''; // снимаем анимацию на время задержки
+                innerWrapper.style.transition = '';
             }, animationDuration);
         }
 
@@ -344,7 +341,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         paginationDots[index].classList.add('summary__slider-dot_active');
 
 
-        activeSlideIndex = index; //обновляем значение для дальнейшего пролистывания
+        activeSlideIndex = index;
         localStorage.setItem('activeSlideIndex', activeSlideIndex);
     }
 
@@ -391,5 +388,15 @@ const swiper = new Swiper('.swiper', {
     navigation: {
       nextEl: '.swiper-button-next',
       prevEl: '.swiper-button-prev',
+    },
+
+    a11y: {
+        prevSlideMessage: 'Previous slide',
+        nextSlideMessage: 'Next slide',
+    },
+    
+    keyboard: {
+    enabled: true,
+    onlyInViewport: true,   
     },
   });

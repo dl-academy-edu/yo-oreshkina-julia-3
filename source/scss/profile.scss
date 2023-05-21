@@ -61,18 +61,34 @@
         margin-bottom: 10px;
     }
 }
-
-.password-form {
-    min-width: 370px;
-    @include form;
-    flex-direction: column;
-    @media (max-width: $media-mobile-landscape) {
-        min-width: 320px;
+.popup-form-edit-data {
+    &__wrapper{
+        padding-top: 132px;
+        @include form-wrapper;
+        @media (max-width: $media-tablet) {
+            flex-direction: column-reverse;
+            padding-left: 44px;
+            padding-right: 44px;
+            align-items: center;
+        }
+        @media (max-width: 665px) {
+            padding-top: 20px;
+        }
+        @media (max-width: $media-mobile-landscape) {
+            padding: 20px;
+        }
     }
-    @media (max-width: 375px) {
-        border: none;
-        padding: 10px 20px;
+    &__btn-close {
+        align-self: start;
+        @media (max-width: $media-tablet) {
+            align-self: end;
+        }
+        @media (max-width: 375px) {
+            align-self: start;
+        }
     }
+}
+.popup-form-edit-password {
     &__wrapper {
         padding-top: 181px;
         @include form-wrapper;
@@ -86,101 +102,6 @@
     }
     &__btn-close {
         align-self: start;
-    }
-    &__btn {
-        margin-top: 6px;
-    }
-}
-
-.form-edit-data {
-    &__wrapper{
-        padding-top: 132px;
-        @include form-wrapper;
-        @media (max-width: $media-tablet) {
-            flex-direction: column-reverse;
-            padding-left: 44px;
-            padding-right: 44px;
-            align-items: center;
-          }
-          @media (max-width: 665px) {
-            padding-top: 20px;
-          }
-          @media (max-width: $media-mobile-landscape) {
-            padding: 20px;
-          }
-    }
-    &__inner {
-        position: relative;
-    }
-    &__input-file {
-        position: absolute;
-        width: 1px;
-        height: 1px;
-        overflow: hidden;
-        clip: rect(0 0 0 0);
-    }
-    &__label-file {
-        margin-bottom: 56px;
-        max-width: 280px;
-    }
-    &__label-file::before {
-        content: '';
-        box-sizing: border-box;
-        position: absolute;
-        top: 22px;
-        left: 0;
-
-        height: 50px;
-        width: calc(1/2*100% - (1 - 1/2)*20px);
-
-        border: 2px solid $color-disabled;
-        transition: 0.4s;
-        @media (max-width: 665px) {
-            width: 100%;
-        }
-    }
-    &__file-icon {
-        position: absolute;
-        width: 20px;
-        height: 20px;
-        left: 14px;
-        top: 40px;
-        background: url('../img/icons/file-upload.svg') no-repeat;
-    }
-    &__file-text {
-        box-sizing: border-box;
-        position: absolute;
-        top: 50%;
-        left: 45px;
-
-        width: 200px; 
-        overflow: hidden;
-        text-overflow: ellipsis;
-
-        font-size: 18px;
-        line-height: 20px;
-        color: $primary-text;
-    }
-    
-    &__input-file:hover + &__label-file::before{
-        border: 2.5px solid $color-text;
-        cursor: pointer;
-    }
-    &__input-file:focus + &__label-file::before {
-        border: 2.5px solid $primary-text;
-        outline: none;
-    }
-    &__btn {
-        margin-top: 10px;
-    }
-    &__btn-close {
-        align-self: start;
-        @media (max-width: $media-tablet) {
-            align-self: end;
-        }
-        @media (max-width: 375px) {
-            align-self: start;
-        }
     }
 }
 

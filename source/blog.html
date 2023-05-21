@@ -30,12 +30,37 @@
     </main>
     @@include('blocks/footer.html',
     {"blogStyle": "footer_onBlog"})
-    <!-- button toTop -->
     <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
-    <!-- popups -->
-    @@include('blocks/popup__login-form.html')
-    @@include('blocks/popup__registration-form.html')
-    @@include('blocks/popup__connect-form.html')
+    <div class="popup popup-login-form popup-login-form_js visually-hidden">
+      <div class="popup__login-form-wrapper">
+        @@include('blocks/login-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-login-form__btn-close",
+        "addClassJs": "popup-login-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close log in form"})
+      </div>
+    </div>
+    <div class="popup visually-hidden popup-registration-form popup-registration-form_js">
+      <div class="popup__wrapper">
+        @@include('blocks/registration-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-registration-form__btn-close",
+        "addClassJs": "popup-registration-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close registration form"})
+      </div>
+    </div>
+    <div class="popup popup-connect-form popup-connect-form_js visually-hidden">
+      <div class="popup__wrapper">
+        @@include('blocks/connect-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-connect-form__btn-close",
+        "addClassJs": "popup-connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
+      </div>
+    </div>
     @@include('blocks/server-message.html')
     <script src="js/common.js"></script>
     <script src="js/blog.js"></script>

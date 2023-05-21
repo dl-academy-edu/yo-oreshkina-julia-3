@@ -57,83 +57,22 @@
         </div>
     </div>
    </main>
-   <div class="password-form__popup_js popup visually-hidden">
-    <div class="password-form__wrapper">
-      <form class="password-form" name="editPasswordForm" novalidate>
-          <div class="form__inner">
-            <input class="form__input_js form__input-focus_js" type="password" name="oldPassword" id="old-password" aria-label="enter the current password" required>
-            <label class="form__label" for="old-password">Old password</label>
-          </div>
-          <div class="form__inner">
-            <input class="form__input_js" type="password" name="newPassword" id="new-password" aria-label="enter the new password" autocomplete="on" required>
-              <label class="form__label" for="new-password">New password</label>
-          </div>
-          <div class="form__inner">
-            <input class="form__input_js" type="password" name="repeatPassword" id="confirm-password" aria-label="confirm the new password" required>
-            <label class="form__label" for="confirm-password">Repeat new password</label>
-          </div>
-            @@include('blocks/buttons.html',
-            {"additionalClass": "password-form__btn",
-            "classJs": "password-form__btn_js",
-            "buttonType": "submit",
-            "buttonName": "change password",
-            "btnAriaLabel": "save new password",
-            "buttonTab": "0",
-            "atr": ""})
-      </form>
+   <div class=" popup popup-form-edit-password visually-hidden popup-form-edit-password_js">
+    <div class="popup-form-edit-password__wrapper">
+      @@include('blocks/form-edit-password.html')
       @@include('blocks/button-close.html', 
-      {"addClass": "password-form__btn-close",
-      "addClassJs": "password-form__btn-close_js",
+      {"addClass": "popup-form-edit-password__btn-close",
+      "addClassJs": "popup-form-edit-password__btn-close_js",
       "btnTab": "0",
       "btnLabel": "close editing password form"})
     </div>
   </div>
-  <div class="form-edit-data__popup_js popup visually-hidden">
-    <div class="form-edit-data__wrapper">
-      <form class="form form-edit-data" name="editDataForm" novalidate>
-          <div class="form__inner">
-            <input class="form__input_js form__input-focus_js" type="email" name="email" id="new-email">
-            <label class="form__label" for="new-email">Email</label>
-          </div>
-          <div class="form__inputs-wrap">
-            <div class="form__inner">
-                <input class="form__input_js" type="text" name="name" id="new-name">
-                <label class="form__label" for="new-name">Name</label>
-              </div>
-              <div class="form__inner">
-                <input class="form__input_js" type="text" name="surname" id="new-surname">
-                <label class="form__label" for="new-surname">Surname</label>
-              </div>
-          </div>
-          <div class="form__inputs-wrap">
-            <div class="form__inner">
-                <input class="form__input_js" type="text" name="location" id="new-location">
-                <label class="form__label" for="new-location">Location</label>
-              </div>
-              <div class="form__inner">
-                <input class="form__input_js" type="number" name="age" id="new-age">
-                <label class="form__label" for="new-age">Age</label>
-              </div>
-          </div>
-          <div class="form__inner form-edit-data__inner">
-            <input class="form-edit-data__input-file form-edit-data__input-file_js" type="file" name="avatar" id="photo">
-            <label class="form__label form-edit-data__label-file" for="photo">Profile picture
-              <span class="form-edit-data__file-icon"></span>
-              <span class="form-edit-data__file-text form-edit-data__file-text_js">Choose a file...</span>
-            </label>
-          </div>
-            @@include('blocks/buttons.html',
-            {"additionalClass": "form-edit-data__btn",
-            "classJs": "form-edit-data__btn_js",
-            "buttonType": "submit",
-            "buttonName": "Submit changes",
-            "btnAriaLabel": "save new data of profile",
-            "buttonTab": "0",
-            "atr": ""})
-      </form>
+  <div class="popup popup-form-edit-data visually-hidden popup-form-edit-data_js">
+    <div class="popup-form-edit-data__wrapper">
+      @@include('blocks/form-edit-data.html')
       @@include('blocks/button-close.html', 
-      {"addClass": "form-edit-data__btn-close",
-      "addClassJs": "form-edit-data__btn-close_js",
+      {"addClass": "popup-form-edit-data__btn-close",
+      "addClassJs": "popup-form-edit-data__btn-close_js",
       "btnTab": "0",
       "btnLabel": "close editing profile data form"})
     </div>

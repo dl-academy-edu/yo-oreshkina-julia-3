@@ -1,14 +1,14 @@
-// вызов функции открытия и закрытия формы входа
-popupHandler('popup__login-form_js', 'header__login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия формы регистрации
-popupHandler('popup__registration-form_js', 'header__reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия для отправки сообщения
-popupHandler('popup__connect-form_js', 'footer__btn-connect_js', 'connect-form__btn-close_js', 'form__input-focus_js');
-// вызов функции открытия и закрытия форм из мобильного меню 
-popupMobileHandler('popup__login-form_js', 'header__burger-login-btn_js', 'login-form__btn-close_js', 'form__input-focus_js');
-popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', 'registration-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the login form
+popupHandler('popup-login-form_js', 'header__login-btn_js', 'popup-login-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the registration form
+popupHandler('popup-registration-form_js', 'header__reg-btn_js', 'popup-registration-form__btn-close_js', 'form__input-focus_js');
+// opening and closing the send message form
+popupHandler('popup-connect-form_js', 'footer__btn-connect_js', 'popup-connect-form__btn-close_js', 'form__input-focus_js');
+// opening and closing forms from the mobile menu
+popupMobileHandler('popup-login-form_js', 'header__burger-login-btn_js', 'popup-login-form__btn-close_js', 'form__input-focus_js');
+popupMobileHandler('popup-registration-form_js', 'header__burger-reg-btn_js', 'popup-registration-form__btn-close_js', 'form__input-focus_js');
 
-// функция выделение текущей страницы как активной
+// set the current page as active
 (function() {
     const currentPage = document.querySelector('.header__blog-link_js');
     const currentBurgerPage = document.querySelector('.header__burger-blog-link_js');
@@ -16,13 +16,14 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     currentBurgerPage.classList.add('header__link_active');
 
 })();
-// Инициализация ссылок в меню при аутентификации
+
 (function setMenuLinks() {
     rerenderLinks();
     rerenderBurgerLinks();
 })();
+
 /* _______________________________ FILTER __________________________________ */
-// получение  и отрисовка тегов  и постов
+
 (function() {
     const filter = document.forms.filterForm;
     const resetBtn = filter.querySelector('.filter__reset-btn_js');
@@ -51,9 +52,8 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         data.views = ([...filter.elements.views]
             .find(view => view.checked) || {value: null}).value;
 
-        //console.log(data);
-        getPostsData(data); // получаем данные с фильтра для дальнейшей работы с ними
-        setSearchParams(data); // устанавливаем параметры поиска
+        getPostsData(data); 
+        setSearchParams(data); 
     });
 
     let xhr = new XMLHttpRequest();
@@ -72,8 +72,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
             location.search = localStorage.getItem('searchParams');
         };
 
-        const params = getParamsFromLocation(); // получаем данные из location.search
-        //console.log(params);
+        const params = getParamsFromLocation();
         setDataToFilter(params);
         getPostsData(params);
 
@@ -99,7 +98,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         });
     }
 
-    // из данной функции получаем объект с текущими данными
     function getParamsFromLocation() {
         let searchParams = new URLSearchParams(location.search);
         return {
@@ -113,7 +111,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         }
     }
 
-    function setSearchParams(data) {  // функция формирующая location.search
+    function setSearchParams(data) {
         let searchParams = new URLSearchParams();
         searchParams.set('name', data.name);
         data.tags.forEach(tag => {
@@ -140,13 +138,12 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         }
 
         history.replaceState(null, document.title, '?' + searchParams.toString());
-        localStorage.setItem('searchParams', searchParams.toString()); // сохраняем данные фильтра и постов в локальном хранилище
+        localStorage.setItem('searchParams', searchParams.toString());
     }
 
-    // функция, формирующая посты по данным с сервера
     function getPostsData(params) {
-        const result = document.querySelector('.posts_js'); // получаем контейнер под посты
-        const links = document.querySelector('.blog__pagination_js'); // получаем контейнер под ссылки на странички постов
+        const result = document.querySelector('.posts_js');
+        const links = document.querySelector('.blog__pagination_js');
 
         let xhr = new XMLHttpRequest();
         let searchParams = new URLSearchParams();
@@ -226,7 +223,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                 }
             }
             if(btnNext) {
-                // если страница одна, или последняя (отсчет от 0)
                 if(pageCount === 0 || getParamsFromLocation().page === (pageCount - 1)) {
                     btnNext.setAttribute('disabled', '');
                 } else {
@@ -341,10 +337,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
 
 })();
 
-// РАБОТА С ФОРМОЙ АВТОРИЗАЦИИ
+// working with the authorization form
 
 (function() {
-    const loginPopup = document.querySelector('.popup__login-form_js');
+    const loginPopup = document.querySelector('.popup-login-form_js');
     const loginForm = document.forms.loginForm;
     const loginFormInputs = [...loginForm.querySelectorAll('.form__input_js')];
     const serverMessagePopup = document.querySelector('.server-message_js');
@@ -420,10 +416,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     });
 })();
 
-// РАБОТА С ФОРМОЙ РЕГИСТРАЦИИ
+// working with the registration form
 
 (function() {
-    const RegPopup = document.querySelector('.popup__registration-form_js');
+    const RegPopup = document.querySelector('.popup-registration-form_js');
     const regForm = document.forms.regForm;
     const regFormInputs = regForm.querySelectorAll('.form__input_js');
     const regFormBtn = regForm.querySelector('.registration-form__btn_js');
@@ -432,7 +428,6 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
                
     if(!regForm) return;
 
-    // разблокировка кнопки по нажатию на чекбокс и смена aria-label у input'ов
     userAgreement.addEventListener('click', () => agreementCheckedHandler(userAgreement, regFormInputs, regFormBtn));
 
     regForm.addEventListener('submit', (e) => {
@@ -441,7 +436,7 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
         clearErrors(regForm);
         clearValidityMessage(regForm);
 
-        const userData = getAllFormData(regForm); // кладем данные формы во временный объект
+        const userData = getAllFormData(regForm);
         let errors = getValidationFeildsResult(regFormInputs, userData);
 
         if(Object.keys(errors).length) {
@@ -513,10 +508,10 @@ popupMobileHandler('popup__registration-form_js', 'header__burger-reg-btn_js', '
     });
 })();
 
-//  РАБОТА С ФОРМОЙ ОТПРАВКИ СООБЩЕНИЯ
+//  working with the send message form
 
 (function() {
-    const connectFormPopup = document.querySelector('.popup__connect-form_js');
+    const connectFormPopup = document.querySelector('.popup-connect-form_js');
     const connectForm = document.forms.connectForm;
     const connectFormInputs = connectForm.querySelectorAll('.form__input_js');
     const connectFormBtn = connectForm.querySelector('.connect-form__btn_js');

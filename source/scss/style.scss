@@ -23,6 +23,8 @@
 @import "_blocks/buttons";
 @import "_blocks/checkbox";
 @import "_blocks/server-message";
+@import "_blocks/form-edit-data";
+@import "_blocks/form-edit-password";
 @import "blog";
 @import "profile";
 @import "fonts";
@@ -81,19 +83,13 @@
     justify-content: center;
     height: 465px;
     font-size: 24px;
-    color: $color-section;
+    background-color: $color-section;
   }
-  &__slide:nth-child(4n + 1) {
-    background-color: aqua;
-  }
-  &__slide:nth-child(4n + 2) {
-    background-color: crimson;
-  }
-  &__slide:nth-child(4n + 3) {
-    background-color: yellowgreen;
-  }
-  &__slide:nth-child(4n + 4) {
-    background-color: yellow;
+  &__photo {
+    display: flex;
+    height: 465px;
+    max-width: 100%;
+    object-fit: cover;
   }
   &__slider-panel {
     margin-top: 30px;
@@ -380,7 +376,41 @@
     background-color: #FFFFFF;
     opacity: 1;
   }
+  &__wrapper {
+    padding-top: 118px;
+    @include form-wrapper;
+    @media (max-width: 835px) {
+      flex-direction: column-reverse;
+      padding: 45px;
+      align-items: center;
+    }
+    @media (max-width: $media-mobile-landscape) {
+      padding: 20px;
+    }
+  }
+  &__login-form-wrapper {
+    padding-top: 225px;
+    @include form-wrapper;
+    @media (max-width: 500px) {
+      flex-direction: column-reverse;
+      align-items: center;
+      padding-left: 20px;
+      padding-right: 20px;
+    }
+    @media (max-width: 375px) {
+      padding-top: 75px;
+    }
+  }
 }
+.popup-login-form {
+  &__btn-close {
+    align-self: start;
+    @media (max-width: 500px) {
+      align-self: end;
+    }
+  }
+}
+
 
 .form {
   @include form;
@@ -393,18 +423,6 @@
   @media (max-width: 375px) {
     border: none;
     padding: 10px 0;
-  }
-  &__wrapper {
-    padding-top: 118px;
-    @include form-wrapper;
-    @media (max-width: 835px) {
-      flex-direction: column-reverse;
-      padding: 45px;
-      align-items: center;
-    }
-    @media (max-width: $media-mobile-landscape) {
-      padding: 20px;
-    }
   }
   &__inputs-wrap {
     display: flex;
@@ -422,7 +440,6 @@
     width: 100%;
     gap: 6px;
   }
-  
   &__label {
     @include text-label;
   }
@@ -431,7 +448,6 @@
     height: 50px;
     outline: none;
   }
-  
   &__inner > input.invalid {
     border: 2.5px solid $color-bad;
   }
@@ -459,26 +475,6 @@
 
 .login-form {
   max-width: 370px;
-
- &__wrapper {
-  padding-top: 225px;
-  @include form-wrapper;
-  @media (max-width: 500px) {
-    flex-direction: column-reverse;
-    align-items: center;
-    padding-left: 20px;
-    padding-right: 20px;
-  }
-  @media (max-width: 375px) {
-    padding-top: 75px;
-  }
- }
- &__btn-close {
-    align-self: start;
-    @media (max-width: 500px) {
-      align-self: end;
-    }
- }
  &__btn {
   margin-top: 10px;
  }
@@ -498,7 +494,6 @@
 
 /* DINAMIC ELEMENTS */
 
-// class of error div
 .invalid-message {
   color: $color-bad;
   font-size: 14px;
@@ -506,14 +501,11 @@
   max-width: 286px;
 }
 
-// class of success div
 .valid-message {
   color: $color-good;
   font-size: 14px;
   line-height: 16px;
 }
-
-// loader
 
 .loader {
   display: flex;

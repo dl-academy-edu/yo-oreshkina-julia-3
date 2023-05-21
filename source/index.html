@@ -28,10 +28,38 @@
       <div class="summary__slider summary__slider_js">
         <div class="summary__slider-wrapper summary__slider-wrapper_js">
           <div class="summary__slider-inner summary__slider-inner_js">
-            <div class="summary__slide summary__slide_js">This is 1 slide</div>
-            <div class="summary__slide summary__slide_js">This is 2 slide</div>
-            <div class="summary__slide summary__slide_js">This is 3 slide</div>
-            <div class="summary__slide summary__slide_js">This is 4 slide</div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide1-320.jpg, ./img/slide1-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide1-768.jpg, ./img/slide1-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide1-1440.jpg, ./img/slide1-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide1-1440.jpg" alt="first photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide2-320.jpg, ./img/slide2-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide2-768.jpg, ./img/slide2-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide2-1440.jpg, ./img/slide2-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide2-1440.jpg" alt="second photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/320.jpg, ./img/320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/768.jpg, ./img/768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/1440.jpg, ./img/1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/1440.jpg" alt="third photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide4-320.jpg, ./img/slide4-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide4-768.jpg, ./img/slide4-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide4-1440.jpg, ./img/slide4-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide4-1440.jpg" alt="fourth photo">
+              </picture>
+            </div>
           </div>
         </div>
         <div class="summary__slider-panel">
@@ -65,8 +93,8 @@
           <img class="skills__icon" src="./img/icons/css-icon.svg" alt="CSS/SCSS icon" width="79" height="90">
           <p class="skills__name">CSS/SCSS</p>
           <div class="skills__progress-inner">
-            <p class="skills__progress-value">70%</p>
-            <span class="skills__progress" style="--width: 70"></span>
+            <p class="skills__progress-value">80%</p>
+            <span class="skills__progress" style="--width: 80"></span>
           </div>
         </li>
         <li class="skills__item">
@@ -81,8 +109,8 @@
           <img class="skills__icon" src="./img/icons/git-icon.svg" alt="Git icon" width="90" height="90">
           <p class="skills__name">Git/GitHub</p>
           <div class="skills__progress-inner">
-            <p class="skills__progress-value">50%</p>
-            <span class="skills__progress" style="--width: 50"></span>
+            <p class="skills__progress-value">45%</p>
+            <span class="skills__progress" style="--width: 45"></span>
           </div>
         </li>
         <li class="skills__item">
@@ -98,11 +126,8 @@
     <section class="portfolio">
       <h2 class="portfolio__title">Portfolio</h2>
       <div class="portfolio__inner container">
-        <!-- Slider main container -->
         <div class="swiper">
-          <!-- Additional required wrapper -->
           <div class="swiper-wrapper">
-            <!-- Slides -->
             <div class="swiper-slide">
               <picture>
                 <source srcset="./img/swiper-slide1-320.jpg, ./img/swiper-slide1-320-2x.jpg 2x" media="(max-width: 512px)">
@@ -139,12 +164,37 @@
     </section>
     @@include('blocks/footer.html',
     {"blogStyle": ""})
-    <!-- button toTop -->
     <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
-    <!-- popups -->
-    @@include('blocks/popup__login-form.html')
-    @@include('blocks/popup__registration-form.html')
-    @@include('blocks/popup__connect-form.html')
+    <div class="popup popup-login-form popup-login-form_js visually-hidden">
+      <div class="popup__login-form-wrapper">
+        @@include('blocks/login-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-login-form__btn-close",
+        "addClassJs": "popup-login-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close log in form"})
+      </div>
+    </div>
+    <div class="popup visually-hidden popup-registration-form popup-registration-form_js">
+      <div class="popup__wrapper">
+        @@include('blocks/registration-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-registration-form__btn-close",
+        "addClassJs": "popup-registration-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close registration form"})
+      </div>
+    </div>
+    <div class="popup popup-connect-form popup-connect-form_js visually-hidden">
+      <div class="popup__wrapper">
+        @@include('blocks/connect-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-connect-form__btn-close",
+        "addClassJs": "popup-connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
+      </div>
+    </div>
     @@include('blocks/server-message.html')
     <script src="js/app.js" defer></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>

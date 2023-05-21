@@ -1,17 +1,13 @@
-// базовый путь до сервера
 const BASE_SERVER_PATH = 'https://academy.directlinedev.com';
 
-// ф-ция открытия и закрытия форм
 function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass, inputFocusClass) {
     const popup = document.querySelector(`.${popupClass}`);
     const openPopupbtn = document.querySelector(`.${openPopupbtnClass}`);
     const closePopupbtn = document.querySelector(`.${closePopupbtnClass}`);
     const inputFocus = popup.querySelector(`.${inputFocusClass}`);
 
-    // проверка на наличие открывающей кнопки в обычном меню 
     if(!openPopupbtn) return;
 
-    // проверка на наличие модального окна или если пользователь специально удалит класс через браузер
     if(!popup || !popup.classList.contains('visually-hidden')) return;
 
     openPopupbtn.addEventListener('click', openPopup);
@@ -23,7 +19,7 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass, inputF
         inputFocus.focus();
         window.addEventListener('keydown', escClosePopup);
         
-        if(closePopupbtn) { // проверка на наличие закрывающей кнопки
+        if(closePopupbtn) { 
         closePopupbtn.addEventListener('click', closePopup);
         }
     }
@@ -44,7 +40,7 @@ function popupHandler (popupClass, openPopupbtnClass, closePopupbtnClass, inputF
         }
     }
 }
-// ф-ция открытия и закрытия форм из бургер-меню
+
 function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopupbtnClass, inputFocusClass) {
     const menu = document.querySelector('.header__burger');
     const openMenuBtn = document.querySelector('.header__burger-btn-open_js');
@@ -78,7 +74,7 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
     }      
 }
 
-//------------------------------   Бургер меню  -------------------------------
+/* -----------------------------   Burger menu  ---------------------------- */
 
 (function() {
     const openMenuBtn = document.querySelector('.header__burger-btn-open_js');
@@ -113,7 +109,7 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
     }
 })();
 
-/* -------------------- Функция выхода из аккаунта------------------ */
+/* --------------- log out of account and rerender menu-------------------- */
 (function() {
     const signOutBtn = document.querySelector('.header__sign-out-btn_js');
     const signOutBurgerBtn = document.querySelector('.header__burger-sign-out-btn_js');
@@ -137,7 +133,80 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
     }
 })();
 
-/* -------------------- Функция прокрутки страницы вверх------------------ */
+function rerenderLinks() {
+    const loginBtn = document.querySelector('.header__item-login_js');
+    const registerBtn = document.querySelector('.header__item-reg_js');
+    const toProfileLink = document.querySelector('.header__item-profile_js');
+    const signOutBtn = document.querySelector('.header__item-sign-out_js');
+  
+    const isLogin = localStorage.getItem('token');
+
+    if(isLogin) {
+        if(!loginBtn.classList.contains('visually-hidden')) {
+            loginBtn.classList.add('visually-hidden');
+        }
+        if(!registerBtn.classList.contains('visually-hidden')) {
+            registerBtn.classList.add('visually-hidden');
+        }
+        if(toProfileLink.classList.contains('visually-hidden')){
+            toProfileLink.classList.remove('visually-hidden');
+        }
+        if(signOutBtn.classList.contains('visually-hidden')){
+            signOutBtn.classList.remove('visually-hidden');
+        }
+    } else {
+        if(loginBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(registerBtn.classList.contains('visually-hidden')) {
+            registerBtn.classList.remove('visually-hidden');
+        }
+        if(!toProfileLink.classList.contains('visually-hidden')){
+            toProfileLink.classList.add('visually-hidden');
+        }
+        if(!signOutBtn.classList.contains('visually-hidden')){
+            signOutBtn.classList.add('visually-hidden');
+        }
+    }
+}
+
+function rerenderBurgerLinks() {
+    const loginBurgerBtn = document.querySelector('.header__burger-login_js');
+    const registerBurgerBtn = document.querySelector('.header__burger-reg_js');
+    const toProfileBurgerLink = document.querySelector('.header__burger-profile_js');
+    const signOutBurgerBtn = document.querySelector('.header__burger-sign-out_js');
+    const isLogin = localStorage.getItem('token');
+    
+    if(isLogin) {
+        if(!loginBurgerBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.add('visually-hidden');
+        }
+        if(!registerBurgerBtn.classList.contains('visually-hidden')) {
+            registerBurgerBtn.classList.add('visually-hidden');
+        }
+        if(toProfileBurgerLink.classList.contains('visually-hidden')) {
+            toProfileBurgerLink.classList.remove('visually-hidden');
+        }
+        if(signOutBurgerBtn.classList.contains('visually-hidden')) {
+            signOutBurgerBtn.classList.remove('visually-hidden');
+        }
+    } else {
+        if(loginBurgerBtn.classList.contains('visually-hidden')) {
+            loginBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(registerBurgerBtn.classList.contains('visually-hidden')) {
+            registerBurgerBtn.classList.remove('visually-hidden');
+        }
+        if(!toProfileBurgerLink.classList.contains('visually-hidden')) {
+            toProfileBurgerLink.classList.add('visually-hidden');
+        }
+        if(!signOutBurgerBtn.classList.contains('visually-hidden')) {
+            signOutBurgerBtn.classList.add('visually-hidden');
+        }   
+    }
+}
+
+/* ------------------------- scroll the page up -------------------------- */
 (function() {
     const btnToTop = document.querySelector('.button-to-top_js');
 
@@ -160,33 +229,8 @@ function popupMobileHandler(mobilePopupClass, openPopupBurgerbtnClass, closePopu
     }
 })();
 
-/* -------------------------------- ФОРМЫ ---------------------------------- */
-// функция закрытия сообщений с сервера
-(function closeServerMessage() {
-    const serverMessagePopup = document.querySelector('.server-message_js');
-    const closeServerMessagePopupBtn = document.querySelector('.server-message__btn-close_js');
+/* -------------------------------- forms --------------------------------- */
 
-    if(!serverMessagePopup && !closeServerMessagePopupBtn) return;
-
-    window.addEventListener('keydown', escHandler);
-
-    closeServerMessagePopupBtn.addEventListener('click', () => {
-        if(!serverMessagePopup.classList.contains('visually-hidden')) {
-            serverMessagePopup.classList.add('visually-hidden');
-            document.body.classList.remove('no-scroll');
-            window.removeEventListener('keydown', escHandler);
-        }
-    });
-
-    function escHandler(e) {
-        if(e.code === "Escape" && !serverMessagePopup.classList.contains('visually-hidden')) {
-            serverMessagePopup.classList.add('visually-hidden');
-            document.body.classList.remove('no-scroll');
-        }
-    }
-})();
-
-// функция получения данных из формы
 function getAllFormData(form) {
     const inputs = form.querySelectorAll('input'); 
     const textareas = form.querySelectorAll('textarea'); 
@@ -228,30 +272,23 @@ function getAllFormData(form) {
     return result; 
 }
 
-// проверка на корректное заполнение почты 
 function isEmailCorrect(email) {
     return email.match(/^[0-9a-z-\.]+\@[0-9a-z-]{2,}\.[a-z]{2,}$/i);
 }
 
-// проверка на возраст пользователя
 function isAgeCorrect(age) {
     return (!isNaN(age) && age !== null && age >= 18);
 }
 
-// проверка на корректное заполнение номера телефона
 function isPhoneCorrect(phone) {
     return phone.match(/^(\s*)?(\+)?([- _():=+]?\d[- _():=+]?){10,14}(\s*)?$/);
 }
 
-// проверка на корректное заполнение поля What is your name?
 function isConnectNameCorrect(fullName) {
     return fullName.match(/^[a-zA-Z]{2,}\s[a-zA-Z]{1,}'?-?[a-zA-Z]{2,}\s?([a-zA-Z]{1,})?$/);
 }
 
-//разблокировка кнопки и переименование aria-label по отмеченному чекбоксу
-
 function agreementCheckedHandler(checkbox, inputs, btn) {
-    // проверка на отмеченный чекбокс
     if(checkbox.checked) {
         inputs.forEach(elem => {
             if(elem.getAttribute('aria-label') === 'checkbox is not selected') {
@@ -267,221 +304,7 @@ function agreementCheckedHandler(checkbox, inputs, btn) {
     }  
 }
 
-// появление-удаление ошибки для некорректно заполненного поля
-
-function setErrorText(input, messageError) { 
-    const error = errorCreator(messageError);
-    input.classList.add('invalid');
-    input.insertAdjacentElement('beforeBegin', error);
-    input.addEventListener('input', () => {
-        error.remove(); // Удаляем ошибку.
-        input.classList.remove('invalid');
-    }, {once: true});
-}
-
-// создание элемента ошибки
-function errorCreator(message) {
-    let messageError = document.createElement('div'); 
-    messageError.classList.add('invalid-message'); 
-    messageError.innerText = message; 
-    return messageError;
-}
-
-//  вставка cooбщения о корректно заполненном поле
-function setValidityMessage(input) { 
-    const message = validityMessageCreator(); 
-    input.classList.add('valid'); 
-    input.insertAdjacentElement('beforeBegin', message);
-    input.addEventListener('input', () => {
-        message.remove(); 
-        input.classList.remove('valid'); 
-    }, {once: true}); 
-}
-
-// создание елемента c cообщением о правильности заполнения формы
-function validityMessageCreator() {
-    let validityMessage = document.createElement('div'); 
-    validityMessage.classList.add('valid-message'); 
-    validityMessage.innerText = 'All right'; 
-    return validityMessage;
-}
-
-//ф-ция для переключения модальных окон
-function interactionModal(modal) {
-    modal.classList.toggle('visually-hidden');
-    document.body.classList.remove('no-scroll');
-}
-
-// функция создания элемента
-function createElement(elem, className) {
-    let element = document.createElement(elem);
-    element.classList.add(className);
-    return element;
-}
-
-// функция отрисовки лоадера
-function createPreloader() {
-   let preloader = createElement('div', 'loader');
-   let spinner = createElement('div', 'spinner-border');
-   preloader.insertAdjacentElement('afterBegin', spinner);
-   return preloader;
-}
-
-// показать лоадер
-function showLoader() {
-    let loader = createPreloader();
-    document.body.insertAdjacentElement('afterBegin', loader);
-}
-
-// убрать лоадер
-function removeLoader() {
-    const loader = document.querySelector('.loader');
-    if (loader) loader.remove(); 
-}
-
-// функция переключения страниц после авторизации
-
-function rerenderLinks() {
-    const loginBtn = document.querySelector('.header__item-login_js');
-    const registerBtn = document.querySelector('.header__item-reg_js');
-    const toProfileLink = document.querySelector('.header__item-profile_js');
-    const signOutBtn = document.querySelector('.header__item-sign-out_js');
-  
-    const isLogin = localStorage.getItem('token');
-
-    if(isLogin) {
-        // токен присутсвует
-        if(!loginBtn.classList.contains('visually-hidden')) {
-            loginBtn.classList.add('visually-hidden');
-        }
-        if(!registerBtn.classList.contains('visually-hidden')) {
-            registerBtn.classList.add('visually-hidden');
-        }
-        if(toProfileLink.classList.contains('visually-hidden')){
-            toProfileLink.classList.remove('visually-hidden');
-        }
-        if(signOutBtn.classList.contains('visually-hidden')){
-            signOutBtn.classList.remove('visually-hidden');
-        }
-    } else {
-        // токен отсутствует
-        if(loginBtn.classList.contains('visually-hidden')) {
-            loginBurgerBtn.classList.remove('visually-hidden');
-        }
-        if(registerBtn.classList.contains('visually-hidden')) {
-            registerBtn.classList.remove('visually-hidden');
-        }
-        if(!toProfileLink.classList.contains('visually-hidden')){
-            toProfileLink.classList.add('visually-hidden');
-        }
-        if(!signOutBtn.classList.contains('visually-hidden')){
-            signOutBtn.classList.add('visually-hidden');
-        }
-    }
-}
-
-function rerenderBurgerLinks() {
-    const loginBurgerBtn = document.querySelector('.header__burger-login_js');
-    const registerBurgerBtn = document.querySelector('.header__burger-reg_js');
-    const toProfileBurgerLink = document.querySelector('.header__burger-profile_js');
-    const signOutBurgerBtn = document.querySelector('.header__burger-sign-out_js');
-    const isLogin = localStorage.getItem('token');
-    
-    if(isLogin) {
-        // токен присутсвует
-        if(!loginBurgerBtn.classList.contains('visually-hidden')) {
-            loginBurgerBtn.classList.add('visually-hidden');
-        }
-        if(!registerBurgerBtn.classList.contains('visually-hidden')) {
-            registerBurgerBtn.classList.add('visually-hidden');
-        }
-        if(toProfileBurgerLink.classList.contains('visually-hidden')) {
-            toProfileBurgerLink.classList.remove('visually-hidden');
-        }
-        if(signOutBurgerBtn.classList.contains('visually-hidden')) {
-            signOutBurgerBtn.classList.remove('visually-hidden');
-        }
-    } else {
-        // токен отсутствует
-        if(loginBurgerBtn.classList.contains('visually-hidden')) {
-            loginBurgerBtn.classList.remove('visually-hidden');
-        }
-        if(registerBurgerBtn.classList.contains('visually-hidden')) {
-            registerBurgerBtn.classList.remove('visually-hidden');
-        }
-        if(!toProfileBurgerLink.classList.contains('visually-hidden')) {
-            toProfileBurgerLink.classList.add('visually-hidden');
-        }
-        if(!signOutBurgerBtn.classList.contains('visually-hidden')) {
-            signOutBurgerBtn.classList.add('visually-hidden');
-        }   
-    }
-}   
-
-// функция заготовки для создания запроса
-function sendRequest({url, method = 'GET', headers, body = null}) {
-    return fetch(BASE_SERVER_PATH + url, {
-        method,
-        headers,
-        body,
-    })
-}
-
-// функция установки ошибок на полях форм
-function errorFormHandler(errors, form) {
-    if(!errors) return;
-    if(Object.keys(errors).length) {
-      Object.keys(errors).forEach(key => {
-        const messageError = errors[key];
-        const input = form.elements[key];
-        setErrorText(input, messageError);
-      })
-      return;
-    }
-  }
-
-  // функция удаления ошибок на полях форм
-  function clearErrors(element) {
-    const messages = element.querySelectorAll('.invalid-message');
-    const invalids = element.querySelectorAll('.invalid');
-    messages.forEach(message => message.remove());
-    invalids.forEach(invalid => invalid.classList.remove('invalid'));
-  }
-
-  // функция удаления сообщений All right! на полях форм
-  function clearValidityMessage(element) {
-    const messages = element.querySelectorAll('.valid-message');
-    const valids = element.querySelectorAll('.valid');
-    messages.forEach(message => message.remove());
-    valids.forEach(invalid => invalid.classList.remove('valid'));
-  }
-
-  // функция оповещения ошибки сервера
-  function setErrorServerMessage(element, error) {
-    const serverMessage = createElement('div', 'server-message__text-error');
-    serverMessage.innerText = `The form was sent but the server transmits an error: “${error}”`;
-    element.insertAdjacentElement('afterBegin', serverMessage);
-    if (element.classList.contains('visually-hidden'))
-    interactionModal(element);
-    setTimeout(() => { 
-        serverMessage.remove();
-     }, 3000)
-  }
-
-  // функция оповещения об успешном запросе
-  function setSuccessServerMessage(element) {
-    const serverMessage = createElement('div', 'server-message__text-success');
-    serverMessage.innerText = 'Form has been sent successfully';
-    element.insertAdjacentElement('afterBegin', serverMessage);
-    if (element.classList.contains('visually-hidden'))
-    interactionModal(element);
-    setTimeout(() => { 
-        serverMessage.remove();
-     }, 3000)
-  }
-
-  // функция валидации обязательных полей форм
-  function getValidationFeildsResult (inputs, data = null) {
+function getValidationFeildsResult (inputs, data = null) {
     let errors = {};
     inputs.forEach(elem => {
         if(elem.hasAttribute('required')){
@@ -540,7 +363,148 @@ function errorFormHandler(errors, form) {
         }
     });
     return errors;
-  }
+}
 
+function setErrorText(input, messageError) { 
+    const error = errorCreator(messageError);
+    input.classList.add('invalid');
+    input.insertAdjacentElement('beforeBegin', error);
+    input.addEventListener('input', () => {
+        error.remove();
+        input.classList.remove('invalid');
+    }, {once: true});
+}
 
-  
+function errorCreator(message) {
+    let messageError = document.createElement('div'); 
+    messageError.classList.add('invalid-message'); 
+    messageError.innerText = message; 
+    return messageError;
+}
+
+function setValidityMessage(input) { 
+    const message = validityMessageCreator(); 
+    input.classList.add('valid'); 
+    input.insertAdjacentElement('beforeBegin', message);
+    input.addEventListener('input', () => {
+        message.remove(); 
+        input.classList.remove('valid'); 
+    }, {once: true}); 
+}
+
+function validityMessageCreator() {
+    let validityMessage = document.createElement('div'); 
+    validityMessage.classList.add('valid-message'); 
+    validityMessage.innerText = 'All right'; 
+    return validityMessage;
+}
+
+function errorFormHandler(errors, form) {
+    if(!errors) return;
+    if(Object.keys(errors).length) {
+      Object.keys(errors).forEach(key => {
+        const messageError = errors[key];
+        const input = form.elements[key];
+        setErrorText(input, messageError);
+      })
+      return;
+    }
+}
+
+function clearErrors(element) {
+    const messages = element.querySelectorAll('.invalid-message');
+    const invalids = element.querySelectorAll('.invalid');
+    messages.forEach(message => message.remove());
+    invalids.forEach(invalid => invalid.classList.remove('invalid'));
+}
+
+  function clearValidityMessage(element) {
+    const messages = element.querySelectorAll('.valid-message');
+    const valids = element.querySelectorAll('.valid');
+    messages.forEach(message => message.remove());
+    valids.forEach(invalid => invalid.classList.remove('valid'));
+}
+
+/* --------------------------- server request ---------------------------- */
+
+(function closeServerMessage() {
+    const serverMessagePopup = document.querySelector('.server-message_js');
+    const closeServerMessagePopupBtn = document.querySelector('.server-message__btn-close_js');
+
+    if(!serverMessagePopup && !closeServerMessagePopupBtn) return;
+
+    window.addEventListener('keydown', escHandler);
+
+    closeServerMessagePopupBtn.addEventListener('click', () => {
+        if(!serverMessagePopup.classList.contains('visually-hidden')) {
+            serverMessagePopup.classList.add('visually-hidden');
+            document.body.classList.remove('no-scroll');
+            window.removeEventListener('keydown', escHandler);
+        }
+    });
+
+    function escHandler(e) {
+        if(e.code === "Escape" && !serverMessagePopup.classList.contains('visually-hidden')) {
+            serverMessagePopup.classList.add('visually-hidden');
+            document.body.classList.remove('no-scroll');
+        }
+    }
+})();
+
+function setErrorServerMessage(element, error) {
+    const serverMessage = createElement('div', 'server-message__text-error');
+    serverMessage.innerText = `The form was sent but the server transmits an error: “${error}”`;
+    element.insertAdjacentElement('afterBegin', serverMessage);
+    if (element.classList.contains('visually-hidden'))
+    interactionModal(element);
+    setTimeout(() => { 
+        serverMessage.remove();
+     }, 3000)
+}
+
+function setSuccessServerMessage(element) {
+    const serverMessage = createElement('div', 'server-message__text-success');
+    serverMessage.innerText = 'Form has been sent successfully';
+    element.insertAdjacentElement('afterBegin', serverMessage);
+    if (element.classList.contains('visually-hidden'))
+    interactionModal(element);
+    setTimeout(() => { 
+        serverMessage.remove();
+     }, 3000)
+}
+
+function sendRequest({url, method = 'GET', headers, body = null}) {
+    return fetch(BASE_SERVER_PATH + url, {
+        method,
+        headers,
+        body,
+    })
+}
+
+function createPreloader() {
+   let preloader = createElement('div', 'loader');
+   let spinner = createElement('div', 'spinner-border');
+   preloader.insertAdjacentElement('afterBegin', spinner);
+   return preloader;
+}
+
+function showLoader() {
+    let loader = createPreloader();
+    document.body.insertAdjacentElement('afterBegin', loader);
+}
+
+function removeLoader() {
+    const loader = document.querySelector('.loader');
+    if (loader) loader.remove(); 
+}
+
+function createElement(elem, className) {
+    let element = document.createElement(elem);
+    element.classList.add(className);
+    return element;
+}
+
+function interactionModal(modal) {
+    modal.classList.toggle('visually-hidden');
+    document.body.classList.remove('no-scroll');
+}
