@@ -244,7 +244,7 @@
   &__name {
     @include text-skills;
   }
-  &__progress-inner {
+  &__progress-wrapper {
     display: flex;
     flex-direction: row;
     column-gap: 10px;
