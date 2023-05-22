@@ -117,7 +117,6 @@ popupHandler('popup-form-edit-data_js', 'profile__change-data-btn_js', 'popup-fo
         .then(response => {
             if(response.success) {
                 setSuccessServerMessage(serverMessagePopup);
-                clearValidityMessage(editDataForm);
                 profile = response.data;
                 renderProfile();
                 setTimeout(() => { 
@@ -129,26 +128,21 @@ popupHandler('popup-form-edit-data_js', 'profile__change-data-btn_js', 'popup-fo
             }
         })
         .catch(err => {
-            if(err._message) {
-                setErrorServerMessage(serverMessagePopup, err._message);
-                editDataForm.reset();
-                setTimeout(() => { 
-                    interactionModal(editDataFormPopup);
-                    interactionModal(serverMessagePopup);
-                 }, 2000);
+            if (err._message) {
+                setErrorServerMessage(serverMessagePopup, 'Unknown server error!');
             }
             if(err.errors.email === 'Данный email уже занят!') {
                 setErrorServerMessage(serverMessagePopup, err.errors.email);
-                clearValidityMessage(editDataForm);
-                editDataForm.reset();
-                setTimeout(() => { 
-                    interactionModal(editDataFormPopup);
-                    interactionModal(serverMessagePopup);
-                 }, 2000);
-            }
+            } 
+            setTimeout(() => { 
+                interactionModal(editDataFormPopup);
+                interactionModal(serverMessagePopup);
+            }, 2000);
         })
         .finally(() => {
             removeLoader();
+            clearValidityMessage(editDataForm);
+            editDataForm.reset();
         }) 
     }
 
@@ -230,19 +224,23 @@ popupHandler('popup-form-edit-data_js', 'profile__change-data-btn_js', 'popup-fo
             }
         })
         .catch(err => {
-            if(err._message === "") {
-                setErrorServerMessage(serverMessagePopup, 'The current password is not correct!');
-                clearValidityMessage(editPasswordForm);
-                clearErrors(editPasswordForm);
-                editPasswordForm.reset();
+            if(err) {
+                if(err._message === "") {
+                    setErrorServerMessage(serverMessagePopup, 'The current password is not correct!');
+                } else {
+                    setErrorServerMessage(serverMessagePopup, 'Unknown server error!');
+                }
                 setTimeout(() => { 
                     interactionModal(editPasswordPopup);
                     interactionModal(serverMessagePopup);
-                 }, 2000);
+                }, 2000);
             }
         })
         .finally(() => {
             removeLoader();
+            clearValidityMessage(editPasswordForm);
+            clearErrors(editPasswordForm);
+            editPasswordForm.reset();
         })
     }
 
