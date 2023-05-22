@@ -1,31 +1,38 @@
 .header {
     padding-top: 35px;
-    @media (max-width: 375px) {
-        display: none;
+    @media (max-width: $media-mobile-landscape) {
+        padding: 0;
+        margin: 0;
     }
     &__nav {
-        display: flex;
-        justify-content: space-between;
         border-bottom: 1px solid $color-text;
         padding-bottom: 30px;
+        @media (max-width: $media-mobile-landscape) {
+            display: none;
+        }
+    }
+    &__list {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+        @media (max-width: $media-mobile-landscape) {
+            display: none;
+        }
+    }
+    &__list > li:nth-of-type(1) {
+        flex: 1 1 auto;
     }
     &__link {
         font-weight: bold;
         transition: 0.4s;
     }
-    &__link--active {
+    &__link_active {
         color: $primary-text;
         font-weight: bold;
         transition: 0.4s;
     }
-    &__link--active:hover, &__link--active:focus {
+    &__link_active:hover, &__link_active:focus {
         color:$color-text;
-    }
-    &__list--log-out {
-        @include no-list;
-        display: flex;
-        flex-direction: row;
-        gap: 20px;
     }
     &__btn {
         @include no-btn;
@@ -39,4 +46,66 @@
     &__btn:hover, &__btn:focus, &__link:hover, &__link:focus {
         color: $primary-text;
     }
+    &__burger-btn-open {
+        display: none; 
+        background-color:#fff;
+        background-image: url('../img/icons/burger-menu.svg');
+        background-repeat: no-repeat;
+        width: 32px;
+        height: 20px;
+        border: none; 
+        @media (max-width: $media-mobile-landscape) {
+            display: block;
+        }
+        &_home-page {
+            position: absolute;
+            top: 175px;
+            right: 20px;
+        }
+        &_pages {
+            position: absolute;
+            top: 50px; 
+            right: 20px;
+        }
+    }
+    &__burger {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        row-gap: 186px;
+        z-index: 10;
+        position: absolute;
+        padding-top: 50px;
+        padding-right: 20px;
+        top: 0;
+        right: 0;
+        width: 100%;
+        max-width: $media-mobile-landscape;
+        height: 100%;
+        background: rgba(246, 246, 246, 0.99); 
+        animation: open-burger-menu linear 0.5s;
+    }
+    &__burger.visually-hidden {
+        display: none;
+    }
+    
+    &__burger-list {
+        display: flex;
+        flex-direction: column;
+        align-items: end;
+        gap: 40px;
+    }
+    &__burger-link, &__burger-btn {
+        @include text-burger-menu;
+    }
+    
+}
+
+@keyframes open-burger-menu {
+    0% {
+      transform: translateY(-100%);    
+    }
+  100% {
+    transform: translateY(0);    
+  }
 }

@@ -24,6 +24,10 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+ul, ol {
+  list-style-type: none;
+}
+
 a {
   text-decoration: none;
   font-family: $gilroy;
@@ -51,6 +55,14 @@ h2 {
   line-height: 42px;
 }
 
+h5 {
+  font-family: $gilroy;
+  font-style: normal;
+  font-weight: bold;
+  font-size: 24px;
+  line-height: 30px;
+}
+
 p {
   font-family: $gilroy;
   font-style: normal;
@@ -69,6 +81,15 @@ button {
   cursor: pointer;
 }
 
+fieldset {
+  border: none;
+  padding: 0;
+}
+
 .visually-hidden {
   display: none;
+}
+
+.no-scroll {
+  overflow: hidden;
 }

@@ -6,39 +6,75 @@
     <meta name="google" content="notranslate">
     <meta name="format-detection" content="telephone=no">
 
-    <title>DL Academy</title>
-    <meta name="description" content="">
-    <meta name="keywords" content="">
-
+    <title>Summary | Main page</title>
+    <meta name="description" content="The final project of the course `Junior Front End Developer` by Julia Oreshkina, student DL Academy">
+    
     <script>
       var docElement = document.documentElement;
       docElement.className = docElement.className.replace(/\bno-js\b/, '') + ' js';
     </script>
 
-    <!-- Favicon -->
-
-    <!-- build:css -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <link href="css/style.min.css" rel="stylesheet">
-    <!-- endbuild -->
   </head>
   <body>
-    @@include('blocks/header.html')
+    @@include('blocks/header.html',
+    {"posOnPage": "header__burger-btn-open_home-page"})
     <main class="summary container">
       <h1 class="summary__title">Julia Oreshkina</h1>
       <div class="summary__info">
-        <p>Future front-end developer</p>
-        <p>30 years old, Tolyatti</p>
+        <p>Future front-end developer 30 years old, Tolyatti</p>
       </div>
-      @@include('blocks/burger-menu.html')
-      <button class="burger-menu__btn-open" type="button" aria-label="open burger menu"></button>
-      <div class="summary__slider"></div>
+      <div class="summary__slider summary__slider_js">
+        <div class="summary__slider-wrapper summary__slider-wrapper_js">
+          <div class="summary__slider-inner summary__slider-inner_js">
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide1-320.jpg, ./img/slide1-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide1-768.jpg, ./img/slide1-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide1-1440.jpg, ./img/slide1-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide1-1440.jpg" alt="first photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide2-320.jpg, ./img/slide2-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide2-768.jpg, ./img/slide2-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide2-1440.jpg, ./img/slide2-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide2-1440.jpg" alt="second photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/320.jpg, ./img/320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/768.jpg, ./img/768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/1440.jpg, ./img/1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/1440.jpg" alt="third photo">
+              </picture>
+            </div>
+            <div class="summary__slide summary__slide_js">
+              <picture class="summary__photo">
+                <source class="summary__photo" srcset="./img/slide4-320.jpg, ./img/slide4-320-2x.jpg 2x" media="(max-width: 320px)">
+                <source class="summary__photo" srcset="./img/slide4-768.jpg, ./img/slide4-768-2x.jpg 2x" media="(min-width: 321px) and (max-width: 768px)">
+                <source class="summary__photo" srcset="./img/slide4-1440.jpg, ./img/slide4-1440-2x.jpg 2x" media="(min-width: 769px)">
+                <img class="summary__photo" src="./img/slide4-1440.jpg" alt="fourth photo">
+              </picture>
+            </div>
+          </div>
+        </div>
+        <div class="summary__slider-panel">
+          <button type="button" class="summary__slider-btn summary__slider-btn-back_js" aria-label="switch to the previous slide"></button>
+          <div class="summary__slider-pagination summary__slider-pagination_js"></div>
+          <button type="button" class="summary__slider-btn summary__slider-btn-next_js" aria-label="switch to the next slide"></button>
+        </div>
+      </div>
     </main>
     <section class="about">
       <div class="about__inner">
         <h2 class="about__title">About me</h2>
-        <p class="about__text">Aliquam tortor molestie turpis est tristique. Congue diam orci amet quis semper ut. Vitae aenean nibh facilisis urna, ultricies euismod nunc. Commodo fringilla sit hendrerit consequat. Vel ac elit vel sagittis.</p>
-        <p class="about__text">Tincidunt id quis pellentesque rutrum pretium. Egestas aliquam dictum ipsum nisl, sed pulvinar. Commodo elit sed a fermentum non justo. Etiam platea consectetur.</p>
-        <p class="about__text">Quam ipsum odio tellus etiam aliquam dolor ut hendrerit. Felis risus nec vitae nunc ultricies placerat. Nullam nec felis eu id dolor pellentesque tristique. </p>
+        <p class="about__text">I’ve got some professional background as Russian teacher and forensic linguist (2015-2021). In 2022, I decided to change my profession and focused on different IT career paths as promising directions for me. I got interested in Front-end development.</p>
+        <p class="about__text">I’m ready for challenges, hard work, new technologies and high-level mentoring. In the near future I’d like to find a job where I could improve my skills and become a good developer with strong soft skills as well as technical skills.</p>
+        <p class="about__text">In my opinion, it’s never too late to aim higher and gain new knowledge. That's why I read a lot, study English and programming. But in my spare time I'm keen on board and computer games. In summertime I prefer beach volleyball, hiking or playing the guitar.</p>
       </div>
     </section>
     <section class="skills container">
@@ -48,7 +84,7 @@
         <li class="skills__item">
           <img class="skills__icon" src="./img/icons/html-icon.svg" alt="HTML icon" width="79" height="90">
           <p class="skills__name">HTML 5</p>
-          <div class="skills__progress-inner">
+          <div class="skills__progress-wrapper">
             <p class="skills__progress-value">90%</p>
             <span class="skills__progress" style="--width: 90"></span>
           </div>
@@ -56,15 +92,15 @@
         <li class="skills__item">
           <img class="skills__icon" src="./img/icons/css-icon.svg" alt="CSS/SCSS icon" width="79" height="90">
           <p class="skills__name">CSS/SCSS</p>
-          <div class="skills__progress-inner">
-            <p class="skills__progress-value">70%</p>
-            <span class="skills__progress" style="--width: 70"></span>
+          <div class="skills__progress-wrapper">
+            <p class="skills__progress-value">80%</p>
+            <span class="skills__progress" style="--width: 80"></span>
           </div>
         </li>
         <li class="skills__item">
           <img class="skills__icon" src="./img/icons/js-icon.svg" alt="JavaScript icon" width="68" height="90">
           <p class="skills__name">JavaScript</p>
-          <div class="skills__progress-inner">
+          <div class="skills__progress-wrapper">
             <p class="skills__progress-value">50%</p>
             <span class="skills__progress" style="--width: 50"></span>
           </div>
@@ -72,15 +108,15 @@
         <li class="skills__item">
           <img class="skills__icon" src="./img/icons/git-icon.svg" alt="Git icon" width="90" height="90">
           <p class="skills__name">Git/GitHub</p>
-          <div class="skills__progress-inner">
-            <p class="skills__progress-value">70%</p>
-            <span class="skills__progress" style="--width: 70"></span>
+          <div class="skills__progress-wrapper">
+            <p class="skills__progress-value">45%</p>
+            <span class="skills__progress" style="--width: 45"></span>
           </div>
         </li>
         <li class="skills__item">
           <img class="skills__icon" src="./img/icons/figma-icon.svg" alt="Figma icon" width="60" height="90">
           <p class="skills__name">Figma</p>
-          <div class="skills__progress-inner">
+          <div class="skills__progress-wrapper">
             <p class="skills__progress-value">80%</p>
             <span class="skills__progress" style="--width: 80"></span>
           </div>
@@ -89,51 +125,80 @@
     </section>
     <section class="portfolio">
       <h2 class="portfolio__title">Portfolio</h2>
-      <div class="portfolio__inner">
-        <div class="portfolio__slider"></div>
-        <div class="portfolio__info">
-          <h3 class="portfolio__info-heading">Learning site for DL Academy courses</h3>
-          <p class="portfolio__info-desc">A simple multi-page static site. The design layout was in Figma. HTML and CSS were used. The site is responsive and cross-browser, but without adding interactivity via JavaScript.</p>
+      <div class="portfolio__inner container">
+        <div class="portfolio__swiper swiper">
+          <div class="portfolio__swiper-wrapper swiper-wrapper">
+            <div class="portfolio__swiper-slide swiper-slide">
+              <picture>
+                <source srcset="./img/swiper-slide1-320.jpg, ./img/swiper-slide1-320-2x.jpg 2x" media="(max-width: 512px)">
+                <source srcset="./img/swiper-slide1-768.jpg, ./img/swiper-slide1-768-2x.jpg 2x" media="(min-width: 513px) and (max-width: 830px)">
+                <source srcset="./img/swiper-slide1.jpg, ./img/swiper-slide1-2x.jpg 2x" media="(min-width: 831px) and (max-width: 1440px)">
+                <img src="./img/swiper-slide1.jpg" alt="main page of my site">
+              </picture>
+            </div>
+            <div class="portfolio__swiper-slide swiper-slide">
+              <picture>
+                <source srcset="./img/swiper-slide2-320.jpg, ./img/swiper-slide2-320-2x.jpg 2x" media="(max-width: 512px)">
+                <source srcset="./img/swiper-slide2-768.jpg, ./img/swiper-slide2-768-2x.jpg 2x" media="(min-width: 513px) and (max-width: 830px)">
+                <source srcset="./img/swiper-slide2.jpg, ./img/swiper-slide2-2x.jpg 2x" media="(min-width: 831px) and (max-width: 1440px)">
+                <img src="./img/swiper-slide2.jpg" alt="second slide">
+              </picture>
+            </div>
+            <div class="portfolio__swiper-slide swiper-slide">
+              <picture>
+                <source srcset="./img/swiper-slide3-320.jpg, ./img/swiper-slide3-320-2x.jpg 2x" media="(max-width: 512px)">
+                <source srcset="./img/swiper-slide3-768.jpg, ./img/swiper-slide3-768-2x.jpg 2x" media="(min-width: 513px) and (max-width: 830px)">
+                <source srcset="./img/swiper-slide3.jpg, ./img/swiper-slide3-2x.jpg 2x" media="(min-width: 831px) and (max-width: 1440px)">
+                <img src="./img/swiper-slide3.jpg" alt="third slide">
+              </picture>
+            </div>
+          </div>
+          <div class="portfolio__swiper-button swiper-button-prev"></div>
+          <div class="portfolio__swiper-button swiper-button-next"></div>
+          <div class="portfolio__info">
+            <h3 class="portfolio__info-heading">Learning site for DL Academy courses</h3>
+            <p class="portfolio__info-desc">A simple multi-page static site. The design layout was in Figma. HTML and CSS were used. The site is responsive and cross-browser, but without adding interactivity via JavaScript.</p>
+          </div>
         </div>
       </div>
     </section>
-    @@include('blocks/footer.html')
-    <div class="modal-box visually-hidden">
-      <div class="form__wrapper">
+    @@include('blocks/footer.html',
+    {"blogStyle": ""})
+    <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
+    <div class="popup popup-login-form popup-login-form_js visually-hidden">
+      <div class="popup__login-form-wrapper">
+        @@include('blocks/login-form.html')
         @@include('blocks/button-close.html', 
-        {"classJs": "connect-form__btn-close"})
-        <form class="form connect-form" action="#" novalidate>
-            <div class="form__inner form__inner--two-input">
-              <input type="text" name="name" id="name" required>
-              <label class="form__label" for="name">What is your name?</label>
-            </div>
-            <div class="form__inner form__inner--two-input">
-              <input type="email" name="email" id="email" required>
-              <label class="form__label" for="email">Message subject</label>
-            </div> 
-            <div class="form__inner form__inner--two-input">
-              <input type="email" name="email" id="email" required>
-              <label class="form__label" for="email">Your Email</label>
-            </div>
-            <div class="form__inner form__inner--two-input">
-              <input type="tel" name="phone" id="phone" required>
-              <label class="form__label" for="phone">Your mobile phone</label>
-            </div>
-            <div class="form__inner">
-              <textarea name="message" id="message" cols="30" rows="6"></textarea>
-              <label class="form__label" for="message">What do you want to discuss with me?</label>
-            </div>
-              @@include('blocks/checkbox.html',
-              {"checkboxId": "agreement",
-              "atrCheckbox": "disabled"})
-              @@include('blocks/buttons.html',
-              {"additionalclass": "connect-form__btn",
-              "buttonType": "submit",
-              "buttonName": "Send",
-              "atr": "disabled"})
-        </form>
+        {"addClass": "popup-login-form__btn-close",
+        "addClassJs": "popup-login-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close log in form"})
       </div>
     </div>
+    <div class="popup visually-hidden popup-registration-form popup-registration-form_js">
+      <div class="popup__wrapper">
+        @@include('blocks/registration-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-registration-form__btn-close",
+        "addClassJs": "popup-registration-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close registration form"})
+      </div>
+    </div>
+    <div class="popup popup-connect-form popup-connect-form_js visually-hidden">
+      <div class="popup__wrapper">
+        @@include('blocks/connect-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-connect-form__btn-close",
+        "addClassJs": "popup-connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
+      </div>
+    </div>
+    @@include('blocks/server-message.html')
     <script src="js/app.js" defer></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
+    <script src="js/common.js"></script>
+    <script src="js/script.js"></script>
   </body>
 </html>

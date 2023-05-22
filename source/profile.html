@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>Summary | profile</title>
+    <meta name="description" content="The final project of the course `Junior Front End Developer` by Julia Oreshkina, student DL Academy">
+
+    <script>
+      var docElement = document.documentElement;
+      docElement.className = docElement.className.replace(/\bno-js\b/, '') + ' js';
+    </script>
+
+    <link href="css/style.min.css" rel="stylesheet">
+  </head>
+  <body>
+    @@include('blocks/header.html',
+    {"posOnPage": "header__burger-btn-open_pages"})
+   <main class="profile container">
+    <h1 class="profile__title">My profile</h1>
+    <div class="profile__inner">
+        <div class="profile__avatar-wrapper profile__avatar-wrapper_js"></div>
+        <div class="profile__data">
+            <p class="profile__item">Name: <span class="profile__value profile__name_js"></span></p>
+            <p class="profile__item">Surame: <span class="profile__value profile__surname_js"></span></p>
+            <p class="profile__item">Email: <span class="profile__value profile__email_js"></span></p>
+            <p class="profile__item">Password: <span class="profile__value profile__password_js">****************</span></p>
+            <p class="profile__item">Location: <span class="profile__value profile__location_js"></span></p>
+            <p class="profile__item">Age: <span class="profile__value profile__age_js"></span></p>
+            @@include('blocks/buttons.html',
+            {"additionalClass": "profile__change-password-btn",
+            "classJs": "profile__change-password-btn_js",
+            "buttonType": "button",
+            "buttonName": "Change password",
+            "btnAriaLabel": "open popup for change password",
+            "buttonTab": "0",
+            "atr": ""})
+            @@include('blocks/buttons.html',
+            {"additionalClass": "profile__change-data-btn",
+            "classJs": "profile__change-data-btn_js",
+            "buttonType": "button",
+            "buttonName": "Change other data",
+            "btnAriaLabel": "open popup for change data of profile",
+            "buttonTab": "0",
+            "atr": ""})
+            @@include('blocks/buttons.html',
+            {"additionalClass": "profile__delete-btn",
+            "classJs": "profile__delete-btn_js",
+            "buttonType": "button",
+            "buttonName": "Delete account",
+            "btnAriaLabel": "delete account",
+            "buttonTab": "0",
+            "atr": ""})
+        </div>
+    </div>
+   </main>
+   <div class=" popup popup-form-edit-password visually-hidden popup-form-edit-password_js">
+    <div class="popup-form-edit-password__wrapper">
+      @@include('blocks/form-edit-password.html')
+      @@include('blocks/button-close.html', 
+      {"addClass": "popup-form-edit-password__btn-close",
+      "addClassJs": "popup-form-edit-password__btn-close_js",
+      "btnTab": "0",
+      "btnLabel": "close editing password form"})
+    </div>
+  </div>
+  <div class="popup popup-form-edit-data visually-hidden popup-form-edit-data_js">
+    <div class="popup-form-edit-data__wrapper">
+      @@include('blocks/form-edit-data.html')
+      @@include('blocks/button-close.html', 
+      {"addClass": "popup-form-edit-data__btn-close",
+      "addClassJs": "popup-form-edit-data__btn-close_js",
+      "btnTab": "0",
+      "btnLabel": "close editing profile data form"})
+    </div>
+  </div>
+  @@include('blocks/server-message.html')
+    <script src="js/app.js" defer></script>
+    <script src="js/common.js"></script>
+    <script src="js/profile.js"></script>
+  </body>
+</html>

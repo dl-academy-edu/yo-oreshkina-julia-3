@@ -1,8 +1,10 @@
 .button {
+    width: max-content;
     @include btn-link-white;
+    outline: none;
 }
 
-.button:hover, .button:focus {
+.button:hover, .button:focus:not(:disabled) {
     border: 2.5px solid $color-text;
     color: $color-text;
 }

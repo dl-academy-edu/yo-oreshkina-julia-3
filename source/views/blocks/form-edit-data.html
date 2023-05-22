@@ -1,0 +1,41 @@
+<form class="form form-edit-data" name="editDataForm" novalidate>
+    <div class="form__inner">
+      <input class="form__input_js form__input-focus_js" type="email" name="email" id="new-email">
+      <label class="form__label" for="new-email">Email</label>
+    </div>
+    <div class="form__inputs-wrap">
+      <div class="form__inner">
+          <input class="form__input_js" type="text" name="name" id="new-name">
+          <label class="form__label" for="new-name">Name</label>
+        </div>
+        <div class="form__inner">
+          <input class="form__input_js" type="text" name="surname" id="new-surname">
+          <label class="form__label" for="new-surname">Surname</label>
+        </div>
+    </div>
+    <div class="form__inputs-wrap">
+      <div class="form__inner">
+          <input class="form__input_js" type="text" name="location" id="new-location">
+          <label class="form__label" for="new-location">Location</label>
+        </div>
+        <div class="form__inner">
+          <input class="form__input_js" type="number" name="age" id="new-age">
+          <label class="form__label" for="new-age">Age</label>
+        </div>
+    </div>
+    <div class="form__inner form-edit-data__inner">
+      <input class="form-edit-data__input-file form-edit-data__input-file_js" type="file" name="avatar" id="photo">
+      <label class="form__label form-edit-data__label-file" for="photo">Profile picture
+        <span class="form-edit-data__file-icon"></span>
+        <span class="form-edit-data__file-text form-edit-data__file-text_js">Choose a file...</span>
+      </label>
+    </div>
+      @@include('blocks/buttons.html',
+      {"additionalClass": "form-edit-data__btn",
+      "classJs": "form-edit-data__btn_js",
+      "buttonType": "submit",
+      "buttonName": "Submit changes",
+      "btnAriaLabel": "save new data of profile",
+      "buttonTab": "0",
+      "atr": ""})
+</form>

@@ -4,15 +4,11 @@
 
 let userNumber = prompt("Введите число", "");
 
-if (isNaN(userNumber) || userNumber === null || userNumber === "") {
+if(!Number(userNumber)) {
     console.log("Ошибка!");
 }
-
 for (let i = 1; i <= Number(userNumber); i++) {
-    if(i % 4 === 0) { 
-        continue;
-    }
-
+    if(i % 4 === 0) continue;
     console.log(i); 
 }
 
@@ -20,8 +16,8 @@ for (let i = 1; i <= Number(userNumber); i++) {
 
 let number = prompt("Введите число", "");
 
-if (!isNaN(number) && number !== null && number !== "") {
-    let num = Number(number);
+if (Number(number)) {
+    let num = +number;
 
     if(!Number.isInteger(num) || num < 0) { // невозможно вычислить факториал дробного или отрицательного числа
         console.log("Ошибка!");
@@ -43,13 +39,13 @@ if (!isNaN(number) && number !== null && number !== "") {
 
 /* task 3 */
 
-let x = prompt("Введите число", "");
-let n = prompt("Введите степень числа", "");
+let baseNumber = prompt("Введите число", "");
+let degree = prompt("Введите степень числа", "");
 
 
-if(!isNaN(x) && !isNaN(n) && x !== null && x !== "" && n !== null && n !== "" && Number(x) !== 0) {  //  Number(x) !== 0 -  0 не принято возводить в степень
-    let base = Number(x);
-    let exponent = Number(n);
+if(Number(baseNumber) && Number(degree) && Number(baseNumber) !== 0) {  //  Number(x) !== 0 -  0 не принято возводить в степень
+    let base = +baseNumber;
+    let exponent = +degree;
 
     if(exponent === 0) {
         console.log(1);
@@ -82,9 +78,9 @@ while (true) {
     if (random === guess) {
         console.log(`Победа! ${random} - правильный ответ!`);
         break;
-    } else {
-        guess = +prompt("Угадайте число");
-    }
+    } 
+    
+    guess = +prompt("Угадайте число");    
 }
 
 

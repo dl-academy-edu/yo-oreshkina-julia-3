@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width">
+    <meta name="google" content="notranslate">
+    <meta name="format-detection" content="telephone=no">
+
+    <title>DL Academy</title>
+    <meta name="description" content="The final project of the course `Junior Front End Developer` by Julia Oreshkina, student DL Academy">
+
+    <script>
+      var docElement = document.documentElement;
+      docElement.className = docElement.className.replace(/\bno-js\b/, '') + ' js';
+    </script>
+    <link href="css/style.min.css" rel="stylesheet">
+  </head>
+  <body>
+    @@include('blocks/header.html',
+    {"posOnPage": "header__burger-btn-open_pages"})
+    <main class="blog container">
+      <h1 class="blog__title">My blog</h1>
+      @@include('blocks/filter.html')
+      <div class="posts posts_js"></div>
+      <div class="blog__control-panel">
+        <button type="button" class="blog__btn blog__btn-back_js" aria-label="switch to the previous blog page"></button>
+        <div class="blog__pagination blog__pagination_js"></div>
+        <button type="button" class="blog__btn blog__btn-next_js" aria-label="switch to the blog page"></button>
+      </div>
+    </main>
+    @@include('blocks/footer.html',
+    {"blogStyle": "footer_onBlog"})
+    <button class="button-to-top button-to-top_js visually-hidden" type="button" aria-label="scroll to top"></button>
+    <div class="popup popup-login-form popup-login-form_js visually-hidden">
+      <div class="popup__login-form-wrapper">
+        @@include('blocks/login-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-login-form__btn-close",
+        "addClassJs": "popup-login-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close log in form"})
+      </div>
+    </div>
+    <div class="popup visually-hidden popup-registration-form popup-registration-form_js">
+      <div class="popup__wrapper">
+        @@include('blocks/registration-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-registration-form__btn-close",
+        "addClassJs": "popup-registration-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close registration form"})
+      </div>
+    </div>
+    <div class="popup popup-connect-form popup-connect-form_js visually-hidden">
+      <div class="popup__wrapper">
+        @@include('blocks/connect-form.html')
+        @@include('blocks/button-close.html', 
+        {"addClass": "popup-connect-form__btn-close",
+        "addClassJs": "popup-connect-form__btn-close_js",
+        "btnTab": "0",
+        "btnLabel": "close form of send message"})
+      </div>
+    </div>
+    @@include('blocks/server-message.html')
+    <script src="js/common.js"></script>
+    <script src="js/blog.js"></script>
+  </body>
+</html>

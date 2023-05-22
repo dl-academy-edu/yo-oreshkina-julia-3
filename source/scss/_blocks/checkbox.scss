@@ -12,47 +12,51 @@
         align-items:center;
         margin-left: 34px;
         @include text-label;
+        color: $color-disabled;
         transition: 0.4s; 
     }
     
     &__label::before {
         content: ' ';
+        box-sizing: border-box;
         position: absolute;
         margin-left: -34px;
         width: 19px;
         height: 19px;
         background-color:inherit; 
         border-radius: 3px;
-        border: 2px solid $primary-text;
+        border: 2px solid $color-disabled;
         transition: 0.4s; 
     }
     
     &__input:disabled + &__label {
-        color: $color-disabled;
         cursor: url(../img/icons/cursor-disabled.svg) 2 2, pointer;
     }
     &__input:disabled + &__label::before {
-        border: 2px solid $color-disabled;
         cursor: url(../img/icons/cursor-disabled.svg) 2 2, pointer;
     }
+    &__label:hover {
+        color: $color-text;
+        cursor: pointer;
+    }
+    &__input:hover:enabled + &__label::before {
+        border: 2px solid $color-text;
+    }
+
     &__input:checked + &__label::before {
         border: 2px solid $primary-text;
         background-image: url('../img/icons/check.svg');
         background-repeat: no-repeat;
         background-size:contain;
     }
-    &__label:hover {
-        color: $color-text;
-        cursor: pointer;
+    &__input:checked + &__label {
+        color: $primary-text;
     }
-    &__input:hover + &__label::before {
-        border: 2px solid $color-text;
-    }
-    // TODO: разобраться с поведение чекбокса при фокусе через tub и при состоянии checked
-    /* &__input:focus + &__label::before {
+    
+    &__input:focus + &__label::before {
         border: 2px solid $color-text;
     }
     &__input:focus + &__label {
         color: $color-text;
-    } */
+    }
 }

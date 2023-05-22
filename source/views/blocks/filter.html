@@ -1,0 +1,70 @@
+<form class="filter" name="filterForm">
+    <fieldset class="filter__fieldset filter__tags">
+      <legend class="filter__subtitle">Tags</legend>
+      <div class="filter__tags-inner filter__tags-inner_js"></div>
+    </fieldset>
+    <fieldset class="filter__fieldset filter__views">
+      <legend class="filter__subtitle">Views</legend>
+      <input type="radio" id="views-0" name="views" value="100-500" tabindex="0">
+      <label class="filter__radio-label" for="views-0">100-500</label>
+
+      <input type="radio" id="views-1" name="views" value="500-1000">
+      <label class="filter__radio-label" for="views-1">500-1000</label>
+
+      <input type="radio" id="views-2" name="views" value="1000-2000">
+      <label class="filter__radio-label" for="views-2">1000-2000</label> 
+    </fieldset>
+    <fieldset class="filter__fieldset filter__comments">
+      <legend class="filter__subtitle">Comments</legend>
+      <input type="checkbox" id="comments-0" name="comments" value="0-0">
+      <label class="filter__checkbox-label" for="comments-0">0</label>
+
+      <input type="checkbox" id="comments-1" name="comments" value="0-1">
+      <label class="filter__checkbox-label" for="comments-1">0-1</label>
+
+      <input type="checkbox" id="comments-2" name="comments" value="1-50">
+      <label class="filter__checkbox-label" for="comments-2">1-50</label> 
+    </fieldset>
+    <fieldset class="filter__fieldset filter__count-show">
+      <legend class="filter__subtitle">How show?</legend>
+      <input type="radio" id="show-0" name="countShow" value="5">
+      <label class="filter__radio-label" for="show-0">show 5</label>
+
+      <input type="radio" id="show-1" name="countShow" value="10" >
+      <label class="filter__radio-label" for="show-1">show 10</label>
+    </fieldset>
+    <fieldset class="filter__fieldset filter__sorts">
+      <legend class="filter__subtitle">Sort by</legend> 
+      <input type="radio" name="sorts" id="sort-date" value="date">
+      <label class="filter__radio-label" for="sort-date">date</label>
+
+      <input type="radio" name="sorts" id="sort-title" value="title">
+      <label class="filter__radio-label" for="sort-title">title</label>
+
+      <input type="radio" name="sorts" id="sort-views" value="views">
+      <label class="filter__radio-label" for="sort-views">views</label> 
+    </fieldset>
+    <div class="filter__reset">
+      <p class="filter__reset-subtitle">reset form</p>
+      @@include('blocks/buttons.html',
+          {"additionalClass": "filter__reset-btn",
+          "classJs": "filter__reset-btn_js",
+          "buttonType": "reset",
+          "buttonName": "Reset",
+          "btnAriaLabel": "search post",
+          "buttonTab": "0",
+          "atr": ""})
+    </div>
+    <div class="filter__search">
+      <input type="text" name="name" class="filter__search-input" id="text-search">
+      <label class="filter__search-label" for="text-search"></label>
+      @@include('blocks/buttons.html',
+        {"additionalClass": "filter__search-btn",
+        "classJs": "filter__search-btn_js",
+        "buttonType": "submit",
+        "buttonName": "Search",
+        "btnAriaLabel": "search posts",
+        "buttonTab": "0",
+        "atr": ""})
+    </div>
+  </form>
